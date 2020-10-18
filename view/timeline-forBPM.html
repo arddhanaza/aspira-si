@@ -50,8 +50,15 @@
                             <span class="span-time">Posted on September, 23rd 2020. 15.34pm</span>
                         </div>
                         <div class="col-3 text-right">
-                            <button class="btn btn-sm btn-outline-danger">Down Vote</button>
-                            <button class="btn btn-sm btn-primary">Up Vote</button>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-danger btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    ...
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Details</a>
+                                    <a class="dropdown-item bg-danger" href="#">Delete</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -88,15 +95,18 @@
                 </div>
                 <div class="card-footer aspiration-card-footer">
                     <div class="row">
-                        <div class="col-1 col">
-                            <img alt="" class="img-thumbnail img-icon" src="../assets/img/telkom.jpg"
-                                 style="width: 50px;">
+                        <div class="col-8">
+                            <select name="" id="" class="update-selection btn btn-sm btn-outline-light">
+                                <option value="" disabled selected>Resolve Status</option>
+                                <option value="">Di Tinjau</option>
+                                <option value="">Process</option>
+                                <option value="">Diteruskan</option>
+                                <option value="">Done Resolved</option>
+                            </select>
+                            <button class="btn btn-sm btn-primary">Update</button>
                         </div>
-                        <div class="col-11 col">
-                            <input class="form-control aspiration-comments" placeholder="add comments" type="text">
-                        </div>
-                        <div class="col-12 text-right">
-                            <a href="">see more comments</a>
+                        <div class="col-4 text-right">
+                            <a href="">see all comments</a>
                         </div>
                     </div>
                 </div>
