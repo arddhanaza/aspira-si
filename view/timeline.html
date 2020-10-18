@@ -106,9 +106,37 @@
     <!--End of Aspiration Card-->
 </section>
 
-<button class="btn btn-primary feb btn-lg">
+<button class="btn btn-primary feb btn-lg" data-target="#exampleModalCenter" data-toggle="modal">
     +
 </button>
+
+
+<!--MODAL ADD-->
+<div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade" id="exampleModalCenter"
+     role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Aspiration</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="">
+                    <label for="aspirasi">Aspirasi</label>
+                    <input class="form-control" id="aspirasi" placeholder="Tuliskan Aspirasi" type="text">
+                    <label for="file">File Pendukung</label>
+                    <input class="form-control-file" id="file" multiple type="file">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                <button class="btn btn-primary" type="button">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
