@@ -1,3 +1,19 @@
+<?php
+$data = array(
+    array('idAspirasi' => 1, 'pengirim' => 'Arddhana Zhafran', 'angkatan' => 2018, 'aspirasiText' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam autem consequuntur
+                                doloremque expedita magnam, obcaecati optio pariatur quibusdam quod ratione, sunt
+                                temporibus voluptate voluptatibus? Consequuntur debitis ipsum maxime quod veniam!', 'tujuan' => 'Lab daspro', 'filePendukung' => 'Tidak Ada File', 'tanggal' => '20/10/2020', 'status' => 'Belum Diproses'),
+    array('idAspirasi' => 2, 'pengirim' => 'Nana', 'angkatan' => 2018, 'aspirasiText' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam autem consequuntur
+                                doloremque expedita magnam, obcaecati optio pariatur quibusdam quod ratione, sunt
+                                temporibus voluptate voluptatibus? Consequuntur debitis ipsum maxime quod veniam!', 'tujuan' => 'Lab EDE', 'filePendukung' => 'Tidak Ada File', 'tanggal' => '19/10/2020', 'status' => 'Process')
+);
+if (isset($_POST['statusUpdate'])) {
+    $row = $_POST['rowData'];
+    $idAspirasi = $_POST['idAspirasi'];
+    $statusUpdated = $_POST['statusUpdate'];
+    $data[$row]['status'] = $statusUpdated;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,24 +79,31 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Ardddhana Zhafran</td>
-                            <td>2018</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam autem consequuntur
-                                doloremque expedita magnam, obcaecati optio pariatur quibusdam quod ratione, sunt
-                                temporibus voluptate voluptatibus? Consequuntur debitis ipsum maxime quod veniam!
-                            </td>
-                            <td>Lab Daspro</td>
-                            <td>Tidak Ada File</td>
-                            <td><?php echo date("d/M/Y"); ?></td>
-                            <td>Belum Ditinjau</td>
-                            <td>
-                                <button class="btn btn-primary mb-2">Detail</button>
-                                <button class="btn btn-outline-info mb-2">Update</button>
-                                <button class="btn btn-outline-danger mb-2">Delete</button>
-                            </td>
-                        </tr>
+                        <?php
+                        for ($row = 0; $row < count($data); $row++) {
+                            echo '
+                            <tr>
+                                <td>' . $data[$row]['idAspirasi'] . '</td>
+                                <td>' . $data[$row]['pengirim'] . '</td>
+                                <td>' . $data[$row]['angkatan'] . '</td>
+                                <td>' . $data[$row]['aspirasiText'] . '
+                                </td>
+                                <td>' . $data[$row]['tujuan'] . '</td>
+                                <td>' . $data[$row]['filePendukung'] . '</td>
+                                <td>' . $data[$row]['tanggal'] . '</td>
+                                <td>' . $data[$row]['status'] . '</td>
+                                <td>
+                                    <button class="btn btn-primary mb-2" disabled>Detail</button>
+                                    <button class="btn btn-outline-info mb-2" data-toggle="modal"
+                                            data-target="#modalUpdate' . $row . '">Update
+                                    </button>
+                                    <button class="btn btn-outline-danger mb-2" disabled>Delete</button>
+                                </td>
+                            </tr>
+                            ';
+                        }
+                        ?>
+
                         </tbody>
                     </table>
                 </div>
@@ -89,6 +112,89 @@
     </div>
     <!--End of Aspiration Card-->
 </section>
+
+<?php
+for ($row = 0; $row < count($data); $row++) {
+    echo '
+    <div class="modal fade" id="modalUpdate' . $row . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Update Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6>Status: <span class="badge badge-pill badge-secondary">' . $data[$row]['status'] . '</span></h6>
+                <hr>
+                <form action="updateAspiration.php" method="post">
+                    <input type="hidden" name="rowData" value="' . $row . '">
+                    <input type="hidden" name="idAspirasi" value="' . $data[$row]['idAspirasi'] . '">
+                    <div class="form-group">
+                        <label for="statusUpdate">Status Update</label> <br>';
+
+    if ($data[$row]['status'] == 'Belum Diproses') {
+        echo '
+        <select name="statusUpdate" id="statusUpdate"
+                class="update-selection btn btn-sm btn-outline-dark btn-block btn-lg">
+            <option value="' . $data[$row]['status'] . '" selected disabled>' . $data[$row]['status'] . '</option>
+            <option value="Di Tinjau">Di Tinjau</option>
+            <option value="Process">Process</option>
+            <option value="Diteruskan">Diteruskan</option>
+            <option value="Done Resolved">Done Resolved</option>
+        </select>
+        ';
+    } elseif ($data[$row]['status'] == 'Di Tinjau') {
+        echo '
+        <select name="statusUpdate" id="statusUpdate"
+                class="update-selection btn btn-sm btn-outline-dark btn-block btn-lg">
+            <option value="' . $data[$row]['status'] . '" selected disabled>' . $data[$row]['status'] . '</option>
+            <option value="Process">Process</option>
+            <option value="Diteruskan">Diteruskan</option>
+            <option value="Done Resolved">Done Resolved</option>
+        </select>
+        ';
+    } elseif ($data[$row]['status'] == 'Process') {
+        echo '
+        <select name="statusUpdate" id="statusUpdate"
+                class="update-selection btn btn-sm btn-outline-dark btn-block btn-lg">
+            <option value="' . $data[$row]['status'] . '" selected disabled>' . $data[$row]['status'] . '</option>
+            <option value="Diteruskan">Diteruskan</option>
+            <option value="Done Resolved">Done Resolved</option>
+        </select>
+        ';
+    } elseif ($data[$row]['status'] == 'Diteruskan') {
+        echo '
+        <select name="statusUpdate" id="statusUpdate"
+                class="update-selection btn btn-sm btn-outline-dark btn-block btn-lg">
+            <option value="' . $data[$row]['status'] . '" selected disabled>' . $data[$row]['status'] . '</option>
+            <option value="Done Resolved">Done Resolved</option>
+        </select>
+        ';
+    } else {
+        echo '
+        <select name="statusUpdate" id="statusUpdate"
+                class="update-selection btn btn-sm btn-outline-dark btn-block btn-lg">
+            <option value="' . $data[$row]['status'] . '" selected disabled>' . $data[$row]['status'] . '</option>
+        </select>
+        ';
+    }
+    echo '
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    ';
+}
+?>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
