@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>ASPIRA-SI</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link rel="stylesheet" href="../assets/css/bootstrap.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@700&family=Roboto&display=swap"
           rel="stylesheet">
 </head>
@@ -26,7 +26,7 @@
                     <a class="nav-link" href="#">My Aspiration</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Announcement</a>
+                    <a class="nav-link" href="Announcement.html">Announcement</a>
                 </li>
             </ul>
             <!--            <form class="form-inline my-2 my-lg-0">-->
@@ -47,10 +47,18 @@
                     <div class="row">
                         <div class="col-9">
                             <h3>Proses Registrasi surat izin lambat</h3>
+                            <span class="span-time">Posted on September, 23rd 2020. 15.34pm</span>
                         </div>
                         <div class="col-3 text-right">
-                            <button class="btn btn-sm btn-outline-danger">Down Vote</button>
-                            <button class="btn btn-sm btn-primary">Up Vote</button>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-danger btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    ...
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Details</a>
+                                    <a class="dropdown-item bg-danger" href="#">Delete</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -87,15 +95,20 @@
                 </div>
                 <div class="card-footer aspiration-card-footer">
                     <div class="row">
-                        <div class="col-1 col">
-                            <img alt="" class="img-thumbnail img-icon" src="../assets/img/telkom.jpg"
-                                 style="width: 50px;">
+                        <div class="col-8">
+                        <form action="Announcement.php" method="post">
+                            <select name="data" id="" class="update-selection btn btn-sm btn-outline-light">
+                                <option disabled selected>Resolve Status</option>
+                                <option >Di Tinjau</option>
+                                <option >Process</option>
+                                <option >Diteruskan</option>
+                                <option >Done Resolved</option>
+                            </select>
+                            <button class="btn btn-sm btn-primary" name="submit" type="submit" class="nav-link">Update</button>
+                            </form>
                         </div>
-                        <div class="col-11 col">
-                            <input class="form-control aspiration-comments" placeholder="add comments" type="text">
-                        </div>
-                        <div class="col-12 text-right">
-                            <a href="">see more comments</a>
+                        <div class="col-4 text-right">
+                            <a href="">see all comments</a>
                         </div>
                     </div>
                 </div>
