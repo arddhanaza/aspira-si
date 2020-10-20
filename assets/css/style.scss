@@ -43,6 +43,7 @@ body {
   }
 }
 
+
 .img-icon {
   border-radius: 100%;
   border: none;
@@ -50,7 +51,7 @@ body {
 }
 
 .btn {
-  border-radius: 100px;
+  border-radius: 20px 20px 20px 20px;
 }
 
 .feb {
@@ -62,6 +63,13 @@ body {
   position: fixed;
   bottom: 5%;
   right: 5%;
+}
+
+.aspiration-card-table {
+  background: white;
+  box-shadow: 0px 15px 28px -16px #6e6e6e;
+  border-radius: 15px;
+  border: none;
 }
 
 .aspiration-card {
