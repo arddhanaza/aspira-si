@@ -44,7 +44,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>Forgot Password</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -56,31 +56,21 @@ try {
             <div class="col-md-6 left-side ">                              
                 <div class="row ">
                     <div class="col ">
-                        <h3>ASPIRA <br> -SI</h3>
+                        <h3>Recover your password</h3>
+                        <p>Please enter your email address to reset the password</p>
                     </div>
                 </div>
                 
                 <div class="row">
                     <div class="col-md-6 ">
-                        <form>
-                            <div class="form-group">
-                                <label for="nim">NIM</label>
-                                <input type="text" class="form-control shadow p-1 mb-1 bg-white rounded" id="nim" name="inputNim" >                        
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control shadow p-1 mb-1 bg-white rounded" id="password" name="inputPassword">
+                        <form>                            
+                            <div class="form-group">                                
+                                <input type="email" class="form-control shadow p-1 mb-1 bg-white rounded" placeholder="email" id="email" name="inputEmail">
                             </div>                    
-                            <button type="submit" class="btn btn-primary btn-block">LOGIN</button>                            
+                            <button type="submit" class="btn btn-primary btn-block" name="forgot_password">Recover your password</button>                            
                         </form>                
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6 align-items-end">
-                        <a href="forgot_password.php">Forgot Password</a>
-                    </div>
-                </div>
+                </div>                
             </div>
 
             <div class="col-md-6">
