@@ -1,0 +1,22 @@
+#profil {
+    border-radius: 50%;
+}
+
+img {
+    width: 80%;
+}
+
+h3 {
+    font-family: Montserrat;
+    margin-top: 100px;
+}
+
+.vl {
+    border-left: 3px solid lightskyblue;
+    height: 300px;
+}
+
+.left-side {
+    margin-top: 10%;
+    
+}
