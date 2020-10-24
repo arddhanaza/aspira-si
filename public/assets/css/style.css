@@ -23,11 +23,11 @@ body button {
   box-shadow: 0px 19px 13px -16px rgba(199, 199, 199, 0.5);
   background-color: white;
 }
-.nav-main .container .navbar-brand {
+.nav-main .container-fluid .navbar-brand {
   font-family: "Commissioner", sans-serif;
   color: #45A1E5;
 }
-.nav-main .container .nav-item {
+.nav-main .container-fluid .nav-item {
   font-family: "Roboto", sans-serif;
 }
 

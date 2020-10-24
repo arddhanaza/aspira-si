@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/','AspirationController@index');
+
+Route::post('/PostAspiration', 'AspirationController@store');
+Route::get('/testCase', function (){
+    echo 'Failed';
 });
