@@ -16,15 +16,6 @@ class AspirationController extends Controller
      */
     public function index()
     {
-//        $aspirasi = DB::table('aspirasi')->get();
-//        $aspirasi = DB::table('aspirasi')
-//            ->join('mahasiswa', 'aspirasi.id_mahasiswa', '=', 'mahasiswa.id_mahasiswa')
-//            ->join('entitas_si', 'aspirasi.id_entitas', '=', 'entitas_si.id_entitas')
-//            ->rightJoin('vote_aspirasi','aspirasi.id_aspirasi','=','vote_aspirasi.id_aspirasi')
-//            ->select('aspirasi.*', 'mahasiswa.username', 'entitas_si.nama_entitas','vote_aspirasi.upvote','vote_aspirasi.downvote')
-//            ->get();
-//        dd($aspirasi);
-//        return view('timeline', ['aspirasi' => $aspirasi]);
         $aspirasi = Aspiration::getAspiration();
         $entitas = EntitasSi::getDataEntitas();
         return view('timeline', ['aspirasi' => $aspirasi , 'entitas' => $entitas]);

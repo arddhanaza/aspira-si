@@ -23,4 +23,9 @@ class VoteAspiration extends Model
             ->where('id_aspirasi', '=' , $id)
             ->sum('downvote');
     }
+
+//    protected static function sudahVote($id_mahasiswa,$id_aspirasi){
+//
+//    }
+
 }

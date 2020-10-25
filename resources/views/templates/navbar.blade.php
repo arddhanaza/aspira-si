@@ -19,14 +19,14 @@
                 <li class="dropdown">
                     <a class="nav-link dropdown-toggle nav-link-lg nav-link-user" data-toggle="dropdown" href="#">
                         <img alt="image" class="rounded-circle mr-1" style="max-width: 30px" src="{{'assets/img/telkom.jpg'}}">
-                        <div class="d-sm-none d-lg-inline-block">Hi, Riski</div>
+                        <div class="d-sm-none d-lg-inline-block">Hi, {{session(0)->nama_mahasiswa}}</div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item has-icon" href="profile-praktikan.html">
                             <i class="far fa-user"></i> Profile
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item has-icon text-danger" href="#">
+                        <a class="dropdown-item has-icon text-danger" href="{{route('logout')}}">
                             <i class="fas fa-sign-out-alt"></i> Logout
                         </a>
                     </div>

@@ -1,5 +1,7 @@
 @extends('templates/template')
 
+@include('templates.navbar')
+
 @section('title','Feed')
 
 @section('container')
@@ -18,12 +20,6 @@
             </form>
         </div>
     </div>
-    <!--Start of Aspiration Card-->
-{{--    @foreach($aspirasi as $asp)--}}
-{{--        <h1>{{$loop -> iteration}}</h1>--}}
-{{--        <h1>{{$asp ->aspirasi_text}}</h1>--}}
-{{--    @endforeach--}}
-
     @foreach($aspirasi as $asp)
     <div class="row justify-content-center mb-4">
         <div class="col-12">
@@ -64,7 +60,7 @@
                                 </p>
                             </div>
                             <div class="col-10">
-                                <button class="btn btn-outline-info">File Pendukung</button>
+                                <a href="" class="btn btn-outline-info">File Pendukung</a>
                             </div>
                         </div>
                     </div>
@@ -90,9 +86,11 @@
     <!--End of Aspiration Card-->
 </section>
 
+@if(session('0')->getTable() == 'mahasiswa')
 <button class="btn btn-primary feb btn-lg rounded-circle" data-target="#exampleModalCenter" data-toggle="modal">
     +
 </button>
+@endif
 
 
 <!--MODAL ADD-->
@@ -109,7 +107,7 @@
             <form action="/PostAspiration" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
-                    <input type="hidden" name="id_mahasiswa" value="4">
+                    <input type="hidden" name="id_mahasiswa" value="{{session(0)->id_mahasiswa}}'">
 {{--                    <input type="hidden" name="id_entitas" value="2">--}}
                     <input type="hidden" name="status" value="Belum Diproses">
                     <label for="judulAspirasi">Judul Aspisrasi</label>

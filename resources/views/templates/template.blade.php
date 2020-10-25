@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <title>@yield('title')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link rel="stylesheet" href="{{'assets/css/bootstrap.css'}}">
-    <link rel="stylesheet" href="{{'assets/css/style.css'}}">
+    <link rel="stylesheet" href="{{'assets/scss/bootstrap.css'}}">
+    <link rel="stylesheet" href="{{'assets/dist/css/style.css'}}">
     <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@700&family=Roboto&display=swap"
           rel="stylesheet">
 </head>
 <body>
-
-@include('templates.navbar')
 
 
 
