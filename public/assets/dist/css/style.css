@@ -109,4 +109,8 @@ body button {
   color: #5F5F5F;
 }
 
+.dr-notif:hover .dropdown-menu {
+  display: block;
+}
+
 /*# sourceMappingURL=style.css.map */

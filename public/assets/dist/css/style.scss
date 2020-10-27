@@ -131,3 +131,9 @@ body {
   font-size: 0.75em;
   color: #5F5F5F;
 }
+
+.dr-notif:hover{
+    .dropdown-menu{
+        display: block;
+    }
+}

@@ -45,11 +45,6 @@ class Aspiration extends Model
             ->select('aspirasi.*', 'mahasiswa.username', 'entitas_si.nama_entitas')
             ->orderBy('created_at','desc')
             ->get();
-//        return DB::table('aspirasi')
-//            ->join('mahasiswa', 'aspirasi.id_mahasiswa', '=', 'mahasiswa.id_mahasiswa')
-//            ->join('entitas_si', 'aspirasi.id_entitas', '=', 'entitas_si.id_entitas')
-//            ->select('aspirasi.*', 'mahasiswa.username', 'entitas_si.nama_entitas')
-//            ->get();
         for ($row = 0; $row < count($data); $row++){
             $newData = self::changeElement($data[$row] -> username);
             $upvoteTotal = VoteAspiration::getTotalUpVote($data[$row]->id_aspirasi);
@@ -66,6 +61,12 @@ class Aspiration extends Model
         $y = substr_replace($x,'*',9,1);
         return $y;
     }
+
+    protected static function getAspirationByPopular(){ //with higher likes
+        
+    }
+
+
 
 
 }

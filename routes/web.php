@@ -20,8 +20,12 @@ Route::post('/login','LoginController@login')->name('login');
 Route::get('/logout','LoginController@logout')->name('logout');
 
 Route::group(['middleware'=>'loggedIn'],function (){
-    Route::get('/feed','AspirationController@index');
+    Route::get('/feed','AspirationController@index')->name('feed');
     Route::post('/PostAspiration', 'AspirationController@store');
+});
+
+Route::get('/profile',function (){
+    return view('/users.profile');
 });
 
 // Route::get('/', function () {
