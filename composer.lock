@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "10c06a685d854e3c069050e94f75ee19",
+=======
+    "content-hash": "d0c0458cd7bf0aa562d0e4f09f6d9d59",
+>>>>>>> origin/form-arddhana
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -921,6 +925,7 @@
             "time": "2020-08-11T19:28:08+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "laravel/ui",
             "version": "v2.0.0",
             "source": {
@@ -976,6 +981,8 @@
             "time": "2020-03-03T13:43:00+00:00"
         },
         {
+=======
+>>>>>>> origin/form-arddhana
             "name": "league/commonmark",
             "version": "1.5.6",
             "source": {
@@ -6094,6 +6101,10 @@
     "platform": {
         "php": "^7.2.5"
     },
+<<<<<<< HEAD
     "platform-dev": [],
     "plugin-api-version": "1.1.0"
+=======
+    "platform-dev": []
+>>>>>>> origin/form-arddhana
 }

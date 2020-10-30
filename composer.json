@@ -1,5 +1,8 @@
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/form-arddhana
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
@@ -14,8 +17,12 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.24",
+<<<<<<< HEAD
         "laravel/tinker": "^2.0",
         "laravel/ui": "2.0"
+=======
+        "laravel/tinker": "^2.0"
+>>>>>>> origin/form-arddhana
     },
     "require-dev": {
         "facade/ignition": "^2.0",
@@ -62,5 +69,8 @@
             "@php artisan key:generate --ansi"
         ]
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/form-arddhana
 }
