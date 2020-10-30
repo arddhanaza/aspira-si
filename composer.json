@@ -1,6 +1,9 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/form-arddhana
 =======
 >>>>>>> origin/form-arddhana
     "name": "laravel/laravel",
@@ -18,8 +21,12 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.24",
 <<<<<<< HEAD
+<<<<<<< HEAD
         "laravel/tinker": "^2.0",
         "laravel/ui": "2.0"
+=======
+        "laravel/tinker": "^2.0"
+>>>>>>> origin/form-arddhana
 =======
         "laravel/tinker": "^2.0"
 >>>>>>> origin/form-arddhana
@@ -70,7 +77,10 @@
         ]
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/form-arddhana
 =======
 >>>>>>> origin/form-arddhana
 }

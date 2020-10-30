@@ -5,7 +5,11 @@
         "This file is @generated automatically"
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
     "content-hash": "10c06a685d854e3c069050e94f75ee19",
+=======
+    "content-hash": "d0c0458cd7bf0aa562d0e4f09f6d9d59",
+>>>>>>> origin/form-arddhana
 =======
     "content-hash": "d0c0458cd7bf0aa562d0e4f09f6d9d59",
 >>>>>>> origin/form-arddhana
@@ -926,6 +930,7 @@
         },
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             "name": "laravel/ui",
             "version": "v2.0.0",
             "source": {
@@ -981,6 +986,8 @@
             "time": "2020-03-03T13:43:00+00:00"
         },
         {
+=======
+>>>>>>> origin/form-arddhana
 =======
 >>>>>>> origin/form-arddhana
             "name": "league/commonmark",
@@ -6102,8 +6109,12 @@
         "php": "^7.2.5"
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     "platform-dev": [],
     "plugin-api-version": "1.1.0"
+=======
+    "platform-dev": []
+>>>>>>> origin/form-arddhana
 =======
     "platform-dev": []
 >>>>>>> origin/form-arddhana

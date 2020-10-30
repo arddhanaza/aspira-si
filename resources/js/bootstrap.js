@@ -2,6 +2,7 @@ window._ = require('lodash');
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
  * code may be modified to fit the specific needs of your application.
@@ -15,6 +16,8 @@ try {
 } catch (e) {}
 
 /**
+=======
+>>>>>>> origin/form-arddhana
 =======
 >>>>>>> origin/form-arddhana
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -41,7 +44,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     key: process.env.MIX_PUSHER_APP_KEY,
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 <<<<<<< HEAD
+<<<<<<< HEAD
 //     encrypted: true
+=======
+//     forceTLS: true
+>>>>>>> origin/form-arddhana
 =======
 //     forceTLS: true
 >>>>>>> origin/form-arddhana

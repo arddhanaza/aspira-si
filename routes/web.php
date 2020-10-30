@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+<<<<<<< HEAD
 
 
 Route::get('/', 'AuthController@showFormLogin')->name('login');
@@ -35,3 +36,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+=======
+>>>>>>> origin/form-arddhana
