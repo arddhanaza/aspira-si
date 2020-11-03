@@ -21,6 +21,13 @@ class AspirationController extends Controller
         return view('timeline', ['aspirasi' => $aspirasi , 'entitas' => $entitas]);
     }
 
+    public function feedPopular(){
+        $aspirasi = Aspiration::getAspirationByPopular();
+        $entitas = EntitasSi::getDataEntitas();
+        return view('timeline', ['aspirasi' => $aspirasi , 'entitas' => $entitas]);
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *

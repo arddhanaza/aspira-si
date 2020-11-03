@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>@yield('title')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link rel="stylesheet" href="{{'assets/scss/bootstrap.css'}}">
-    <link rel="stylesheet" href="{{'assets/dist/css/style.css'}}">
+    <link rel="stylesheet" href="{{asset('assets/scss/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/dist/css/style.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@700&family=Roboto&display=swap"
           rel="stylesheet">
 </head>
@@ -22,5 +22,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+<script
+    src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous"></script>
 </body>
 </html>

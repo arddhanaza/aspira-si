@@ -63,10 +63,24 @@ class Aspiration extends Model
     }
 
     protected static function getAspirationByPopular(){ //with higher likes
-        
+        $data = self::getAspiration()->sortByDesc('upvote');
+        return $data;
     }
 
-
-
-
+    protected static function getAspirasiByUser($user){
+        $data =  DB::table('aspirasi')
+            ->join('mahasiswa', 'aspirasi.id_mahasiswa', '=', 'mahasiswa.id_mahasiswa')
+            ->join('entitas_si', 'aspirasi.id_entitas', '=', 'entitas_si.id_entitas')
+            ->select('aspirasi.*', 'mahasiswa.username','mahasiswa.nama_mahasiswa', 'entitas_si.nama_entitas')
+            ->where('mahasiswa.id_mahasiswa' ,'=',$user)
+            ->orderBy('created_at','desc')
+            ->get();
+        for ($row = 0; $row < count($data); $row++){
+            $upvoteTotal = VoteAspiration::getTotalUpVote($data[$row]->id_aspirasi);
+            $downvoteTotal = VoteAspiration::getTotalDownVote($data[$row]->id_aspirasi);
+            $data[$row] -> upvote = $upvoteTotal;
+            $data[$row] -> downvote = $downvoteTotal;
+        }
+        return $data;
+    }
 }

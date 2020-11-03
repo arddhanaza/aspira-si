@@ -21,12 +21,14 @@ Route::get('/logout','LoginController@logout')->name('logout');
 
 Route::group(['middleware'=>'loggedIn'],function (){
     Route::get('/feed','AspirationController@index')->name('feed');
+    Route::get('/feed-sorted','AspirationController@feedPopular')->name('feedPopular');
     Route::post('/PostAspiration', 'AspirationController@store');
+    Route::get('/profile/{user}', 'UserController@index')->name('profile');
+    Route::get('/feed/likes/{id}/{id_aspirasi}','VoteController@postUpVote')->name('upvote');
+    Route::get('/feed/dislikes/{id}/{id_aspirasi}','VoteController@postDownVote')->name('downvote');
 });
 
-Route::get('/profile',function (){
-    return view('/users.profile');
-});
+
 
 // Route::get('/', function () {
 //     return view('welcome');

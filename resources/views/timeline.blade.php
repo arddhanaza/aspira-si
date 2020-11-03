@@ -9,11 +9,12 @@
         <div class="row mb-4">
             <div class="col-12">
                 <form action="" class="text-right">
-                    <select name="" id="" class="btn-sm btn btn-primary ">
-                        <option value="">
+                    <select name="" id="sortByOption" class="btn-sm btn btn-primary">
+                        <option value="" disabled selected>Sort By</option>
+                        <option value="terbaru">
                             Terbaru
                         </option>
-                        <option value="">
+                        <option value="teratas">
                             Teratas
                         </option>
                     </select>
@@ -31,11 +32,15 @@
                                     <span class="span-time">Posted on September, {{$asp -> created_at}}</span>
                                 </div>
                                 <div class="col-3 text-right">
-                                    <button class="btn btn-sm btn-outline-danger"><span><img
-                                                src="{{'assets/icon/hand-thumbs-down.svg'}}" class="img-icon" alt="">- {{$asp -> downvote}}</span>
+                                    <button class="btn btn-sm btn-outline-danger"><img
+                                            src="{{'assets/icon/hand-thumbs-down.svg'}}" class="img-icon" alt=""><span
+                                            onclick="addDisLikes({{session(0)->id_mahasiswa}},{{$asp->id_aspirasi}})"
+                                            id="totalDisLikes{{$asp->id_aspirasi}}">{{$asp -> downvote}}</span>
                                     </button>
-                                    <button class="btn btn-sm btn-primary"><span><img
-                                                src="{{'assets/icon/hand-thumbs-up.svg'}}" class="img-icon" alt=""> + {{$asp -> upvote}}</span>
+                                    <button class="btn btn-sm btn-primary"><img
+                                            src="{{'assets/icon/hand-thumbs-up.svg'}}" class="img-icon" alt=""><span
+                                            onclick="addLikes({{session(0)->id_mahasiswa}},{{$asp->id_aspirasi}})"
+                                            id="totalLikes{{$asp->id_aspirasi}}">{{$asp -> upvote}}</span>
                                     </button>
                                 </div>
                             </div>
@@ -160,7 +165,8 @@
                             <span>Download</span> <br>
                             <?php
                             foreach (json_decode($asp->file_name) as $file){ ?>
-                            <a href="{{asset('files/'.$file)}}" target="_blank" class="btn btn-outline-info">Name: <?php echo $file?></a>
+                            <a href="{{asset('files/'.$file)}}" target="_blank"
+                               class="btn btn-outline-info">Name: <?php echo $file?></a>
                             <?php } ?>
                         </div>
                     </div>
@@ -170,5 +176,69 @@
     @endforeach
 
 
+    <script !src="">
+        document.getElementById('sortByOption').addEventListener('change', function (e) {
+            if (e.target.value == 'teratas') {
+                refreshTeratas();
+            } else {
+                refreshTerbaru();
+            }
+        })
+
+        function refreshTerbaru() {
+            let url = "{{ route('feed')}}";
+            document.location.href = url;
+        }
+
+        function refreshTeratas() {
+            let url = "{{ route('feedPopular')}}";
+            document.location.href = url;
+        }
+
+        function addLikes(idm, id) {
+            var x = document.getElementById('totalLikes' + id).innerText;
+            x = parseInt(x) + 1;
+            document.getElementById('totalLikes' + id).innerText = x;
+            runAjaxForLikes(idm, id);
+        }
+
+        function addDisLikes(idm, id) {
+            var x = document.getElementById('totalDisLikes' + id).innerText;
+            x = parseInt(x) + 1;
+            document.getElementById('totalDisLikes' + id).innerText = x;
+            runAjaxForDisLikes(idm, id);
+        }
+
+        function runAjaxForLikes(idm, id) {
+            $.ajax({
+                type: "GET",
+                url: '/feed/likes/' + idm + '/' + id,
+                data: {
+                    id_mahasiswa: idm,
+                    id_aspirasi: id,
+                    _token: '{{csrf_token()}}'
+                }
+            })
+            // .done(function (msg) {
+            //     alert('Likes Diterima');
+            // })
+            ;
+        }
+        function runAjaxForDisLikes(idm, id) {
+            $.ajax({
+                type: "GET",
+                url: '/feed/dislikes/' + idm + '/' + id,
+                data: {
+                    id_mahasiswa: idm,
+                    id_aspirasi: id,
+                    _token: '{{csrf_token()}}'
+                }
+            })
+            // .done(function (msg) {
+            //     alert('Likes Diterima');
+            // })
+            ;
+        }
+    </script>
 
 @endsection
