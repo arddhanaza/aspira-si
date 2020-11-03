@@ -5,6 +5,7 @@
 @section('title','Feed')
 
 @section('container')
+
     <section class="container  mt-5">
         <div class="row mb-4">
             <div class="col-12">
@@ -28,20 +29,37 @@
                         <div class="card-header aspiration-card-header">
                             <div class="row">
                                 <div class="col-9">
-                                    <h3>{{$asp->judul_aspirasi}}</h3>
+                                    <h3>
+                                        <a href="{{route('detailAspiration',[$asp->id_aspirasi])}}">{{$asp->judul_aspirasi}}</a>
+                                    </h3>
                                     <span class="span-time">Posted on September, {{$asp -> created_at}}</span>
                                 </div>
                                 <div class="col-3 text-right">
-                                    <button class="btn btn-sm btn-outline-danger"><img
-                                            src="{{'assets/icon/hand-thumbs-down.svg'}}" class="img-icon" alt=""><span
-                                            onclick="addDisLikes({{session(0)->id_mahasiswa}},{{$asp->id_aspirasi}})"
-                                            id="totalDisLikes{{$asp->id_aspirasi}}">{{$asp -> downvote}}</span>
-                                    </button>
-                                    <button class="btn btn-sm btn-primary"><img
-                                            src="{{'assets/icon/hand-thumbs-up.svg'}}" class="img-icon" alt=""><span
-                                            onclick="addLikes({{session(0)->id_mahasiswa}},{{$asp->id_aspirasi}})"
-                                            id="totalLikes{{$asp->id_aspirasi}}">{{$asp -> upvote}}</span>
-                                    </button>
+                                    @if(session(0)->getTable() != 'bpm' && session(0)->getTable() != 'entitas_si')
+                                        <button class="btn btn-sm btn-outline-danger"
+                                                onclick="addDisLikes({{session(0)->id_mahasiswa}},{{$asp->id_aspirasi}})">
+                                            <img
+                                                src="{{asset('assets/icon/hand-thumbs-down.svg')}}" class="img-icon"
+                                                alt=""><span
+                                                id="totalDisLikes{{$asp->id_aspirasi}}">{{$asp -> downvote}}</span>
+                                        </button>
+                                        <button class="btn btn-sm btn-primary"
+                                                onclick="addLikes({{session(0)->id_mahasiswa}},{{$asp->id_aspirasi}})">
+                                            <img
+                                                src="{{asset('assets/icon/hand-thumbs-up.svg')}}" class="img-icon"
+                                                alt=""><span
+                                                id="totalLikes{{$asp->id_aspirasi}}">{{$asp -> upvote}}</span>
+                                        </button>
+                                    @else
+                                        <button class="btn btn-sm btn-outline-danger" disabled><img
+                                                src="{{asset('assets/icon/hand-thumbs-down.svg')}}" class="img-icon"
+                                                alt=""><span>{{$asp -> downvote}}</span>
+                                        </button>
+                                        <button class="btn btn-sm btn-primary" disabled><img
+                                                src="{{asset('assets/icon/hand-thumbs-up.svg')}}" class="img-icon"
+                                                alt=""><span>{{$asp -> upvote}}</span>
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -85,11 +103,28 @@
                                          style="width: 50px;">
                                 </div>
                                 <div class="col-11 col">
-                                    <input class="form-control aspiration-comments" placeholder="add comments"
-                                           type="text">
+                                    <form action="{{route('comment')}}" method="post">
+                                        @csrf
+                                        <div class="row">
+                                            <input type="hidden" name="id_aspirasi" value="{{$asp->id_aspirasi}}">
+                                            <input type="hidden" name="id_mahasiswa" value="{{session(0)->id_mahasiswa}}">
+                                            <div class="col-11">
+                                                <textarea class="form-control aspiration-comments" placeholder="add comments"
+                                                      style="resize: none" rows="1" name="text_comment"
+                                                      type="text"></textarea>
+                                            </div>
+                                            <div class="col-1">
+                                                <button type="submit" class="btn py-0">
+                                                    <img alt="" class="img-thumbnail img-icon"
+                                                         src="{{asset('assets/icon/arrow-right-short.svg')}}"
+                                                         style="width: 50px;">
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="col-12 text-right">
-                                    <a href="">see more comments</a>
+                                <div class="col-12 text-right mt-2">
+                                    <a href="{{route('detailAspiration',[$asp->id_aspirasi])}}">see more comments</a>
                                 </div>
                             </div>
                         </div>
@@ -176,69 +211,11 @@
     @endforeach
 
 
-    <script !src="">
-        document.getElementById('sortByOption').addEventListener('change', function (e) {
-            if (e.target.value == 'teratas') {
-                refreshTeratas();
-            } else {
-                refreshTerbaru();
-            }
-        })
-
-        function refreshTerbaru() {
-            let url = "{{ route('feed')}}";
-            document.location.href = url;
-        }
-
-        function refreshTeratas() {
-            let url = "{{ route('feedPopular')}}";
-            document.location.href = url;
-        }
-
-        function addLikes(idm, id) {
-            var x = document.getElementById('totalLikes' + id).innerText;
-            x = parseInt(x) + 1;
-            document.getElementById('totalLikes' + id).innerText = x;
-            runAjaxForLikes(idm, id);
-        }
-
-        function addDisLikes(idm, id) {
-            var x = document.getElementById('totalDisLikes' + id).innerText;
-            x = parseInt(x) + 1;
-            document.getElementById('totalDisLikes' + id).innerText = x;
-            runAjaxForDisLikes(idm, id);
-        }
-
-        function runAjaxForLikes(idm, id) {
-            $.ajax({
-                type: "GET",
-                url: '/feed/likes/' + idm + '/' + id,
-                data: {
-                    id_mahasiswa: idm,
-                    id_aspirasi: id,
-                    _token: '{{csrf_token()}}'
-                }
-            })
-            // .done(function (msg) {
-            //     alert('Likes Diterima');
-            // })
-            ;
-        }
-        function runAjaxForDisLikes(idm, id) {
-            $.ajax({
-                type: "GET",
-                url: '/feed/dislikes/' + idm + '/' + id,
-                data: {
-                    id_mahasiswa: idm,
-                    id_aspirasi: id,
-                    _token: '{{csrf_token()}}'
-                }
-            })
-            // .done(function (msg) {
-            //     alert('Likes Diterima');
-            // })
-            ;
-        }
+    <script src="{{asset('assets/dist/js/feedsSort.js')}}">
     </script>
+    @if(session(0)->getTable() != 'bpm' or session(0)->getTable() != 'entitas_si')
+        <script src="{{asset('assets/dist/js/vote.js')}}">
+        </script>
+    @endif
 
 @endsection

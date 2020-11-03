@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Aspiration;
 use App\EntitasSi;
+use App\ReplyAspiration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -27,6 +28,11 @@ class AspirationController extends Controller
         return view('timeline', ['aspirasi' => $aspirasi , 'entitas' => $entitas]);
     }
 
+    public function getAllAspiration()
+    {
+        $aspirasi = Aspiration::getAllAspiration();
+        return view('bpm.allAspiration',['aspirasi' => $aspirasi]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -82,7 +88,9 @@ class AspirationController extends Controller
      */
     public function show($id)
     {
-
+        $aspirasi = Aspiration::getAspirasiById($id);
+        $reply = ReplyAspiration::getReplyById($id);
+        return view('aspiration.detailaspiration', ['aspirasi' => $aspirasi,'replys'=>$reply]);
     }
 
     /**
@@ -105,7 +113,10 @@ class AspirationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $aspirasi = Aspiration::find($id);
+        $aspirasi->status = $request->statusUpdate;
+        $aspirasi->save();
+        return redirect(route('bpmAllAspiration'));
     }
 
     /**

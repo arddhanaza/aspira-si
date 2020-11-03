@@ -26,6 +26,10 @@ Route::group(['middleware'=>'loggedIn'],function (){
     Route::get('/profile/{user}', 'UserController@index')->name('profile');
     Route::get('/feed/likes/{id}/{id_aspirasi}','VoteController@postUpVote')->name('upvote');
     Route::get('/feed/dislikes/{id}/{id_aspirasi}','VoteController@postDownVote')->name('downvote');
+    Route::get('/bpm/allaspiration', 'AspirationController@getAllAspiration')->name('bpmAllAspiration');
+    Route::put('/aspiration/{id}','AspirationController@update')->name('updateApirationStatus');
+    Route::get('/aspiration/{id}','AspirationController@show')->name('detailAspiration');
+    Route::post('/reply','ReplyController@store')->name('comment');
 });
 
 
