@@ -7,7 +7,7 @@
     <div class="row">
     <div class="col-md-6" style="margin-top: 10%;">
         <div class="row">
-            <div class="col-md-8 d-flex justify-content-end" style="margin-left: 4%">
+            <div class="col-md-9 d-flex justify-content-end" >
                 <h1>ASPIRA <br>-SI</h1>
             </div>            
         </div>        
@@ -31,7 +31,7 @@
         
         <div class="row">
             <div class="col-md-9 d-flex justify-content-end">
-                <a href="forgot-password.blade.php">Forget Password</a>
+                <a href="forgot-password">Forget Password</a>
             </div>
         </div>
     </div>    
