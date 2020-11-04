@@ -28,6 +28,10 @@ Route::get('/profile',function (){
     return view('/users.profile');
 });
 
+Route::get('forgot-password',function (){
+    return view(('/Login.forgot-password'));
+});
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
