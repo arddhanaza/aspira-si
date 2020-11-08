@@ -24,6 +24,14 @@ class VoteAspiration extends Model
             ->sum('downvote');
     }
 
+    protected static function getVoteByIdUser($id,$idm){
+        return DB::table('vote_aspirasi')
+            ->select('upvote','downvote')
+            ->where('id_aspirasi','=',$id)
+            ->where('id_mahasiswa','=',$idm)
+            ->get();
+    }
+
     protected static function belumVote($id_mahasiswa,$id_aspirasi){
         $data = DB::table('vote_aspirasi')
             ->where('id_aspirasi','=',$id_aspirasi)

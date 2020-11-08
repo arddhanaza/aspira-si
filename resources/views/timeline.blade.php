@@ -41,14 +41,16 @@
                                             <img
                                                 src="{{asset('assets/icon/hand-thumbs-down.svg')}}" class="img-icon"
                                                 alt=""><span
-                                                id="totalDisLikes{{$asp->id_aspirasi}}">{{$asp -> downvote}}</span>
+                                                id="totalDisLikes{{$asp->id_aspirasi}}" data-count="{{$asp->downVoteCount}}"
+                                                data-max-count="1">{{$asp -> downvote}}</span>
                                         </button>
                                         <button class="btn btn-sm btn-primary"
                                                 onclick="addLikes({{session(0)->id_mahasiswa}},{{$asp->id_aspirasi}})">
                                             <img
                                                 src="{{asset('assets/icon/hand-thumbs-up.svg')}}" class="img-icon"
                                                 alt=""><span
-                                                id="totalLikes{{$asp->id_aspirasi}}">{{$asp -> upvote}}</span>
+                                                id="totalLikes{{$asp->id_aspirasi}}" data-count="{{$asp->upVoteCount}}"
+                                                data-max-count="1">{{$asp -> upvote}}</span>
                                         </button>
                                     @else
                                         <button class="btn btn-sm btn-outline-danger" disabled><img
@@ -107,11 +109,13 @@
                                         @csrf
                                         <div class="row">
                                             <input type="hidden" name="id_aspirasi" value="{{$asp->id_aspirasi}}">
-                                            <input type="hidden" name="id_mahasiswa" value="{{session(0)->id_mahasiswa}}">
+                                            <input type="hidden" name="id_mahasiswa"
+                                                   value="{{session(0)->id_mahasiswa}}">
                                             <div class="col-11">
-                                                <textarea class="form-control aspiration-comments" placeholder="add comments"
-                                                      style="resize: none" rows="1" name="text_comment"
-                                                      type="text"></textarea>
+                                                <textarea class="form-control aspiration-comments"
+                                                          placeholder="add comments"
+                                                          style="resize: none" rows="1" name="text_comment"
+                                                          type="text"></textarea>
                                             </div>
                                             <div class="col-1">
                                                 <button type="submit" class="btn py-0">
