@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>ASPIRA-SI</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../../public/assets/dist/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@700&family=Roboto&display=swap"
           rel="stylesheet">
 </head>
@@ -20,13 +20,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Feed <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="timeline-forBPM.php">Feed <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My Aspiration</a>
+                    <a class="nav-link" href="Announcement.php">Announcement</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Announcement.html">Announcement</a>
+                    <a class="nav-link" href="UbahPassword.php">Profil</a>
                 </li>
             </ul>
             <!--            <form class="form-inline my-2 my-lg-0">-->
