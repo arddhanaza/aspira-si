@@ -54,3 +54,8 @@ Route::group(['middleware'=>'loggedIn'],function (){
 Route::get('/testCase', function (){
     echo 'Failed';
 });
+
+
+Route::get('/zhaf',function (){
+    return view('coba');
+});

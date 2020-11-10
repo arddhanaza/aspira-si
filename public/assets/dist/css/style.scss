@@ -73,6 +73,9 @@ body {
     border: none;
 }
 
+.aspiration-card-profile{
+    box-shadow: 0px 15px 28px -16px #555555 !important;
+}
 .aspiration-card {
     background: $cyan;
     box-shadow: 0px 15px 28px -16px #45A1E5;
@@ -109,7 +112,7 @@ body {
             background: #5EB4F4;
             border-radius: 15px;
             border: none;
-            color: #A7DAFF;
+            color: white;
         }
 
         ::placeholder {
@@ -120,6 +123,10 @@ body {
             color: #A7DAFF;
         }
     }
+}
+
+.aspiration-card-profile{
+    box-shadow: 0px 15px 28px -16px #555555 !important;
 }
 
 .update-selection {
