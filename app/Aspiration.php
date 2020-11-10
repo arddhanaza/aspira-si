@@ -24,6 +24,16 @@ class Aspiration extends Model
             $newData = self::changeElement($data[$row]->username);
             $upvoteTotal = VoteAspiration::getTotalUpVote($data[$row]->id_aspirasi);
             $downvoteTotal = VoteAspiration::getTotalDownVote($data[$row]->id_aspirasi);
+            $vote = VoteAspiration::getVoteByIdUser($data[$row]->id_aspirasi,session(0)->id_mahasiswa);
+            if(!$vote -> isEmpty()){
+                $upvoteCount = $vote[0]->upvote;
+                $downvoteCount = $vote[0]->downvote;
+                $data[$row]->upVoteCount = $upvoteCount;
+                $data[$row]->downVoteCount = $downvoteCount;
+            }else{
+                $data[$row]->upVoteCount = 0;
+                $data[$row]->downVoteCount = 0;
+            }
             $data[$row]->username = $newData;
             $data[$row]->upvote = $upvoteTotal;
             $data[$row]->downvote = $downvoteTotal;

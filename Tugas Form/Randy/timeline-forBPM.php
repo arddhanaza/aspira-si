@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>ASPIRA-SI</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link rel="stylesheet" href="../assets/css/bootstrap.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../../public/assets/dist/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@700&family=Roboto&display=swap"
           rel="stylesheet">
 </head>
@@ -20,13 +20,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Feed <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="timeline-forBPM.php">Feed <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My Aspiration</a>
+                    <a class="nav-link" href="Announcement.php">Announcement</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Announcement.html">Announcement</a>
+                    <a class="nav-link" href="UbahPassword.php">Profil</a>
                 </li>
             </ul>
             <!--            <form class="form-inline my-2 my-lg-0">-->
@@ -96,14 +96,16 @@
                 <div class="card-footer aspiration-card-footer">
                     <div class="row">
                         <div class="col-8">
-                            <select name="" id="" class="update-selection btn btn-sm btn-outline-light">
-                                <option value="" disabled selected>Resolve Status</option>
-                                <option value="">Di Tinjau</option>
-                                <option value="">Process</option>
-                                <option value="">Diteruskan</option>
-                                <option value="">Done Resolved</option>
+                        <form action="Announcement.php" method="post">
+                            <select name="data" id="" class="update-selection btn btn-sm btn-outline-light">
+                                <option disabled selected>Resolve Status</option>
+                                <option >Di Tinjau</option>
+                                <option >Process</option>
+                                <option >Diteruskan</option>
+                                <option >Done Resolved</option>
                             </select>
-                            <button class="btn btn-sm btn-primary">Update</button>
+                            <button class="btn btn-sm btn-primary" name="submit" type="submit" class="nav-link">Update</button>
+                            </form>
                         </div>
                         <div class="col-4 text-right">
                             <a href="">see all comments</a>

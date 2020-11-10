@@ -9,9 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@700&family=Roboto&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    @yield('styles')
 </head>
 <body>
-
 
 @yield('container')
 

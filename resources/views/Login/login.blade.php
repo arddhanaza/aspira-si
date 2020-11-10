@@ -3,55 +3,23 @@
 @section('title','Login')
 
 @section('container')
-{{--    <div class="container-fluid">--}}
-{{--    <div class="row">--}}
-{{--    <div class="col-md-6" style="margin-top: 10%;">--}}
-{{--        <div class="row">--}}
-{{--            <div class="col-md-8 d-flex justify-content-end" style="margin-left: 4%">--}}
-{{--                <h1>ASPIRA <br>-SI</h1>--}}
-{{--            </div>            --}}
-{{--        </div>        --}}
 
-{{--        <div class="row">--}}
-{{--            <div class="col-md-10 d-flex justify-content-end">--}}
-{{--                <form action="{{route('login')}}" method="post">--}}
-{{--                    @csrf--}}
-{{--                    <div class="form-group">--}}
-{{--                        <label for="username">NIM</label>--}}
-{{--                        <input type="text" class="form-control shadow p-3 mb-1 bg-white rounded" id="username" name="username">--}}
-{{--                    </div>                --}}
-{{--                    <div class="form-group">--}}
-{{--                        <label for="password">PASSWORD</label>--}}
-{{--                        <input type="password" name="password" class="form-control shadow p-3 mb-1 bg-white rounded" id="password">--}}
-{{--                    </div>                                --}}
-{{--                    <button type="submit"  class="btn btn-primary btn-block shadow p-1 mb-1 ">Login</button>--}}
-{{--                </form>                --}}
-{{--            </div>            --}}
-{{--        </div>         --}}
-{{--        --}}
-{{--        <div class="row">--}}
-{{--            <div class="col-md-9 d-flex justify-content-end">--}}
-{{--                <a href="forgot-password.blade.php">Forget Password</a>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>    --}}
-
-{{--    <div class="col-md-6">--}}
-{{--        <img src="{{URL::to('/assets/img/icon.png')}}" alt="icon aspirasi" width="70%">--}}
-{{--    </div>--}}
-{{--    </div>--}}
-{{--    </div>--}}
-
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-6" style="margin-top: 10%;">
+@section('styles')
+    <link rel="stylesheet" href="{{asset('assets/dist/css/login.css')}}">
+@stop
+    <div class="container h-100 align-content-center">
+        <div class="row justify-content-center d-flex flex-lg-row-reverse h-100">
+            <div class="col-md-6 align-self-center">
+                <img src="{{URL::to('/assets/img/icon.png')}}" alt="icon aspirasi" width="100%">
+            </div>
+            <div class="col-md-6 align-self-center">
                 <div class="row">
-                    <div class="col-10 d-flex">
+                    <div class="col-lg-10 col-md-10 col-sm-10">
                         <h1>ASPIRA <br>-SI</h1>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-10">
+                    <div class="col-lg-10 col-md-10 col-sm-10">
                         <form action="{{route('login')}}" method="post">
                             @csrf
                             <div class="form-group">
@@ -62,20 +30,19 @@
                                 <label for="password">PASSWORD</label>
                                 <input type="password" name="password" class="form-control rounded-pill shadow p-3 mb-1 bg-white rounded" id="password" style="border: none">
                             </div>
-                            <button type="submit"  class="btn btn-primary btn-block shadow p-1 mb-1 ">Login</button>
+                            <div class="form-group mt-5">
+                                <button type="submit"  class="btn btn-primary btn-block shadow mb-1 ">Login</button>
+                            </div>
                         </form>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-10">
+                    <div class="col-lg-10 col-md-10 col-sm-10 d-flex justify-content-center mt-3">
                         <a href="forgot-password.blade.php">Forget Password</a>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <img src="{{URL::to('/assets/img/icon.png')}}" alt="icon aspirasi" width="70%">
-            </div>
         </div>
     </div>
 
