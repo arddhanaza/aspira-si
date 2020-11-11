@@ -116,4 +116,11 @@ class Aspiration extends Model
         return $data;
     }
 
+    protected static function getAspirasiForYou(){
+//        $user = session(0)->id_entitas;
+//        $getAspiration = self::getAllAspiration(); ini kamu bisa tinggal pakek query yang sama kaya yang ada di get all aspration
+//        $getAspiration -> where('idnyasesuaikan dg di dtabase','=',$user);
+//        kalo g mau ambil yang di atas, tinggal copas aja kodingan yg di get all aspiration, terus tambahin -> where blablabla
+    }
+
 }
