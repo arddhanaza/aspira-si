@@ -30,7 +30,8 @@ Route::group(['middleware'=>'loggedIn'],function (){
     Route::put('/aspiration/{id}','AspirationController@update')->name('updateApirationStatus');
     Route::get('/aspiration/{id}','AspirationController@show')->name('detailAspiration');
     Route::post('/reply','ReplyController@store')->name('comment');
-//    Route::get('/aspiration/foryou','AspirationController@getAspirationForYou')->name('foryou');
+    Route::get('/entitas/foryou','AspirationController@getAspirationForYou')->name('foryou');
+    Route::get('/profile/{user}/edit','UserController@function_name') ->name('editprofil');
     //yang diakses dari blade itu namenya aja. jadi nnri {{route('foryou')}}
 });
 

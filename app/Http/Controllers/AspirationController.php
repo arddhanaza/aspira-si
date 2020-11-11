@@ -36,8 +36,11 @@ class AspirationController extends Controller
     }
 
     public function getAspirationForYou(){
-//        $aspirasi = Aspiration::getAspirationForYou();
-//        return view('namaview',['aspirasi' => $aspirasi]);
+        
+       $aspirasi = Aspiration::getAspirationForYou();
+    //    dd($aspirasi);
+    
+       return view('bpm.foryou',['aspirasi' => $aspirasi]);
     }
 
     /**
