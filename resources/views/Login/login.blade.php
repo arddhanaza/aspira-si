@@ -10,7 +10,7 @@
     <div class="container h-100 align-content-center">
         <div class="row justify-content-center d-flex flex-lg-row-reverse h-100">
             <div class="col-md-6 align-self-center">
-                <img src="{{URL::to('/assets/img/icon.png')}}" alt="icon aspirasi" width="100%">
+                <img draggable="false" src="{{URL::to('/assets/img/icon.png')}}" alt="icon aspirasi" width="100%">
             </div>
             <div class="col-md-6 align-self-center">
                 <div class="row">

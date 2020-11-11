@@ -24,13 +24,21 @@ class Aspiration extends Model
             $newData = self::changeElement($data[$row]->username);
             $upvoteTotal = VoteAspiration::getTotalUpVote($data[$row]->id_aspirasi);
             $downvoteTotal = VoteAspiration::getTotalDownVote($data[$row]->id_aspirasi);
-            $vote = VoteAspiration::getVoteByIdUser($data[$row]->id_aspirasi,session(0)->id_mahasiswa);
-            if(!$vote -> isEmpty()){
+            $vote = VoteAspiration::getVoteByIdUser($data[$row]->id_aspirasi, session(0)->id_mahasiswa);
+            if (session(0)->getTable() == 'mahasiswa'){
+                $comment = ReplyAspiration::getReplyByIdAndUser($data[$row]->id_aspirasi,session(0)->id_mahasiswa);
+                if (!$comment->isEmpty()){
+                    $data[$row]->comment = $comment[0]->reply_text;
+                }else{
+                    $data[$row]->comment = null;
+                }
+            }
+            if (!$vote->isEmpty()) {
                 $upvoteCount = $vote[0]->upvote;
                 $downvoteCount = $vote[0]->downvote;
                 $data[$row]->upVoteCount = $upvoteCount;
                 $data[$row]->downVoteCount = $downvoteCount;
-            }else{
+            } else {
                 $data[$row]->upVoteCount = 0;
                 $data[$row]->downVoteCount = 0;
             }
@@ -91,6 +99,17 @@ class Aspiration extends Model
             ->select('aspirasi.*', 'mahasiswa.username', 'mahasiswa.nama_mahasiswa', 'entitas_si.nama_entitas')
             ->where('aspirasi.id_aspirasi', '=', $id)
             ->first();
+        $vote = VoteAspiration::getVoteByIdUser($data->id_aspirasi, session(0)->id_mahasiswa);
+
+        if (!$vote->isEmpty()) {
+            $upvoteCount = $vote[0]->upvote;
+            $downvoteCount = $vote[0]->downvote;
+            $data->upVoteCount = $upvoteCount;
+            $data->downVoteCount = $downvoteCount;
+        } else {
+            $data->upVoteCount = 0;
+            $data->downVoteCount = 0;
+        }
         $data->upvote = VoteAspiration::getTotalUpVote($data->id_aspirasi);;
         $data->downvote = VoteAspiration::getTotalDownVote($data->id_aspirasi);;
         return $data;

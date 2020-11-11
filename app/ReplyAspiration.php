@@ -46,4 +46,17 @@ class ReplyAspiration extends Model
         return $data;
     }
 
+    protected static function getReplyByIdAndUser($id,$user){
+        $data = DB::table('reply')
+            ->join('aspirasi', 'reply.id_aspirasi', '=', 'aspirasi.id_aspirasi')
+            ->join('mahasiswa', 'reply.id_mahasiswa', '=', 'mahasiswa.id_mahasiswa')
+            ->select('reply.reply_text')
+            ->where('reply.id_aspirasi','=',$id)
+            ->where('reply.id_mahasiswa','=',$user)
+            ->get();
+
+        return $data;
+    }
+
+
 }
