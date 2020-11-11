@@ -1,8 +1,8 @@
 @extends('templates/template')
 
-@include('templates.navbar')
-
 @section('title','Feed')
+
+@include('templates.navbar')
 
 @section('container')
 
@@ -35,17 +35,19 @@
                                     <span class="span-time">Posted on September, {{$asp -> created_at}}</span>
                                 </div>
                                 <div class="col-3 text-right">
+                                    <h5><span class="badge badge-primary rounded-pill">{{$asp->status}}</span></h5>
                                     @if(session(0)->getTable() != 'bpm' && session(0)->getTable() != 'entitas_si')
                                         <button class="btn btn-sm btn-outline-danger"
                                                 onclick="addDisLikes({{session(0)->id_mahasiswa}},{{$asp->id_aspirasi}})">
                                             <img
                                                 src="{{asset('assets/icon/hand-thumbs-down.svg')}}" class="img-icon"
                                                 alt=""><span
-                                                id="totalDisLikes{{$asp->id_aspirasi}}" data-count="{{$asp->downVoteCount}}"
+                                                id="totalDisLikes{{$asp->id_aspirasi}}"
+                                                data-count="{{$asp->downVoteCount}}"
                                                 data-max-count="1">{{$asp -> downvote}}</span>
                                         </button>
                                         <button class="btn btn-sm btn-primary"
-                                                onclick="addLikes({{session(0)->id_mahasiswa}},{{$asp->id_aspirasi}})">
+                                                onclick="addLikes(  {{session(0)->id_mahasiswa}},{{$asp->id_aspirasi}})">
                                             <img
                                                 src="{{asset('assets/icon/hand-thumbs-up.svg')}}" class="img-icon"
                                                 alt=""><span
@@ -100,35 +102,52 @@
                         </div>
                         <div class="card-footer aspiration-card-footer">
                             <div class="row">
-                                <div class="col-1 col">
-                                    <img alt="" class="img-thumbnail img-icon" src="../assets/img/telkom.jpg"
-                                         style="width: 50px;">
-                                </div>
-                                <div class="col-11 col">
-                                    <form action="{{route('comment')}}" method="post">
-                                        @csrf
-                                        <div class="row">
-                                            <input type="hidden" name="id_aspirasi" value="{{$asp->id_aspirasi}}">
-                                            <input type="hidden" name="id_mahasiswa"
-                                                   value="{{session(0)->id_mahasiswa}}">
-                                            <div class="col-11">
+                                @if(session(0)->getTable() == 'mahasiswa')
+                                    <div class="col-1 col">
+                                        <img alt="" class="img-thumbnail img-icon" src="../assets/img/telkom.jpg"
+                                             style="width: 50px;">
+                                    </div>
+                                    @if($asp->comment == null)
+                                        <div class="col-11 col">
+                                            <form action="{{route('comment')}}" method="post">
+                                                @csrf
+                                                <div class="row">
+                                                    <input type="hidden" name="id_aspirasi"
+                                                           value="{{$asp->id_aspirasi}}">
+                                                    <input type="hidden" name="id_mahasiswa"
+                                                           value="{{session(0)->id_mahasiswa}}">
+                                                    <div class="col-11">
                                                 <textarea class="form-control aspiration-comments"
                                                           placeholder="add comments"
-                                                          style="resize: none" rows="1" name="text_comment"
+                                                          style="resize: none" rows="1" name="text_comment" id="text_comment"
                                                           type="text"></textarea>
-                                            </div>
-                                            <div class="col-1">
-                                                <button type="submit" class="btn py-0">
-                                                    <img alt="" class="img-thumbnail img-icon"
-                                                         src="{{asset('assets/icon/arrow-right-short.svg')}}"
-                                                         style="width: 50px;">
-                                                </button>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <button type="submit" class="btn py-0">
+                                                            <img alt="" class="img-thumbnail img-icon"
+                                                                 src="{{asset('assets/icon/arrow-right-short.svg')}}"
+                                                                 style="width: 50px;">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @else
+                                        <div class="col-11 col">
+                                            <div class="aspiration-comments-exist">
+                                                <h6>{{session(0)->nama_mahasiswa}}</h6>
+                                                <span>{{$asp->comment}}</span>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
+                                    @endif
+                                @else
+                                    <div class="col-12 col">
+                                        <button class="btn btn-light rounded-pill" disabled>{{$asp->status}}</button>
+                                    </div>
+                                @endif
                                 <div class="col-12 text-right mt-2">
-                                    <a href="{{route('detailAspiration',[$asp->id_aspirasi])}}">see more comments</a>
+                                    <a href="{{route('detailAspiration',[$asp->id_aspirasi])}}">see more
+                                        comments</a>
                                 </div>
                             </div>
                         </div>

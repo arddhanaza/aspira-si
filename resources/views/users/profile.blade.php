@@ -42,7 +42,7 @@
                 @foreach($aspirasi_mhs as $aspirasi_mahasiswa)
                     <div class="row mb-4">
                         <div class="col-12">
-                            <div class="card aspiration-card">
+                            <div class="card aspiration-card aspiration-card-profile">
                                 <div class="card-header aspiration-card-header">
                                     <div class="row">
                                         <div class="col-7">

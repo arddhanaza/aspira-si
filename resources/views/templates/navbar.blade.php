@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light  nav-main sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">ASPIRA-SI</a>
+        <a class="navbar-brand" href="{{route('feed')}}">ASPIRA-SI</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,11 +11,12 @@
                     <a class="nav-link" href="{{route('feed')}}">Feed <span class="sr-only">(current)</span></a>
                 </li>
                 @if(session(0)->getTable() == 'mahasiswa')
-                    <li class="nav-item {{ Route::currentRouteNamed('aspirasi') ? 'active' : '' }}">
-                        <a class="nav-link" href="#">Aspirasi <span class="sr-only">(current)</span></a>
+                    <li class="nav-item {{ Route::currentRouteNamed('announcement') ? 'active' : '' }}">
+                        <a class="nav-link" href="#">Announcement <span class="sr-only">(current)</span></a>
                     </li>
                 @elseif(session(0)->getTable() == 'entitas_si')
                     <li class="nav-item {{ Route::currentRouteNamed('foryou') ? 'active' : '' }}">
+{{--                        <a class="nav-link" href="{{route('foryou')}}">For You <span class="sr-only">(current)</span></a>--}}
                         <a class="nav-link" href="#">For You <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item {{ Route::currentRouteNamed('announcement') ? 'active' : '' }}">
@@ -30,7 +31,7 @@
                     </li>
                 @endif
 
-                <li class="dropdown dr-notif ml-5">
+                <li class="dropdown dr-notif ml-lg-5 ml-md-5 ml-sm-0">
                     <a class="nav-link dropdown-toggle nav-link-lg nav-link-user" data-toggle="dropdown" href="#">
                         <img src="{{asset('assets/icon/bell-fill.svg')}}" alt="">
                     </a>
