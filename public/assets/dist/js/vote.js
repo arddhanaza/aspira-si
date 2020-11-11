@@ -5,7 +5,9 @@ function addLikes(idm, id) {
     var count = document.getElementById('totalLikes' + id).getAttribute('data-count');
     if (parseInt(count) < parseInt(maxCount)){
         x = x + 1;
-        y = y - 1;
+        if (y != 0){
+            y = y - 1;
+        }
         document.getElementById('totalLikes' + id).setAttribute('data-count','1');
         document.getElementById('totalDisLikes' + id).setAttribute('data-count','0');
     }
@@ -31,7 +33,9 @@ function addDisLikes(idm, id) {
     var count = document.getElementById('totalDisLikes' + id).getAttribute('data-count');
     if (parseInt(count) < parseInt(maxCount)){
         x = x + 1;
-        y = y - 1;
+        if (y != 0){
+            y = y - 1;
+        }
         document.getElementById('totalDisLikes' + id).setAttribute('data-count','1');
         document.getElementById('totalLikes' + id).setAttribute('data-count','0');
     }

@@ -17,6 +17,7 @@ class AspirationController extends Controller
      */
     public function index()
     {
+
         $aspirasi = Aspiration::getAspiration();
         $entitas = EntitasSi::getDataEntitas();
         return view('timeline', ['aspirasi' => $aspirasi , 'entitas' => $entitas]);
@@ -32,6 +33,11 @@ class AspirationController extends Controller
     {
         $aspirasi = Aspiration::getAllAspiration();
         return view('bpm.allAspiration',['aspirasi' => $aspirasi]);
+    }
+
+    public function getAspirationForYou(){
+//        $aspirasi = Aspiration::getAspirationForYou();
+//        return view('namaview',['aspirasi' => $aspirasi]);
     }
 
     /**

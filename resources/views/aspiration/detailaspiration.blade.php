@@ -15,7 +15,7 @@
             </h5>
         </div>
         <div class="row mb-4">
-            <div class="col-10">
+            <div class="col-lg-10 col-md-10 col-sm-12">
                 <div class="card aspiration-card">
                     <div class="card-header aspiration-card-header">
                         <div class="row">
@@ -30,14 +30,16 @@
                                         <img
                                             src="{{asset('assets/icon/hand-thumbs-down.svg')}}" class="img-icon"
                                             alt=""><span
-                                            id="totalDisLikes{{$aspirasi->id_aspirasi}}">{{$aspirasi -> downvote}}</span>
+                                            id="totalDisLikes{{$aspirasi->id_aspirasi}}" data-count="{{$aspirasi->downVoteCount}}"
+                                            data-max-count="1">{{$aspirasi -> downvote}}</span>
                                     </button>
                                     <button class="btn btn-sm btn-primary"
                                             onclick="addLikes({{session(0)->id_mahasiswa}},{{$aspirasi->id_aspirasi}})">
                                         <img
                                             src="{{asset('assets/icon/hand-thumbs-up.svg')}}" class="img-icon"
                                             alt=""><span
-                                            id="totalLikes{{$aspirasi->id_aspirasi}}">{{$aspirasi -> upvote}}</span>
+                                            id="totalLikes{{$aspirasi->id_aspirasi}}" data-count="{{$aspirasi->upVoteCount}}"
+                                            data-max-count="1">{{$aspirasi -> upvote}}</span>
                                     </button>
                                 @else
                                     <button class="btn btn-sm btn-outline-danger" disabled><img
@@ -110,14 +112,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-lg-2 col-md-2 col-sm-12">
                 @if(isset($aspirasi->file_name))
                     <h5>File Pendukung</h5>
 
                     <?php
                     foreach (json_decode($aspirasi->file_name) as $file){ ?>
                     <a href="{{asset('files/'.$file)}}" target="_blank"
-                       class="btn btn-outline-info">Name: <?php echo $file?></a>
+                       class="btn btn-outline-info mb-2">Name: <?php echo $file?></a>
                     <?php } ?>
                 @else
                     <h6>Tidak Ada File Pendukung</h6>
@@ -131,7 +133,7 @@
             </h5>
             @foreach($replys as $reply)
                 <div class="row mt-3">
-                    <div class="col-10">
+                    <div class="col-lg-10 col-md-10 col-sm-12">
                         <div class="card aspiration-card">
                             <div class="card-footer aspiration-card-footer">
 
