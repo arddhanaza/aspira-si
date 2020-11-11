@@ -21,7 +21,6 @@ class Mahasiswa extends Model
         }
     }
 
-
     public function getTable(){
         return $this->table;
     }
@@ -40,4 +39,17 @@ class Mahasiswa extends Model
             return false;
         }
     }
+
+    protected static function validatePassword($id_user,$password){
+        $pass = DB::table('mahasiswa')
+            ->where('id_mahasiswa','=', $id_user)
+            ->select('password')
+            ->first();
+        if ($password == $pass->password){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
