@@ -16,6 +16,7 @@
                     </li>
                 @elseif(session(0)->getTable() == 'entitas_si')
                     <li class="nav-item {{ Route::currentRouteNamed('foryou') ? 'active' : '' }}">
+{{--                        <a class="nav-link" href="{{route('foryou')}}">For You <span class="sr-only">(current)</span></a>--}}
                         <a class="nav-link" href="#">For You <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item {{ Route::currentRouteNamed('announcement') ? 'active' : '' }}">
