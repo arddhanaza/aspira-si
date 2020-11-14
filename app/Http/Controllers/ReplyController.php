@@ -24,4 +24,8 @@ class ReplyController extends Controller
         }
 
     }
+    public function delete($id_aspirasi){
+        DB::table('reply')->where('reply.id_aspirasi')->delete();
+        return redirect('feed');
+    }
 }

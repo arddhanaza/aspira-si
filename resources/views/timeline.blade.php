@@ -149,6 +149,9 @@
                                     <a href="{{route('detailAspiration',[$asp->id_aspirasi])}}">see more
                                         comments</a>
                                 </div>
+                                <div>
+                                <a href="/timeline/delete/{{$asp->id_aspirasi}}" class="btn btn-outline-primary mb-2" type="submit">Delete</a>
+                                </div>
                             </div>
                         </div>
                     </div>

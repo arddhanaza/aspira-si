@@ -32,6 +32,7 @@ Route::group(['middleware'=>'loggedIn'],function (){
     Route::post('/reply','ReplyController@store')->name('comment');
     Route::get('profile/{user}/edit','UserController@edit')->name('edit_password');
     Route::put('profile/{user}/edit','UserController@update')->name('save_edit_password');
+    Route::get('/reply/delete/{id_aspirasi}','ReplyController@delete');
 //    Route::get('/aspiration/foryou','AspirationController@getAspirationForYou')->name('foryou');
     //yang diakses dari blade itu namenya aja. jadi nnri {{route('foryou')}}
 });

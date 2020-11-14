@@ -150,6 +150,7 @@
                                 <textarea name="comment" id="comment" class="form-control aspiration-comments"
                                           style="resize: none" disabled>{{$reply->reply_text}}</textarea>
                                     </div>
+                                    <div class="col-12 col mt-8">
                                 </div>
                             </div>
                         </div>
@@ -170,6 +171,8 @@
     @if(session(0)->getTable() != 'bpm' or session(0)->getTable() != 'entitas_si')
         <script src="{{asset('assets/dist/js/vote.js')}}">
         </script>
+        
+        
     @endif
 
 @endsection
