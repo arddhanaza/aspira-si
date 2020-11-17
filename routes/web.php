@@ -19,6 +19,11 @@ Route::get('/', 'LoginController@index');
 Route::post('/login','LoginController@login')->name('login');
 Route::get('/logout','LoginController@logout')->name('logout');
 
+Route::get('/lupapassword','LoginController@lupaPassword')->name('lupa_password');
+Route::post('/lupapassword/validate','LoginController@validateLupaPassword')->name('validate_lupa_password');
+Route::get('/lupapassword/validate/{id}/edit','LoginController@editPassword')->name('edit_lupa_password');
+Route::put('/lupapassword/validate/{id}/edit/save','LoginController@saveEditPassword')->name('save_edit_lupa_password');
+
 Route::group(['middleware'=>'loggedIn'],function (){
     Route::get('/feed','AspirationController@index')->name('feed');
     Route::get('/feed-sorted','AspirationController@feedPopular')->name('feedPopular');
@@ -35,10 +40,6 @@ Route::group(['middleware'=>'loggedIn'],function (){
 });
 
 
-
-Route::get('forgot-password',function (){
-    return view(('/Login.forgot-password'));
-});
 
 // Route::get('/', function () {
 //     return view('welcome');
