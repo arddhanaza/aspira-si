@@ -35,6 +35,12 @@ Route::group(['middleware'=>'loggedIn'],function (){
     Route::get('profile/{user}/edit','UserController@edit')->name('edit_password');
     Route::put('profile/{user}/edit','UserController@update')->name('save_edit_password');
     Route::get('/reply/delete/{id_aspirasi}','ReplyController@delete');
+    Route::get('/entitas/announcement','AnnouncementController@index')->name('announcement');
+    Route::get('/announcement','AnnouncementController@getAllAnnouncement')->name('all_announcement');
+    Route::post('/post_announcement','AnnouncementController@store')->name('post_announcement');
+    Route::get('/announcement/{id}/delete','AnnouncementController@destroy')->name('delete_announcement');
+    Route::get('/announcement/{id}/edit','AnnouncementController@edit')->name('edit_announcement');
+    Route::put('/announcement/{id}/edit/save','AnnouncementController@update')->name('update_announcement');
 });
 
 Route::get('forgot-password',function (){

@@ -3,14 +3,44 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Announcement extends Model
 {
     protected $table = 'announcement';
     protected $primaryKey = 'id_announcement';
 
-    protected function aspiration(){
-        return $this->belongsTo('App\Model\Aspiration','id_aspirasi');
+    protected static function getAnnouncementByIdUser($user){
+        $data = DB::table('announcement')
+            ->join('entitas_si', 'entitas_si.id_entitas', '=', 'announcement.id_entitas')
+            ->where('announcement.id_entitas','=',$user)
+            ->get();
+        self::updateData($data);
+        return $data;
+    }
+    protected static function updateData($data){
+        for ($row = 0;$row<count($data);$row++){
+            if (isset($data[$row]->id_aspirasi)){
+                $judulAspirasi = DB::table('announcement')
+                    ->join('aspirasi', 'aspirasi.id_aspirasi', '=', 'announcement.id_aspirasi')
+                    ->where('announcement.id_entitas','=',$data[$row]->id_entitas)
+                    ->where('announcement.id_aspirasi','=',$data[$row]->id_aspirasi)
+                    ->select('judul_aspirasi')
+                    ->first();
+                $data[$row] -> judul_aspirasi = $judulAspirasi->judul_aspirasi;
+            }else{
+                $judulAspirasi = "Tanpa Tujuan";
+                $data[$row] -> judul_aspirasi = $judulAspirasi;
+            }
+        }
     }
 
+    protected static function getAllData(){
+        $data = DB::table('announcement')
+            ->join('entitas_si', 'entitas_si.id_entitas', '=', 'announcement.id_entitas')
+            ->orderByDesc('created_at')
+            ->get();
+        self::updateData($data);
+        return $data;
+    }
 }

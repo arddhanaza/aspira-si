@@ -7,12 +7,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item {{ Route::currentRouteNamed('feed') ? 'active' : '' }}">
+                <li class="nav-item {{ Route::currentRouteNamed('feed') || Route::currentRouteNamed('feedPopular') ? 'active' : '' }}">
                     <a class="nav-link" href="{{route('feed')}}">Feed <span class="sr-only">(current)</span></a>
                 </li>
                 @if(session(0)->getTable() == 'mahasiswa')
                     <li class="nav-item {{ Route::currentRouteNamed('announcement') ? 'active' : '' }}">
-                        <a class="nav-link" href="#">Announcement <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{route('all_announcement')}}">Announcement <span class="sr-only">(current)</span></a>
                     </li>
                 @elseif(session(0)->getTable() == 'entitas_si')
                     <li class="nav-item {{ Route::currentRouteNamed('foryou') ? 'active' : '' }}">
@@ -20,7 +20,7 @@
                         <a class="nav-link" href="{{route('foryou')}}">For You <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item {{ Route::currentRouteNamed('announcement') ? 'active' : '' }}">
-                        <a class="nav-link" href="#">Announcement <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{route('announcement')}}">Announcement <span class="sr-only">(current)</span></a>
                     </li>
                 @else
                     <li class="nav-item {{ Route::currentRouteNamed('bpmAllAspiration') ? 'active' : '' }}">
