@@ -40,4 +40,18 @@ class Mahasiswa extends Model
             return false;
         }
     }
+
+    protected static function validateUsername($username,$nama_mahasiswa){
+        $data = DB::table('mahasiswa')
+            ->where([
+                ['username',$username],
+                ['nama_mahasiswa',$nama_mahasiswa],
+            ])
+            ->get();
+        if (!$data -> isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
