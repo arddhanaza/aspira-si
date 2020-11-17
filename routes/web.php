@@ -37,8 +37,6 @@ Route::group(['middleware'=>'loggedIn'],function (){
     Route::get('/reply/delete/{id_aspirasi}','ReplyController@delete');
 });
 
-
-
 Route::get('forgot-password',function (){
     return view(('/Login.forgot-password'));
 });
