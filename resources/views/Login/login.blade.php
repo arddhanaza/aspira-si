@@ -38,7 +38,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-10 col-md-10 col-sm-10 d-flex justify-content-center mt-3">
-                        <a href="forgot-password.blade.php">Forget Password</a>
+                        <a href="{{route('lupa_password')}}">Forget Password</a>
                     </div>
                 </div>
             </div>
