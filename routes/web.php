@@ -39,6 +39,10 @@ Route::group(['middleware'=>'loggedIn'],function (){
 
 
 
+Route::get('forgot-password',function (){
+    return view(('/Login.forgot-password'));
+});
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
