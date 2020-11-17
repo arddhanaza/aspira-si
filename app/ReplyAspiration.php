@@ -57,6 +57,7 @@ class ReplyAspiration extends Model
 
         return $data;
     }
+    
 
 
 }

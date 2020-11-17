@@ -27,7 +27,7 @@
                             </div>
                             <div class="col-lg-6 col-sm-6 col-md-12">
                                 <img src="{{asset('assets/icon/pencil-fill.svg')}}" class="" alt="">
-                                <a href="">Edit</a>
+                                <a href="{{route('edit_password',session(0)->id_mahasiswa)}}">Edit Password</a>
                             </div>
                         </div>
                     </div>
