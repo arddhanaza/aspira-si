@@ -32,6 +32,15 @@ Route::group(['middleware'=>'loggedIn'],function (){
     Route::post('/reply','ReplyController@store')->name('comment');
 //    Route::get('/aspiration/foryou','AspirationController@getAspirationForYou')->name('foryou');
     //yang diakses dari blade itu namenya aja. jadi nnri {{route('foryou')}}
+
+
+    Route::get('/entitas/announcement','AnnouncementController@index')->name('announcement');
+
+    Route::get('/announcement','AnnouncementController@getAllAnnouncement')->name('all_announcement');
+    Route::post('/post_announcement','AnnouncementController@store')->name('post_announcement');
+    Route::get('/announcement/{id}/delete','AnnouncementController@destroy')->name('delete_announcement');
+    Route::get('/announcement/{id}/edit','AnnouncementController@edit')->name('edit_announcement');
+    Route::put('/announcement/{id}/edit/save','AnnouncementController@update')->name('update_announcement');
 });
 
 
