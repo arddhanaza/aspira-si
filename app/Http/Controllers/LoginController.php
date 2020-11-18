@@ -61,6 +61,36 @@ class LoginController extends Controller
 
     }
 
+    public function lupaPassword(){
+        if (!session('loginStatus')){
+            return view('Login.forgot-password');
+        }
+        return redirect(route('feed'));
+    }
+
+    public function validateLupaPassword(Request $request){
+        $username = $request->username;
+        $nama_mahasiswa = $request->nama_mahasiswa;
+        $mahasiswa = Mahasiswa::where('username',$username)->first();
+        if (Mahasiswa::validateUsername($username,$nama_mahasiswa)){
+            return redirect(route('edit_lupa_password',$mahasiswa->id_mahasiswa));
+        }else{
+            return redirect()->back();
+        }
+    }
+
+    public function editPassword($id){
+        $mahasiswa = Mahasiswa::find($id);
+        return view('Login.new-password',['mahasiswa'=>$mahasiswa]);
+    }
+
+    public function saveEditPassword(Request $request){
+        $mahasiswa = Mahasiswa::find($request->id_mahasiswa);
+        $mahasiswa->password = $request->new_password;
+        $mahasiswa->save();
+        return redirect('/');
+    }
+
     public function logout(Request $request){
         $request->session()->flush();
         return redirect('/');
