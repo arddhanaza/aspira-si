@@ -14,41 +14,52 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
 Route::get('/', 'LoginController@index');
-Route::post('/login','LoginController@login')->name('login');
-Route::get('/logout','LoginController@logout')->name('logout');
+Route::post('/login', 'LoginController@login')->name('login');
+Route::get('/logout', 'LoginController@logout')->name('logout');
 
-Route::get('/lupapassword','LoginController@lupaPassword')->name('lupa_password');
-Route::post('/lupapassword/validate','LoginController@validateLupaPassword')->name('validate_lupa_password');
-Route::get('/lupapassword/validate/{id}/edit','LoginController@editPassword')->name('edit_lupa_password');
-Route::put('/lupapassword/validate/{id}/edit/save','LoginController@saveEditPassword')->name('save_edit_lupa_password');
+Route::get('/lupapassword', 'LoginController@lupaPassword')->name('lupa_password');
+Route::post('/lupapassword/validate', 'LoginController@validateLupaPassword')->name('validate_lupa_password');
+Route::get('/lupapassword/validate/{id}/edit', 'LoginController@editPassword')->name('edit_lupa_password');
+Route::put('/lupapassword/validate/{id}/edit/save', 'LoginController@saveEditPassword')->name('save_edit_lupa_password');
 
-Route::group(['middleware'=>'loggedIn'],function (){
-    Route::get('/feed','AspirationController@index')->name('feed');
-    Route::get('/feed-sorted','AspirationController@feedPopular')->name('feedPopular');
+Route::group(['middleware' => 'loggedIn'], function () {
+    //feed
+    Route::get('/feed', 'AspirationController@index')->name('feed');
+    Route::get('/feed-sorted', 'AspirationController@feedPopular')->name('feedPopular');
+    //aspiration
     Route::post('/PostAspiration', 'AspirationController@store');
+    Route::get('/aspiration/{id}', 'AspirationController@show')->name('detailAspiration');
+    //reply
+    Route::post('/reply', 'ReplyController@store')->name('comment');
+    Route::get('/reply/delete/{id_comment}','ReplyController@delete')->name('deleteReply');
+    //vote
+    Route::get('/feed/likes/{id}/{id_aspirasi}', 'VoteController@postUpVote')->name('upvote');
+    Route::get('/feed/dislikes/{id}/{id_aspirasi}', 'VoteController@postDownVote')->name('downvote');
+    //profile
     Route::get('/profile/{user}', 'UserController@index')->name('profile');
-    Route::get('/feed/likes/{id}/{id_aspirasi}','VoteController@postUpVote')->name('upvote');
-    Route::get('/feed/dislikes/{id}/{id_aspirasi}','VoteController@postDownVote')->name('downvote');
-    Route::get('/bpm/allaspiration', 'AspirationController@getAllAspiration')->name('bpmAllAspiration');
-    Route::put('/aspiration/{id}','AspirationController@update')->name('updateApirationStatus');
-    Route::get('/aspiration/{id}','AspirationController@show')->name('detailAspiration');
-    Route::post('/reply','ReplyController@store')->name('comment');
-    Route::get('/entitas/foryou','AspirationController@getAspirationForYou')->name('foryou');
-    Route::get('/profile/{user}/edit','UserController@function_name') ->name('editprofil');
-    Route::get('profile/{user}/edit','UserController@edit')->name('edit_password');
-    Route::put('profile/{user}/edit','UserController@update')->name('save_edit_password');
-    Route::get('/reply/delete/{id_aspirasi}','ReplyController@delete');
-    Route::get('/entitas/announcement','AnnouncementController@index')->name('announcement');
-    Route::get('/announcement','AnnouncementController@getAllAnnouncement')->name('all_announcement');
-    Route::post('/post_announcement','AnnouncementController@store')->name('post_announcement');
-    Route::get('/announcement/{id}/delete','AnnouncementController@destroy')->name('delete_announcement');
-    Route::get('/announcement/{id}/edit','AnnouncementController@edit')->name('edit_announcement');
-    Route::put('/announcement/{id}/edit/save','AnnouncementController@update')->name('update_announcement');
+    Route::get('/profile/{user}/edit', 'UserController@function_name')->name('editprofil');
+    Route::get('profile/{user}/edit', 'UserController@edit')->name('edit_password');
+    Route::put('profile/{user}/edit', 'UserController@update')->name('save_edit_password');
+    //announcement
+    Route::get('/announcement', 'AnnouncementController@getAllAnnouncement')->name('all_announcement');
+    //bpm
+    Route::group(['middleware' => 'loggedInAsBpm'], function () {
+        Route::get('/bpm/allaspiration', 'AspirationController@getAllAspiration')->name('bpmAllAspiration');
+        Route::put('/aspiration/{id}', 'AspirationController@update')->name('updateApirationStatus');
+    });
+    //entitas
+    Route::group(['middleware' => 'loggedInAsEntitas'], function () {
+        Route::get('/entitas/foryou', 'AspirationController@getAspirationForYou')->name('foryou');
+        Route::get('/entitas/announcement', 'AnnouncementController@index')->name('announcement');
+        Route::get('/announcement/{id}/delete', 'AnnouncementController@destroy')->name('delete_announcement');
+        Route::get('/announcement/{id}/edit', 'AnnouncementController@edit')->name('edit_announcement');
+        Route::put('/announcement/{id}/edit/save', 'AnnouncementController@update')->name('update_announcement');
+        Route::post('/post_announcement', 'AnnouncementController@store')->name('post_announcement');
+    });
 });
 
-Route::get('forgot-password',function (){
+Route::get('forgot-password', function () {
     return view(('/Login.forgot-password'));
 });
 
@@ -70,11 +81,9 @@ Route::get('forgot-password',function (){
 //
 //});
 
-Route::get('/testCase', function (){
+Route::get('/testCase', function () {
     echo 'Failed';
 });
-
-
-Route::get('/zhaf',function (){
+Route::get('/zhaf', function () {
     return view('coba');
 });

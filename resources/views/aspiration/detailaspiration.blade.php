@@ -115,7 +115,6 @@
             <div class="col-lg-2 col-md-2 col-sm-12">
                 @if(isset($aspirasi->file_name))
                     <h5>File Pendukung</h5>
-
                     <?php
                     foreach (json_decode($aspirasi->file_name) as $file){ ?>
                     <a href="{{asset('files/'.$file)}}" target="_blank"
@@ -136,18 +135,27 @@
                     <div class="col-lg-10 col-md-10 col-sm-12">
                         <div class="card aspiration-card">
                             <div class="card-footer aspiration-card-footer">
-
                                 <div class="row">
                                     <div class="col-1 col">
                                         <img alt="" class="img-thumbnail img-icon" src="../assets/img/telkom.jpg"
                                              style="width: 50px;">
                                     </div>
-                                    <div class="col-11 col">
-                                        <input class="form-control aspiration-comments" placeholder="add comments"
-                                               type="text" disabled value="{{$reply->username}}">
-                                    </div>
+                                    @if(session(0)->id_mahasiswa == $aspirasi->id_mahasiswa)
+                                        <div class="col-9 col">
+                                            <input class="form-control aspiration-comments" placeholder="add comments"
+                                                   type="text" disabled value="{{$reply->username}}">
+                                        </div>
+                                        <div class="col-2 m-0 pl-0 text-right">
+                                            <a href="{{route('deleteReply',[$aspirasi->id_mahasiswa])}}" class=" w-100 btn btn-outline-danger align-self-center m-0 h-100">Delete</a>
+                                        </div>
+                                    @else
+                                        <div class="col-11 col">
+                                            <input class="form-control aspiration-comments" placeholder="add comments"
+                                                   type="text" disabled value="{{$reply->username}}">
+                                        </div>
+                                    @endif
                                     <div class="col-12 col mt-2">
-                                <textarea name="comment" id="comment" class="form-control aspiration-comments"
+                                    <textarea name="comment" id="comment" class="form-control aspiration-comments"
                                           style="resize: none" disabled>{{$reply->reply_text}}</textarea>
                                     </div>
                                     <div class="col-12 col mt-8">
@@ -156,7 +164,6 @@
                         </div>
                     </div>
                 </div>
-
             @endforeach
         @else
             <h6 class="mt-5">
@@ -171,8 +178,8 @@
     @if(session(0)->getTable() != 'bpm' or session(0)->getTable() != 'entitas_si')
         <script src="{{asset('assets/dist/js/vote.js')}}">
         </script>
-        
-        
+
+
     @endif
 
 @endsection

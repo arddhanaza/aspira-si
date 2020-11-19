@@ -133,10 +133,15 @@
                                             </form>
                                         </div>
                                     @else
-                                        <div class="col-11 col">
+                                        <div class="col-10 col">
                                             <div class="aspiration-comments-exist">
                                                 <h6>{{session(0)->nama_mahasiswa}}</h6>
                                                 <span>{{$asp->comment}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-1 p-0">
+                                            <div>
+                                                <a href="{{route('deleteReply',[$asp->id_aspirasi])}}" class="btn btn-outline-danger align-self-center m-0 h-100">Delete</a>
                                             </div>
                                         </div>
                                     @endif
@@ -148,9 +153,6 @@
                                 <div class="col-12 text-right mt-2">
                                     <a href="{{route('detailAspiration',[$asp->id_aspirasi])}}">see more
                                         comments</a>
-                                </div>
-                                <div>
-                                <a href="/timeline/delete/{{$asp->id_aspirasi}}" class="btn btn-outline-primary mb-2" type="submit">Delete</a>
                                 </div>
                             </div>
                         </div>
