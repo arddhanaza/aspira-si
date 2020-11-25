@@ -13,15 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['withoutMiddleware' => 'loggedIn'], function () {
+    Route::get('/', 'LoginController@index');
+    Route::post('/login', 'LoginController@login')->name('login');
+    Route::get('/logout', 'LoginController@logout')->name('logout');
 
-Route::get('/', 'LoginController@index');
-Route::post('/login', 'LoginController@login')->name('login');
-Route::get('/logout', 'LoginController@logout')->name('logout');
-
-Route::get('/lupapassword', 'LoginController@lupaPassword')->name('lupa_password');
-Route::post('/lupapassword/validate', 'LoginController@validateLupaPassword')->name('validate_lupa_password');
-Route::get('/lupapassword/validate/{id}/edit', 'LoginController@editPassword')->name('edit_lupa_password');
-Route::put('/lupapassword/validate/{id}/edit/save', 'LoginController@saveEditPassword')->name('save_edit_lupa_password');
+    Route::get('/lupapassword', 'LoginController@lupaPassword')->name('lupa_password');
+    Route::post('/lupapassword/validate', 'LoginController@validateLupaPassword')->name('validate_lupa_password');
+    Route::get('/lupapassword/validate/{id}/edit', 'LoginController@editPassword')->name('edit_lupa_password');
+    Route::put('/lupapassword/validate/{id}/edit/save', 'LoginController@saveEditPassword')->name('save_edit_lupa_password');
+});
 
 Route::group(['middleware' => 'loggedIn'], function () {
     //feed

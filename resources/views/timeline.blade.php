@@ -145,10 +145,6 @@
                                             </div>
                                         </div>
                                     @endif
-                                @else
-                                    <div class="col-12 col">
-                                        <button class="btn btn-light rounded-pill" disabled>{{$asp->status}}</button>
-                                    </div>
                                 @endif
                                 <div class="col-12 text-right mt-2">
                                     <a href="{{route('detailAspiration',[$asp->id_aspirasi])}}">see more

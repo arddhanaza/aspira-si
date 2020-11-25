@@ -19,6 +19,7 @@ class Aspiration extends Model
             ->join('entitas_si', 'aspirasi.id_entitas', '=', 'entitas_si.id_entitas')
             ->select('aspirasi.*', 'mahasiswa.username', 'entitas_si.nama_entitas')
             ->where('aspirasi.status','!=','Done Resolved')
+            ->where('aspirasi.status','!=','Belum Diproses')
             ->orderBy('created_at', 'desc')
             ->get();
         for ($row = 0; $row < count($data); $row++) {
@@ -63,9 +64,13 @@ class Aspiration extends Model
 
     protected static function changeElement($data)
     {
-        $x = substr_replace($data, '*****', 0, 5);
-        $y = substr_replace($x, '*', 9, 1);
-        return $y;
+        if (session(0)->getTable() == 'mahasiswa' || session(0)->getTable() == 'entitas_si'){
+            $x = substr_replace($data, '*****', 0, 5);
+            $y = substr_replace($x, '*', 9, 1);
+            return $y;
+        }else{
+            return $data;
+        }
     }
 
     protected static function getAspirationByPopular()
@@ -101,7 +106,7 @@ class Aspiration extends Model
             ->where('aspirasi.id_aspirasi', '=', $id)
             ->first();
         $vote = VoteAspiration::getVoteByIdUser($data->id_aspirasi, session(0)->id_mahasiswa);
-
+        $newData = self::changeElement($data->username);
         if (!$vote->isEmpty()) {
             $upvoteCount = $vote[0]->upvote;
             $downvoteCount = $vote[0]->downvote;
@@ -111,8 +116,9 @@ class Aspiration extends Model
             $data->upVoteCount = 0;
             $data->downVoteCount = 0;
         }
-        $data->upvote = VoteAspiration::getTotalUpVote($data->id_aspirasi);;
-        $data->downvote = VoteAspiration::getTotalDownVote($data->id_aspirasi);;
+        $data->upvote = VoteAspiration::getTotalUpVote($data->id_aspirasi);
+        $data->downvote = VoteAspiration::getTotalDownVote($data->id_aspirasi);
+        $data->username = $newData;
         return $data;
     }
 
@@ -122,12 +128,6 @@ class Aspiration extends Model
         -> where('id_entitas','=',$user)
         -> where('status','=', 'Diteruskan');
         return $getAspiration;
-        // -> where('where('entitas_si','=',$id)','=',$user);
-//        $user = session(0)->id_entitas;
-//        $getAspiration = self::getAllAspiration()
-//        -> where('idnyasesuaikan dg di dtabase','=',$user); ini kamu bisa tinggal pakek query yang sama kaya yang ada di get all aspration
-//        kalo g mau ambil yang di atas, tinggal copas aja kodingan yg di get all aspiration, terus tambahin -> where blablabla
-//        return $getAspiration;
     }
 
     protected static function getAspirasiByIdEntitas($id){

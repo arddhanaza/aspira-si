@@ -10,7 +10,7 @@
         <div class="row justify-content-center mb-4">
             <div class="col-lg-10 col-md-10 col-sm-12">
                 <h5>
-                    <button  style="border: none;background-color: transparent;"><img
+                    <button  onClick="window.history.back();" style="border: none;background-color: transparent;"><img
                             style="width: 30px;" src="{{asset('assets/icon/arrow-left-short.svg')}}" alt="">Back
                     </button>
                 </h5>

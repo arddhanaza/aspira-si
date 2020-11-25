@@ -24,13 +24,15 @@
                                 <span class="span-time">Posted on September, {{$aspirasi -> created_at}}</span>
                             </div>
                             <div class="col-3 text-right">
+                                <h5><span class="badge badge-primary rounded-pill">{{$aspirasi->status}}</span></h5>
                                 @if(session(0)->getTable() != 'bpm' && session(0)->getTable() != 'entitas_si')
                                     <button class="btn btn-sm btn-outline-danger"
                                             onclick="addDisLikes({{session(0)->id_mahasiswa}},{{$aspirasi->id_aspirasi}})">
                                         <img
                                             src="{{asset('assets/icon/hand-thumbs-down.svg')}}" class="img-icon"
                                             alt=""><span
-                                            id="totalDisLikes{{$aspirasi->id_aspirasi}}" data-count="{{$aspirasi->downVoteCount}}"
+                                            id="totalDisLikes{{$aspirasi->id_aspirasi}}"
+                                            data-count="{{$aspirasi->downVoteCount}}"
                                             data-max-count="1">{{$aspirasi -> downvote}}</span>
                                     </button>
                                     <button class="btn btn-sm btn-primary"
@@ -38,7 +40,8 @@
                                         <img
                                             src="{{asset('assets/icon/hand-thumbs-up.svg')}}" class="img-icon"
                                             alt=""><span
-                                            id="totalLikes{{$aspirasi->id_aspirasi}}" data-count="{{$aspirasi->upVoteCount}}"
+                                            id="totalLikes{{$aspirasi->id_aspirasi}}"
+                                            data-count="{{$aspirasi->upVoteCount}}"
                                             data-max-count="1">{{$aspirasi -> upvote}}</span>
                                     </button>
                                 @else
@@ -81,34 +84,37 @@
                         </div>
                     </div>
                     <div class="card-footer aspiration-card-footer">
-                        <div class="row">
-                            <div class="col-1 col">
-                                <img alt="" class="img-thumbnail img-icon" src="../assets/img/telkom.jpg"
-                                     style="width: 50px;">
-                            </div>
-                            <div class="col-11 col">
-                                <form action="{{route('comment')}}" method="post">
-                                    @csrf
-                                    <div class="row">
-                                        <input type="hidden" name="id_aspirasi" value="{{$aspirasi->id_aspirasi}}">
-                                        <input type="hidden" name="id_mahasiswa" value="{{session(0)->id_mahasiswa}}">
-                                        <div class="col-11">
+                        @if(session(0)->getTable() == 'mahasiswa')
+                            <div class="row">
+                                <div class="col-1 col">
+                                    <img alt="" class="img-thumbnail img-icon" src="../assets/img/telkom.jpg"
+                                         style="width: 50px;">
+                                </div>
+                                <div class="col-11 col">
+                                    <form action="{{route('comment')}}" method="post">
+                                        @csrf
+                                        <div class="row">
+                                            <input type="hidden" name="id_aspirasi" value="{{$aspirasi->id_aspirasi}}">
+                                            <input type="hidden" name="id_mahasiswa"
+                                                   value="{{session(0)->id_mahasiswa}}">
+                                            <div class="col-11">
                                                 <textarea class="form-control aspiration-comments"
                                                           placeholder="add comments"
                                                           style="resize: none" rows="1" name="text_comment"
                                                           type="text"></textarea>
+                                            </div>
+                                            <div class="col-1">
+                                                <button type="submit" class="btn py-0">
+                                                    <img alt="" class="img-thumbnail img-icon"
+                                                         src="{{asset('assets/icon/arrow-right-short.svg')}}"
+                                                         style="width: 50px;">
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="col-1">
-                                            <button type="submit" class="btn py-0">
-                                                <img alt="" class="img-thumbnail img-icon"
-                                                     src="{{asset('assets/icon/arrow-right-short.svg')}}"
-                                                     style="width: 50px;">
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -140,13 +146,14 @@
                                         <img alt="" class="img-thumbnail img-icon" src="../assets/img/telkom.jpg"
                                              style="width: 50px;">
                                     </div>
-                                    @if(session(0)->id_mahasiswa == $aspirasi->id_mahasiswa)
+                                    @if(session(0)->id_mahasiswa == $reply->id_mahasiswa)
                                         <div class="col-9 col">
                                             <input class="form-control aspiration-comments" placeholder="add comments"
                                                    type="text" disabled value="{{$reply->username}}">
                                         </div>
                                         <div class="col-2 m-0 pl-0 text-right">
-                                            <a href="{{route('deleteReply',[$aspirasi->id_mahasiswa])}}" class=" w-100 btn btn-outline-danger align-self-center m-0 h-100">Delete</a>
+                                            <a href="{{route('deleteReply',[$aspirasi->id_mahasiswa])}}"
+                                               class=" w-100 btn btn-outline-danger align-self-center m-0 h-100">Delete</a>
                                         </div>
                                     @else
                                         <div class="col-11 col">
@@ -156,9 +163,10 @@
                                     @endif
                                     <div class="col-12 col mt-2">
                                     <textarea name="comment" id="comment" class="form-control aspiration-comments"
-                                          style="resize: none" disabled>{{$reply->reply_text}}</textarea>
+                                              style="resize: none" disabled>{{$reply->reply_text}}</textarea>
                                     </div>
                                     <div class="col-12 col mt-8">
+                                    </div>
                                 </div>
                             </div>
                         </div>

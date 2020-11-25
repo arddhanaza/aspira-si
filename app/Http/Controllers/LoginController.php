@@ -33,7 +33,8 @@ class LoginController extends Controller
                 session()->put($user->all());
                 session()->put(['loginStatus' => true]);
 //                dd(session()->all());
-                return redirect('/feed');
+//                return redirect('/feed');
+                return redirect(\URL::previous());
             }else{
                 return redirect('/');
             }
@@ -42,7 +43,7 @@ class LoginController extends Controller
                 $user = EntitasSi::where('username',$username)->get();
                 session()->put($user->all());
                 session()->put(['loginStatus' => true]);
-                return redirect('/feed');
+                return redirect(\URL::previous());
             }else{
                 return redirect('/');
             }
@@ -51,7 +52,7 @@ class LoginController extends Controller
                 $user = Bpm::where('username',$username)->get();
                 session()->put($user->all());
                 session()->put(['loginStatus' => true]);
-                return redirect('/feed');
+                return redirect(\URL::previous());
             }else{
                 return redirect('/');
             }
@@ -93,6 +94,6 @@ class LoginController extends Controller
 
     public function logout(Request $request){
         $request->session()->flush();
-        return redirect('/');
+        return redirect(\URL::previous());
     }
 }
