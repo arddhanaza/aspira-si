@@ -29,6 +29,9 @@
                     <li class="nav-item {{ Route::currentRouteNamed('announcement') ? 'active' : '' }}">
                         <a class="nav-link" href="#">Announcement <span class="sr-only">(current)</span></a>
                     </li>
+                    <li class="nav-item {{ Route::currentRouteNamed('user_management') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('user_management')}}">User Management <span class="sr-only">(current)</span></a>
+                    </li>
                 @endif
 
                 <li class="dropdown dr-notif ml-lg-5 ml-md-5 ml-sm-0">
@@ -62,17 +65,21 @@
                             <a class="dropdown-item has-icon" href="{{route('profile',[session(0)->id_mahasiswa])}}">
                                 <i class="far fa-user"></i> Profile
                             </a>
+                            <div class="dropdown-divider"></div>
                         @elseif(session(0)->getTable() == 'entitas_si')
 {{--                            <a class="dropdown-item has-icon" href="{{route('profile',[session(0)->id_entitas])}}">--}}
 {{--                                <i class="far fa-user"></i> Profile--}}
 {{--                            </a>--}}
+
+{{--                            <div class="dropdown-divider"></div>--}}
                         @else
-{{--                            <a class="dropdown-item has-icon" href="{{route('profile',[session(0)->id_bpm])}}">--}}
-{{--                                <i class="far fa-user"></i> Profile--}}
+{{--                            <a class="dropdown-item has-icon" href="{{route('admin_panel')}}">--}}
+{{--                                <i class="far fa-user"></i> Admin Panel--}}
 {{--                            </a>--}}
+
+{{--                            <div class="dropdown-divider"></div>--}}
                         @endif
 
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item has-icon text-danger" href="{{route('logout')}}">
                             <i class="fas fa-sign-out-alt"></i> Logout
                         </a>

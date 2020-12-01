@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Aspiration;
+use App\EntitasSi;
 use App\Mahasiswa;
 use App\User;
 use Illuminate\Http\Request;
@@ -36,5 +37,36 @@ class UserController extends Controller
         }
         $mahasiswa->save();
         return redirect(route('profile',session(0)->id_mahasiswa));
+    }
+
+//    user management
+    public function getAllData(){
+        $mahasiswa = Mahasiswa::all();
+        $entitas_si = EntitasSi::all();
+        return view('bpm.user_management',['mahasiswa'=>$mahasiswa,'entitas'=>$entitas_si]);
+    }
+
+    public function updateDataEntitas($id, Request $request){
+        $entitas = EntitasSi::find($id);
+        if (isset($request->status_entitas)){
+            $entitas->status = $request->status_entitas;
+        }
+        $entitas->nama_entitas = $request->nama_entitas;
+        $entitas->username = $request->username_entitas;
+        $entitas->save();
+        return redirect(route('user_management'));
+    }
+
+    public function resetPasswordEntitas($id){
+        $entitas = EntitasSi::find($id);
+        $entitas->password = 'root';
+        $entitas->save();
+        return redirect(route('user_management'));
+    }
+
+    public function hapusDataEntitas($id){
+        $entitas = EntitasSi::find($id);
+        $entitas->delete();
+        return redirect(route('user_management'));
     }
 }

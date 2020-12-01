@@ -11,11 +11,10 @@
             <div class="col-12">
                 <form action="" class="text-right">
                     <select name="" id="sortByOption" class="btn-sm btn btn-primary">
-                        <option value="" disabled selected>Sort By</option>
-                        <option value="terbaru">
+                        <option value="terbaru" {{ Route::currentRouteNamed('feed') ? 'selected' : '' }}>
                             Terbaru
                         </option>
-                        <option value="teratas">
+                        <option value="teratas" {{ Route::currentRouteNamed('feedPopular') ? 'selected' : '' }}>
                             Teratas
                         </option>
                     </select>
