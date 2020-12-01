@@ -21,7 +21,6 @@ class Mahasiswa extends Model
         }
     }
 
-
     public function getTable(){
         return $this->table;
     }
@@ -34,6 +33,32 @@ class Mahasiswa extends Model
             ])
             ->get();
 
+        if (!$data -> isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    protected static function validatePassword($id_user,$password){
+        $pass = DB::table('mahasiswa')
+            ->where('id_mahasiswa','=', $id_user)
+            ->select('password')
+            ->first();
+        if ($password == $pass->password){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    protected static function validateUsername($username,$nama_mahasiswa){
+        $data = DB::table('mahasiswa')
+            ->where([
+                ['username',$username],
+                ['nama_mahasiswa',$nama_mahasiswa],
+            ])
+            ->get();
         if (!$data -> isEmpty()){
             return true;
         }else{

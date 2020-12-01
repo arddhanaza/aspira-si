@@ -4,8 +4,6 @@
 
 @section('title','All Aspiration')
 
-@section('allAspiration','active')
-
 @section('container')
 
     <section class="mt-5 container-fluid">
@@ -13,6 +11,9 @@
         <div class="row justify-content-center mb-4">
             <div class="col-12">
                 <div class="card aspiration-card-table">
+                    <div class="card-header">
+                        <h1>Data Aspirasi</h1>
+                    </div>
                     <div class="card-body table-responsive">
                         <table class="table table-striped datTable">
                             <thead>

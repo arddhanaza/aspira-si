@@ -22,6 +22,9 @@ class ReplyController extends Controller
         }else{
             return redirect()->back();
         }
-
+    }
+    public function delete($id_aspirasi){
+        ReplyAspiration::where('reply.id_mahasiswa','=',session(0)->id_mahasiswa)->where('reply.id_aspirasi','=',$id_aspirasi)->delete();
+        return redirect('feed');
     }
 }
