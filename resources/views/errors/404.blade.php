@@ -3,6 +3,6 @@
     <img draggable="false"
     style="
     display: block;
-    margin:10% auto;"
+    margin:8% auto;"
     src="{{URL::to('/assets/img/404.png')}}" alt="Error 404">
 </div>
