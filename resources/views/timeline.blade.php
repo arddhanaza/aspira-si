@@ -195,7 +195,9 @@
                         <label for="textAspirasi">Teks Aspirasi</label>
                         <textarea class="form-control" name="aspirasi_text" id="textAspirasi" cols="30" rows="10"
                                   required></textarea>
-                        <label for="file">File Pendukung</label>
+                        <label for="file">File Pendukung
+                            <label class="text-danger">*Optional</label>
+                        </label>
                         <input class="form-control-file" id="file" multiple type="file" name="file_name[]">
                     </div>
                     <div class="modal-footer">
