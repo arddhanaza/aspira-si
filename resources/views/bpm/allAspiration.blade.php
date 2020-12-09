@@ -50,11 +50,13 @@
                                     <td>{{$asp->created_at}}</td>
                                     <td>{{$asp->status}}</td>
                                     <td>
-                                        <a href="{{route('detailAspiration',[$asp->id_aspirasi])}}" class="btn btn-primary mb-2">Detail</a>
+                                    <a href="{{route('detailAspiration',[$asp->id_aspirasi])}}" class="btn btn-primary mb-2">Detail</a>
                                         <button class="btn btn-outline-info mb-2" data-toggle="modal"
                                                 data-target="#modalUpdate{{$asp->id_aspirasi}}">Update
                                         </button>
-                                        <button class="btn btn-outline-danger mb-2" disabled>Delete</button>
+                                        <button class="btn btn-outline-danger mb-2" data-toggle="modal"
+                                                data-target="#modalDelete{{$asp->id_aspirasi}}">Delete
+                                            </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -146,4 +148,26 @@
                 </div>
             </div>
         @endif
+        <div class="modal fade" id="modalDelete{{$asp->id_aspirasi}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Delete Aspirasi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Aspirasi akan dihapus. Anda yakin?
+                    </div>
+                    <form action="{{route('deleteAspiration',[$asp->id_aspirasi])}}" method="post">
+                        @csrf
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     @endforeach
