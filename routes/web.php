@@ -48,6 +48,7 @@ Route::group(['middleware' => 'loggedIn'], function () {
     Route::group(['middleware' => 'loggedInAsBpm'], function () {
         Route::get('/bpm/allaspiration', 'AspirationController@getAllAspiration')->name('bpmAllAspiration');
         Route::put('/aspiration/{id}', 'AspirationController@update')->name('updateApirationStatus');
+        Route::post('/aspiration/delete/{id}', 'AspirationController@destroy')->name('deleteAspiration');
     });
     //entitas
     Route::group(['middleware' => 'loggedInAsEntitas'], function () {
