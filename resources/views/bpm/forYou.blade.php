@@ -2,7 +2,9 @@
 
 @include('templates.navbar')
 
-@section('title','All Aspiration')
+@section('title','For You')
+
+<!-- @section('foryou','active') -->
 
 @section('container')
 
@@ -11,9 +13,6 @@
         <div class="row justify-content-center mb-4">
             <div class="col-12">
                 <div class="card aspiration-card-table">
-                    <div class="card-header">
-                        <h1>Data Aspirasi</h1>
-                    </div>
                     <div class="card-body table-responsive">
                         <table class="table table-striped datTable">
                             <thead>
@@ -52,10 +51,10 @@
                                     <td>{{$asp->status}}</td>
                                     <td>
                                         <a href="{{route('detailAspiration',[$asp->id_aspirasi])}}" class="btn btn-primary mb-2">Detail</a>
-                                        <button class="btn btn-outline-info mb-2" data-toggle="modal"
+                                        <!-- <button class="btn btn-outline-info mb-2" data-toggle="modal"
                                                 data-target="#modalUpdate{{$asp->id_aspirasi}}">Update
-                                        </button>
-                                        <button class="btn btn-outline-danger mb-2" disabled>Delete</button>
+                                        </button> -->
+                                        <button class="btn btn-outline-info mb-2">Aswer</button>
                                     </td>
                                 </tr>
                             @endforeach
