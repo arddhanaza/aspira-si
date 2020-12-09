@@ -139,6 +139,9 @@
                                                 <span>{{$asp->comment}}</span>
                                             </div>
                                         </div>
+                                        <div>
+                                            <a href="{{route('deleteReply',[$asp->id_aspirasi])}}" class="btn btn-outline-primary mb-2" type="submit">Delete</a>
+                                        </div>
                                     @endif
                                 @else
                                     <div class="col-12 col">
@@ -148,9 +151,6 @@
                                 <div class="col-12 text-right mt-2">
                                     <a href="{{route('detailAspiration',[$asp->id_aspirasi])}}">see more
                                         comments</a>
-                                </div>
-                                <div>
-                                <a href="/timeline/delete/{{$asp->id_aspirasi}}" class="btn btn-outline-primary mb-2" type="submit">Delete</a>
                                 </div>
                             </div>
                         </div>
