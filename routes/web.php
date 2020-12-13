@@ -88,3 +88,6 @@ Route::get('/testCase', function () {
 Route::get('/zhaf', function () {
     return view('coba');
 });
+
+
+//tes
