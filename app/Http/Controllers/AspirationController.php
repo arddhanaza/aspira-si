@@ -85,7 +85,7 @@ class AspirationController extends Controller
         $aspirasi->status = $request->status;
         $aspirasi->save();
 
-        return redirect('/');
+        return redirect('/')->with('toast_success', 'Yeay, kamu berhasil menambahkan Aspirasi');
     }
 
     /**

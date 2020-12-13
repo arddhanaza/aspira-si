@@ -259,3 +259,8 @@
     @endif
 
 @endsection
+
+<div>
+@include('sweetalert::alert')
+
+</div>
