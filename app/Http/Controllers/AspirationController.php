@@ -126,7 +126,7 @@ class AspirationController extends Controller
             $aspirasi->status = $request->statusUpdate;
             $aspirasi->save();
         }
-        return redirect(route('bpmAllAspiration'));
+        return redirect(route('bpmAllAspiration'))->with('toast_success', 'berhasil update status',"position('top-end')");
     }
 
     /**
