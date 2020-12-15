@@ -1,8 +1,9 @@
 @extends('templates/template')
 
 @section('title','Feed')
+{{--{{dd($notifikasiByUser)}}--}}
 
-@include('templates.navbar')
+@include('templates.navbar', ['notifikasiByUser' => $notifikasiByUser])
 
 @section('container')
 
@@ -260,8 +261,10 @@
         </script>
     @endif
 
+    <div>
+        @include('sweetalert::alert')
+    </div>
+
+
 @endsection
 
-<div>
-@include('sweetalert::alert')
-</div>

@@ -16,8 +16,9 @@
                     </li>
                 @elseif(session(0)->getTable() == 'entitas_si')
                     <li class="nav-item {{ Route::currentRouteNamed('foryou') ? 'active' : '' }}">
-{{--                        <a class="nav-link" href="{{route('foryou')}}">For You <span class="sr-only">(current)</span></a>--}}
-                        <a class="nav-link" href="{{route('foryou')}}">For You <span class="sr-only">(current)</span></a>
+                        {{--                        <a class="nav-link" href="{{route('foryou')}}">For You <span class="sr-only">(current)</span></a>--}}
+                        <a class="nav-link" href="{{route('foryou')}}">For You <span
+                                class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item {{ Route::currentRouteNamed('announcement') ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('announcement')}}">Announcement <span class="sr-only">(current)</span></a>
@@ -36,13 +37,27 @@
 
                 <li class="dropdown dr-notif ml-lg-5 ml-md-5 ml-sm-0">
                     <a class="nav-link dropdown-toggle nav-link-lg nav-link-user" data-toggle="dropdown" href="#">
-                        <img src="{{asset('assets/icon/bell-fill.svg')}}" alt="">
+                        @if($notifikasiByUser->count() > 0)
+                            <img src="{{asset('assets/icon/bell-fill.svg')}}" alt="">
+                        @else
+                            <img src="{{asset('assets/icon/bell.svg')}}" alt="">
+                        @endif
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         {{--                        if there is notification maka tampilkan di bawah ini, else...--}}
-                        @if(false)
-                            <span class="dropdown-item" href="">Profile</span>
-                            <div class="dropdown-divider"></div>
+                        @if($notifikasiByUser->count() > 0)
+                            <div class="dropdown-item">
+                                <a href="{{route('delete_notifikasi')}}" class="dropdown-item-text text-right text-danger">delete all..</a>
+                            </div>
+                            @foreach($notifikasiByUser as $notif)
+                                <div class="dropdown-item">
+                                    <a href="{{route('detailAspiration',$notif->id_aspirasi)}}">
+                                        <span class="dropdown-item-text" href="">Aspirasi: {{$notif->judul_aspirasi}}</span>
+                                        <span class="dropdown-item-text" href="">{{$notif->teks_notifikasi}}</span>
+                                    </a>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                            @endforeach
                         @else
                             <span class="dropdown-item disabled" href="profile-praktikan.html" disabled="true">No Notification</span>
                         @endif
@@ -67,17 +82,17 @@
                             </a>
                             <div class="dropdown-divider"></div>
                         @elseif(session(0)->getTable() == 'entitas_si')
-{{--                            <a class="dropdown-item has-icon" href="{{route('profile',[session(0)->id_entitas])}}">--}}
-{{--                                <i class="far fa-user"></i> Profile--}}
-{{--                            </a>--}}
+                            {{--                            <a class="dropdown-item has-icon" href="{{route('profile',[session(0)->id_entitas])}}">--}}
+                            {{--                                <i class="far fa-user"></i> Profile--}}
+                            {{--                            </a>--}}
 
-{{--                            <div class="dropdown-divider"></div>--}}
+                            {{--                            <div class="dropdown-divider"></div>--}}
                         @else
-{{--                            <a class="dropdown-item has-icon" href="{{route('admin_panel')}}">--}}
-{{--                                <i class="far fa-user"></i> Admin Panel--}}
-{{--                            </a>--}}
+                            {{--                            <a class="dropdown-item has-icon" href="{{route('admin_panel')}}">--}}
+                            {{--                                <i class="far fa-user"></i> Admin Panel--}}
+                            {{--                            </a>--}}
 
-{{--                            <div class="dropdown-divider"></div>--}}
+                            {{--                            <div class="dropdown-divider"></div>--}}
                         @endif
 
                         <a class="dropdown-item has-icon text-danger" href="{{route('logout')}}">

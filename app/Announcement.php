@@ -38,7 +38,7 @@ class Announcement extends Model
     protected static function getAllData(){
         $data = DB::table('announcement')
             ->join('entitas_si', 'entitas_si.id_entitas', '=', 'announcement.id_entitas')
-            ->orderByDesc('created_at')
+            ->orderByDesc('announcement.created_at')
             ->get();
         self::updateData($data);
         return $data;

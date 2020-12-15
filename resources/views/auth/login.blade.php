@@ -70,9 +70,10 @@
         </div>
     </div>
 </div>
+<div>
+    @include('sweetalert::alert')
+</div>
 @endsection
 
-<div>
-@include('sweetalert::alert')
-</div>
+
 

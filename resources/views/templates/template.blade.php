@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
     @yield('styles')
 </head>
-<body style="background-image:url('/assets/img/bg_1.png'); background-attachment: fixed;">
+<body style="background-image:url({{asset('/assets/img/bg_1.png')}}); background-attachment: fixed;">
 
 @yield('container')
 
