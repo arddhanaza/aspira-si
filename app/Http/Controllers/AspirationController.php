@@ -137,6 +137,9 @@ class AspirationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $aspirasi = Aspiration::find($id);
+        $aspirasi->delete();    
+        return redirect(route('bpmAllAspiration'));
+
     }
 }

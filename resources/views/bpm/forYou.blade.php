@@ -51,10 +51,9 @@
                                     <td>{{$asp->status}}</td>
                                     <td>
                                         <a href="{{route('detailAspiration',[$asp->id_aspirasi])}}" class="btn btn-primary mb-2">Detail</a>
-                                        <!-- <button class="btn btn-outline-info mb-2" data-toggle="modal"
-                                                data-target="#modalUpdate{{$asp->id_aspirasi}}">Update
-                                        </button> -->
-                                        <button class="btn btn-outline-info mb-2">Aswer</button>
+                                        <button class="btn btn-outline-info mb-2" data-toggle="modal"
+                                                data-target="#modalAnswer{{$asp->id_aspirasi}}">Answer
+                                        </button>                                        
                                     </td>
                                 </tr>
                             @endforeach
@@ -68,55 +67,32 @@
     </section>
 
     @foreach($aspirasi as $asp)
-        <div class="modal fade" id="modalUpdate{{$asp->id_aspirasi}}" tabindex="-1" role="dialog"
+        <div class="modal fade" id="modalAnswer{{$asp->id_aspirasi}}" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalCenterTitle"
              aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Update Status</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Announcement</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <h6>Status: <span class="badge badge-pill badge-secondary">{{$asp->status}}</span></h6>
+                        <h6>Judul Aspirasi: <span class="badge badge-pill badge-primary">{{$asp->judul_aspirasi}}</span></h6>
                         <hr>
-                        <form action="{{route('updateApirationStatus',$asp->id_aspirasi)}}" method="post">
-                            @method('put')
-                            @csrf
-                            <input type="hidden" name="rowData" value="">
-                            <input type="hidden" name="idAspirasi" value="">
+                        <form action="{{route('post_announcement')}}" method="post">                            
+                            @csrf                            
+                            <input type="hidden" name="id_entitas" value="{{ session(0)->id_entitas }}">
+                            <input type="hidden" name="judul_aspirasi" value="{{ $asp->id_aspirasi }}">
                             <div class="form-group">
-                                <label for="statusUpdate">Status Update</label>
-                                <select name="statusUpdate" id="statusUpdate"
-                                        class="update-selection btn btn-sm btn-outline-dark btn-block btn-lg">
-                                    <option value="{{$asp->status}}"selected disabled>
-                                        {{$asp->status}}
-                                    </option>
-                                    @if($asp->status == 'Belum Diproses')
-                                        <option value="Ditinjau">Ditinjau</option>
-                                        <option value="Sedang diprocess">Sedang diprocess</option>
-                                        <option value="Diteruskan">Diteruskan</option>
-                                        <option value="Done Resolved">Done Resolved</option>
-                                    @elseif($asp->status == 'Ditinjau')
-                                        <option value="Sedang diprocess">Sedang diprocess</option>
-                                        <option value="Diteruskan">Diteruskan</option>
-                                        <option value="Done Resolved">Done Resolved</option>
-                                    @elseif($asp->status == 'Sedang diprocess')
-                                        <option value="Diteruskan">Diteruskan</option>
-                                        <option value="Done Resolved">Done Resolved</option>
-                                    @else
-                                        <option value="Done Resolved">Done Resolved</option>
-                                    @endif
-                                </select>
-                            </div>
-                            <hr>
-                            @if($asp->status != 'Done Resolved')
-                                <div class="form-group">
-                                    <button class="btn btn-primary btn-block" type="submit">Update</button>
-                                </div>
-                            @endif
+                                <label for="announcement_text">Teks Announcement</label>
+                                <textarea class="form-control" name="announcement_text" cols="30" rows="10"></textarea>                                
+                            </div>                                              
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary" type="submit">Post Announcement</button>
+                            </div>                            
                         </form>
                     </div>
                 </div>

@@ -52,6 +52,7 @@ Route::group(['middleware' => 'loggedIn'], function () {
         Route::put('/bpm/user_management/entitas/update/{id}','UserController@updateDataEntitas')->name('updateDataEntitas');
         Route::put('/bpm/user_management/entitas/update_password/{id}','UserController@resetPasswordEntitas')->name('resetPasswordEntitas');
         Route::put('/bpm/user_management/entitas/delete/{id}','UserController@hapusDataEntitas')->name('hapusDataEntitas');
+        Route::post('/aspiration/delete/{id}', 'AspirationController@destroy')->name('deleteAspiration');
     });
     //entitas
     Route::group(['middleware' => 'loggedInAsEntitas'], function () {
