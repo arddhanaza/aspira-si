@@ -75,8 +75,7 @@
                     <form action="{{route('post_announcement')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
-                            <input type="hidden" name="id_entitas" value="{{session(0)->id_entitas}}">
-                            {{--                    <input type="hidden" name="id_entitas" value="2">--}}
+                            <input type="hidden" name="id_entitas" value="{{session(0)->id_entitas}}">                            
                             <label for="judul_aspirasi">Judul Aspirasi</label>
                             <select name="judul_aspirasi" id="judul_aspirasi" class="form-control">
                                 <option value="">Tanpa Tujuan</option>
@@ -87,8 +86,10 @@
                             <label for="textAnnouncement">Teks Announcement</label>
                             <textarea class="form-control" name="announcement_text" id="textAnnouncement" cols="30" rows="10"
                                       required></textarea>
-{{--                            <label for="file">File Pendukung</label>--}}
-{{--                            <input class="form-control-file" id="file" multiple type="file" name="file_name[]">--}}
+                            <label for="file">File Pendukung
+                                <label class="text-danger">*optional</label>
+                            </label>
+                            <input class="form-control-file" id="file" multiple type="file" name="file_name[]">
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
