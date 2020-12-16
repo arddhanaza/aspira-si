@@ -125,9 +125,12 @@ class Aspiration extends Model
     protected static function getAspirationForYou(){
         $user = session(0)->id_entitas;
         $getAspiration = self::getAllAspiration()
-        -> where('id_entitas','=',$user)
-        -> where('status','=', 'Diteruskan');
+        -> where('id_entitas','=',$user, 'and', '(status', '=', 'Diteruskan', 'or', 'status', '=', 'Done Resolved)');        
         return $getAspiration;
+
+        //sort by status
+        //entitas bisa memberikan announcemnet tanpa harus ke tab ann, modal disabled untuk tujuan
+        //yg di announ turun dan diubah statusnya jadi done resolved
     }
 
     protected static function getAspirasiByIdEntitas($id){
