@@ -37,6 +37,13 @@
                                 <label for="text_announcement">Announcement Text</label>
                                 <textarea name="announcement_text" id="text_announcement" class="form-control" rows="10">{{$announcement->announcement_text}}</textarea>
                             </div>
+                            <div class="form-group">
+                                <label for="file">File Pendukung
+                                    <label class="text-danger">*optional</label>
+                                </label>
+                                <input class="form-control-file" id="file" multiple type="file" name="file_name[]" value="{{ $announcement->nama_file }}">
+                            </div>
+                        </div>
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary rounded-pill">Submit</button>

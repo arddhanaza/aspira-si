@@ -6,6 +6,7 @@ use App\Announcement;
 use App\Aspiration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AnnouncementController extends Controller
 {
@@ -27,8 +28,7 @@ class AnnouncementController extends Controller
     }
 
     public function store(Request $request){
-        $announcement = new Announcement();
-        $aspirasi = new Aspiration();
+        $announcement = new Announcement();        
         $announcement->id_entitas = $request->id_entitas;
         if (isset($request->judul_aspirasi)){
             $announcement->id_aspirasi = $request->judul_aspirasi;
@@ -65,7 +65,18 @@ class AnnouncementController extends Controller
         if (isset($request->judul_aspirasi)){
             $announcement->id_aspirasi = $request->judul_aspirasi;
         }
-        $announcement->announcement_text=$request->announcement_text;
+        
+        if($request->hasfile('file_name')) {
+            foreach($request->file('file_name') as $file)
+            {
+                $name = time().'.'.$file->extension();
+                $file->move(public_path().'/files/', $name);
+                $data[] = $name;
+            }
+            $announcement->nama_file = json_encode($data);        
+        }
+
+        $announcement->announcement_text = $request->announcement_text;                            
         $announcement->save();
         return redirect(route('announcement'));
 
