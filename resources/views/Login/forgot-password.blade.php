@@ -3,6 +3,12 @@
 @section('title','Forgot Password')
 
 @section('container')
+<div class="alert alert-success" role="alert">
+    Berhasil Reset Password
+</div>
+<div class="alert alert-warning" role="alert">
+    NIM/Nama lengkap tidak sesuai
+</div>
 @section('styles')
     <link rel="stylesheet" href="{{asset('assets/dist/css/login.css')}}">
 @stop

@@ -5,6 +5,18 @@
 @section('title','User Management')
 
 @section('container')
+<div class="alert alert-success" role="alert">
+    Berhasil Reset Password nama_Entitas/Mahasiswa
+</div>
+<div class="alert alert-success" role="alert">
+    Berhasil Hapus data nama_Entitas/Mahasiswa
+</div>
+<div class="alert alert-success" role="alert">
+    Berhasil Update data nama_Entitas/Mahasiswa
+</div>
+<div class="alert alert-success" role="alert">
+    Berhasil Menambahkan data nama_Entitas/Mahasiswa
+</div>
 
     <section class="mt-5 container">
         <!--Start of Aspiration Card-->
