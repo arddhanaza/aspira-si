@@ -81,14 +81,19 @@
                     <div class="modal-body">
                         <h6>Judul Aspirasi: <span class="badge badge-pill badge-primary">{{$asp->judul_aspirasi}}</span></h6>
                         <hr>
-                        <form action="{{route('post_announcement')}}" method="post">                            
+                        <form action="{{route('post_announcement')}}" method="post" enctype="multipart/form-data">                            
                             @csrf                            
                             <input type="hidden" name="id_entitas" value="{{ session(0)->id_entitas }}">
+                            <input type="hidden" name="judul_aspirasi" value="{{ $asp->id_aspirasi }}">
                             <input type="hidden" name="judul_aspirasi" value="{{ $asp->id_aspirasi }}">
                             <div class="form-group">
                                 <label for="announcement_text">Teks Announcement</label>
                                 <textarea class="form-control" name="announcement_text" cols="30" rows="10"></textarea>                                
-                            </div>                                              
+                            </div>                
+                            <label for="file">File Pendukung
+                                <label class="text-danger">*optional</label>
+                            </label>
+                            <input class="form-control-file" id="file" multiple type="file" name="file_name[]">                               
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
                                 <button class="btn btn-primary" type="submit">Post Announcement</button>
