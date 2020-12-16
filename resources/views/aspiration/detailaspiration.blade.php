@@ -5,6 +5,9 @@
 @section('title','Aspiration')
 
 @section('container')
+    <div class="alert alert-success" role="alert">
+        Berhasil Hapus Komentar
+    </div>
 
     <section class="container  mt-5">
         <div class="row col-12 mb-4">

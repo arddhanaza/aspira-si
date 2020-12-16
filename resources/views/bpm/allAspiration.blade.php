@@ -5,6 +5,12 @@
 @section('title','All Aspiration')
 
 @section('container')
+<div class="alert alert-success" role="alert">
+    Berhasil Update Status
+</div>
+<div class="alert alert-success" role="alert">
+    Berhasil Hapus Data Aspirasi
+</div>
 
 <section class="mt-5 container-fluid">
     <!--Start of Aspiration Card-->

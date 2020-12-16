@@ -6,6 +6,14 @@
 
 @section('container')
 
+<div class="alert alert-success" role="alert">
+    Berhasil Update Password
+</div>
+<div class="alert alert-warning" role="alert">
+    Password baru tidak cocok
+</div>
+
+
 <section class="container  mt-5">
     <div class="row mb-4 justify-content-center">
         <div class="col-lg-10 col-md-10 col-sm-12 mb-4">

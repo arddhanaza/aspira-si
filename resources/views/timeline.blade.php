@@ -6,6 +6,15 @@
 @include('templates.navbar', ['notifikasiByUser' => $notifikasiByUser])
 
 @section('container')
+    <div class="alert alert-success" role="alert">
+    Kamu berhasil Login
+    </div>
+    <div class="alert alert-success" role="alert">
+    Berhasil Menambah Aspirasi
+    </div>
+    <div class="alert alert-success" role="alert">
+    Berhasil menghapus komentar
+    </div>
 
     <section class="container  mt-5">
         <div class="row mb-4">
