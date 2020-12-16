@@ -34,6 +34,7 @@ class LoginController extends Controller
                 session()->put(['loginStatus' => true]);
 //                dd(session()->all());
 //                return redirect('/feed');
+                session()->put(['message'=>"Yeay, kamu berhasil login","messageType"=>'alert-success']);
                 return redirect(\URL::previous())->with('toast_success', 'Yeay, kamu berhasil login');
             }else{
                 return redirect('/');
@@ -43,6 +44,7 @@ class LoginController extends Controller
                 $user = EntitasSi::where('username',$username)->get();
                 session()->put($user->all());
                 session()->put(['loginStatus' => true]);
+                session()->put(['message'=>"Yeay, kamu berhasil login","messageType"=>'alert-success']);
                 return redirect(\URL::previous())->with('toast_success', 'Yeay, kamu berhasil login');
             }else{
                 return redirect('/');
@@ -52,11 +54,14 @@ class LoginController extends Controller
                 $user = Bpm::where('username',$username)->get();
                 session()->put($user->all());
                 session()->put(['loginStatus' => true]);
+                session()->put(['message'=>"Yeay, kamu berhasil login","messageType"=>'alert-success']);
                 return redirect(\URL::previous())->with('toast_success', 'Yeay, kamu berhasil login');
             }else{
+                session()->put(['message'=>"Username atau Password Salah","messageType"=>'alert-danger']);
                 return redirect('/')->with('toast_warning', 'username/password salah');
             }
         }else{
+            session()->put(['message'=>"Username atau Password Salah","messageType"=>'alert-danger']);
             return redirect('/')->with('toast_warning', 'username/password salah');
         }
 

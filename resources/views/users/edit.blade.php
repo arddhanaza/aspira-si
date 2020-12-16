@@ -6,12 +6,13 @@
 
 @section('container')
 
-<div class="alert alert-success" role="alert">
-    Berhasil Update Password
-</div>
-<div class="alert alert-warning" role="alert">
-    Password baru tidak cocok
-</div>
+    @if(Session::has('message'))
+        <div class="alert {{session('messageType')}} alert-dismissible fade show" role="alert" id="alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{session("message")}}
+        </div>
+        {{session()->forget('message')}}
+    @endif
 
 
 <section class="container  mt-5">

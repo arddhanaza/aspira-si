@@ -6,15 +6,13 @@
 @include('templates.navbar', ['notifikasiByUser' => $notifikasiByUser])
 
 @section('container')
-    <div class="alert alert-success" role="alert">
-    Kamu berhasil Login
-    </div>
-    <div class="alert alert-success" role="alert">
-    Berhasil Menambah Aspirasi
-    </div>
-    <div class="alert alert-success" role="alert">
-    Berhasil menghapus komentar
-    </div>
+    @if(Session::has('message'))
+        <div class="alert {{session('messageType')}} alert-dismissible fade show" role="alert" id="alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{session("message")}}
+        </div>
+        {{session()->forget('message')}}
+    @endif
 
     <section class="container  mt-5">
         <div class="row mb-4">
@@ -128,7 +126,8 @@
                                                     <div class="col-11">
                                                 <textarea class="form-control aspiration-comments"
                                                           placeholder="add comments"
-                                                          style="resize: none" rows="1" name="text_comment" id="text_comment"
+                                                          style="resize: none" rows="1" name="text_comment"
+                                                          id="text_comment"
                                                           type="text"></textarea>
                                                     </div>
                                                     <div class="col-1">
@@ -150,7 +149,8 @@
                                         </div>
                                         <div class="col-1 p-0">
                                             <div>
-                                                <a href="{{route('deleteReply',[$asp->id_aspirasi])}}" class="btn btn-outline-danger align-self-center m-0 h-100">Delete</a>
+                                                <a href="{{route('deleteReply',[$asp->id_aspirasi])}}"
+                                                   class="btn btn-outline-danger align-self-center m-0 h-100">Delete</a>
                                             </div>
                                         </div>
                                     @endif

@@ -20,6 +20,13 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-10 col-md-10 col-sm-10">
+                        @if(Session::has('message'))
+                            <div class="alert {{session('messageType')}} alert-dismissible fade show" role="alert" id="alert-success">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {{session("message")}}
+                            </div>
+                            {{session()->forget('message')}}
+                        @endif
                         <form action="{{route('login')}}" method="post">
                             @csrf
                             <div class="form-group">

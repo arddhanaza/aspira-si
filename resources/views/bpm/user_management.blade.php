@@ -5,19 +5,13 @@
 @section('title','User Management')
 
 @section('container')
-<div class="alert alert-success" role="alert">
-    Berhasil Reset Password nama_Entitas/Mahasiswa
-</div>
-<div class="alert alert-success" role="alert">
-    Berhasil Hapus data nama_Entitas/Mahasiswa
-</div>
-<div class="alert alert-success" role="alert">
-    Berhasil Update data nama_Entitas/Mahasiswa
-</div>
-<div class="alert alert-success" role="alert">
-    Berhasil Menambahkan data nama_Entitas/Mahasiswa
-</div>
-
+    @if(Session::has('message'))
+        <div class="alert {{session('messageType')}} alert-dismissible fade show" role="alert" id="alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{session("message")}}
+        </div>
+        {{session()->forget('message')}}
+    @endif
     <section class="mt-5 container">
         <!--Start of Aspiration Card-->
         <div class="row justify-content-center mb-4">
