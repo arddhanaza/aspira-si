@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Announcement;
 use App\Aspiration;
+use App\Notifikasi;
 use Illuminate\Http\Request;
 
 class AnnouncementController extends Controller
@@ -11,12 +12,14 @@ class AnnouncementController extends Controller
     public function index(){
         $announcements = Announcement::getAnnouncementByIdUser(session(0)->id_entitas);
         $aspirasi = Aspiration::getAspirasiByIdEntitas(session(0)->id_entitas);
-        return view('announcement.announcement',['announcements' => $announcements,'aspirasi'=>$aspirasi]);
+        $notifikasi = Notifikasi::getNotificationByEntitas();
+        return view('announcement.announcement',['announcements' => $announcements,'aspirasi'=>$aspirasi,'notifikasiByUser'=>$notifikasi]);
     }
 
     public function getAllAnnouncement(){
         $announcements = Announcement::getAllData();
-        return view('users.announcement',['announcements' => $announcements]);
+        $notifikasi = Notifikasi::getNotifikasiByUser();
+        return view('users.announcement',['announcements' => $announcements,'notifikasiByUser'=>$notifikasi]);
     }
 
     public function destroy($id){
@@ -40,7 +43,8 @@ class AnnouncementController extends Controller
     public function edit($id){
         $announcement = Announcement::find($id);
         $aspirasi = Aspiration::getAspirasiByIdEntitas(session(0)->id_entitas);
-        return view('announcement.editAnnouncement',['announcement' => $announcement,'aspirasi'=>$aspirasi]);
+        $notifikasi = Notifikasi::getNotificationByEntitas();
+        return view('announcement.editAnnouncement',['announcement' => $announcement,'aspirasi'=>$aspirasi,'notifikasiByUser'=>$notifikasi]);
     }
 
     public function update(Request $request){

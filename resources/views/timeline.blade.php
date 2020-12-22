@@ -1,10 +1,18 @@
 @extends('templates/template')
 
 @section('title','Feed')
+{{--{{dd($notifikasiByUser)}}--}}
 
-@include('templates.navbar')
+@include('templates.navbar', ['notifikasiByUser' => $notifikasiByUser])
 
 @section('container')
+    @if(Session::has('message'))
+        <div class="alert {{session('messageType')}} alert-dismissible fade show" role="alert" id="alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{session("message")}}
+        </div>
+        {{session()->forget('message')}}
+    @endif
 
     <section class="container  mt-5">
         <div class="row mb-4">
@@ -118,7 +126,8 @@
                                                     <div class="col-11">
                                                 <textarea class="form-control aspiration-comments"
                                                           placeholder="add comments"
-                                                          style="resize: none" rows="1" name="text_comment" id="text_comment"
+                                                          style="resize: none" rows="1" name="text_comment"
+                                                          id="text_comment"
                                                           type="text"></textarea>
                                                     </div>
                                                     <div class="col-1">
@@ -140,7 +149,8 @@
                                         </div>
                                         <div class="col-1 p-0">
                                             <div>
-                                                <a href="{{route('deleteReply',[$asp->id_aspirasi])}}" class="btn btn-outline-danger align-self-center m-0 h-100">Delete</a>
+                                                <a href="{{route('deleteReply',[$asp->id_aspirasi])}}"
+                                                   class="btn btn-outline-danger align-self-center m-0 h-100">Delete</a>
                                             </div>
                                         </div>
                                     @endif
@@ -194,7 +204,9 @@
                         <label for="textAspirasi">Teks Aspirasi</label>
                         <textarea class="form-control" name="aspirasi_text" id="textAspirasi" cols="30" rows="10"
                                   required></textarea>
-                        <label for="file">File Pendukung</label>
+                        <label for="file">File Pendukung
+                            <label class="text-danger">*Optional</label>
+                        </label>
                         <input class="form-control-file" id="file" multiple type="file" name="file_name[]">
                     </div>
                     <div class="modal-footer">
@@ -258,4 +270,10 @@
         </script>
     @endif
 
+    <div>
+        @include('sweetalert::alert')
+    </div>
+
+
 @endsection
+

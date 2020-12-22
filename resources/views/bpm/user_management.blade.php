@@ -5,7 +5,13 @@
 @section('title','User Management')
 
 @section('container')
-
+    @if(Session::has('message'))
+        <div class="alert {{session('messageType')}} alert-dismissible fade show" role="alert" id="alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{session("message")}}
+        </div>
+        {{session()->forget('message')}}
+    @endif
     <section class="mt-5 container">
         <!--Start of Aspiration Card-->
         <div class="row justify-content-center mb-4">

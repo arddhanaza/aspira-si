@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="alert alert-warning" role="alert">
+    Username/Password tidak sesuai
+</div>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -70,4 +74,10 @@
         </div>
     </div>
 </div>
+<div>
+    @include('sweetalert::alert')
+</div>
 @endsection
+
+
+

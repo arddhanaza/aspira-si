@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Aspiration;
 use App\EntitasSi;
+use App\Notifikasi;
 use App\ReplyAspiration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,27 +20,47 @@ class AspirationController extends Controller
     {
         $aspirasi = Aspiration::getAspiration();
         $entitas = EntitasSi::getDataEntitas();
-        return view('timeline', ['aspirasi' => $aspirasi , 'entitas' => $entitas]);
+
+        if (session(0)->getTable() == 'bpm') {
+            $notifikasi = Notifikasi::getNotificationByBpm();
+        } elseif (session(0)->getTable() == 'entitas_si') {
+            $notifikasi = Notifikasi::getNotificationByEntitas();
+        } else {
+            $notifikasi = Notifikasi::getNotifikasiByUser();
+        }
+//        dd($notifikasi);
+        return view('timeline', ['aspirasi' => $aspirasi, 'entitas' => $entitas, 'notifikasiByUser' => $notifikasi]);
     }
 
-    public function feedPopular(){
+    public function feedPopular()
+    {
         $aspirasi = Aspiration::getAspirationByPopular();
         $entitas = EntitasSi::getDataEntitas();
-        return view('timeline', ['aspirasi' => $aspirasi , 'entitas' => $entitas]);
+        if (session(0)->getTable() == 'bpm') {
+            $notifikasi = Notifikasi::getNotificationByBpm();
+        } elseif (session(0)->getTable() == 'entitas_si') {
+            $notifikasi = Notifikasi::getNotificationByEntitas();
+        } else {
+            $notifikasi = Notifikasi::getNotifikasiByUser();
+        }
+//        dd($notifikasi);
+        return view('timeline', ['aspirasi' => $aspirasi, 'entitas' => $entitas, 'notifikasiByUser' => $notifikasi]);
     }
 
     public function getAllAspiration()
     {
         $aspirasi = Aspiration::getAllAspiration();
-        return view('bpm.allAspiration',['aspirasi' => $aspirasi]);
+        $notifikasi = Notifikasi::getNotificationByBpm();
+        return view('bpm.allAspiration', ['aspirasi' => $aspirasi, 'notifikasiByUser' => $notifikasi]);
     }
 
-    public function getAspirationForYou(){
+    public function getAspirationForYou()
+    {
 
-       $aspirasi = Aspiration::getAspirationForYou();
-    //    dd($aspirasi);
-
-       return view('bpm.foryou',['aspirasi' => $aspirasi]);
+        $aspirasi = Aspiration::getAspirationForYou();
+        //    dd($aspirasi);
+        $notifikasi = Notifikasi::getNotificationByEntitas();
+        return view('bpm.foryou', ['aspirasi' => $aspirasi, 'notifikasiByUser' => $notifikasi]);
     }
 
     /**
@@ -55,7 +76,7 @@ class AspirationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -67,12 +88,10 @@ class AspirationController extends Controller
 //            'file_name.*' => 'mimes:doc,pdf,docx,zip,jpeg,jpg,png'
 //        ]);
 
-        if($request->hasfile('file_name'))
-        {
-            foreach($request->file('file_name') as $file)
-            {
-                $name = time().'.'.$file->extension();
-                $file->move(public_path().'/files/', $name);
+        if ($request->hasfile('file_name')) {
+            foreach ($request->file('file_name') as $file) {
+                $name = time() . '.' . $file->extension();
+                $file->move(public_path() . '/files/', $name);
                 $data[] = $name;
             }
             $aspirasi->file_name = json_encode($data);
@@ -84,27 +103,39 @@ class AspirationController extends Controller
         $aspirasi->aspirasi_text = $request->aspirasi_text;
         $aspirasi->status = $request->status;
         $aspirasi->save();
-
-        return redirect('/');
+        $lates_id_aspirasi = Aspiration::latest()->first();
+        $id = $lates_id_aspirasi->id_aspirasi;
+        $notifikasiTeks = "Aspirasi baru telah dibuat dengan judul $request->judul_aspirasi";
+        $notifikasiTipe = "aspirasi_baru";
+        $notifikasi = new Notifikasi();
+        $notifikasi->postNotifikasi($id, $notifikasiTeks, $notifikasiTipe);
+        return redirect('/')->with('toast_success', 'Yeay, kamu berhasil menambahkan Aspirasi');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $aspirasi = Aspiration::getAspirasiById($id);
         $reply = ReplyAspiration::getReplyById($id);
-        return view('aspiration.detailaspiration', ['aspirasi' => $aspirasi,'replys'=>$reply]);
+        if (session(0)->getTable() == 'bpm') {
+            $notifikasi = Notifikasi::getNotificationByBpm();
+        } elseif (session(0)->getTable() == 'entitas_si') {
+            $notifikasi = Notifikasi::getNotificationByEntitas();
+        } else {
+            $notifikasi = Notifikasi::getNotifikasiByUser();
+        }
+        return view('aspiration.detailaspiration', ['aspirasi' => $aspirasi, 'replys' => $reply, 'notifikasiByUser' => $notifikasi]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -115,28 +146,42 @@ class AspirationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $aspirasi = Aspiration::find($id);
-        if (isset($request->statusUpdate)){
+        if (isset($request->statusUpdate)) {
             $aspirasi->status = $request->statusUpdate;
             $aspirasi->save();
         }
-        return redirect(route('bpmAllAspiration'));
+        if ($request->statusUpdate == 'Diteruskan') {
+            $notifikasiTeks = "Aspirasi diteruskan oleh BPM dengan Judul:  $aspirasi->judul_aspirasi";
+            $notifikasiTipe = "aspirasi_diteruskan";
+
+            $notifikasi = new Notifikasi();
+            $notifikasi->postNotifikasi($id, $notifikasiTeks, $notifikasiTipe);
+        }
+        $notifikasiTeks = "Status Aspirasi Telah di Update Menjadi $request->statusUpdate";
+        $notifikasiTipe = "update_status_aspirasi";
+        $notifikasi = new Notifikasi();
+        $notifikasi->postNotifikasi($id, $notifikasiTeks, $notifikasiTipe);
+        return redirect(route('bpmAllAspiration'))->with('toast_success', 'berhasil update status', "position('top-end')");
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $aspirasi = Aspiration::find($id);
+        $aspirasi->delete();
+        return redirect(route('bpmAllAspiration'));
+
     }
 }

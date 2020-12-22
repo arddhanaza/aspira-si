@@ -44,6 +44,8 @@ Route::group(['middleware' => 'loggedIn'], function () {
     Route::put('profile/{user}/edit', 'UserController@update')->name('save_edit_password');
     //announcement
     Route::get('/announcement', 'AnnouncementController@getAllAnnouncement')->name('all_announcement');
+    //notifikasi
+    Route::get('/notifikasi/delete/','NotifikasiController@destroy')->name('delete_notifikasi');
     //bpm
     Route::group(['middleware' => 'loggedInAsBpm'], function () {
         Route::get('/bpm/allaspiration', 'AspirationController@getAllAspiration')->name('bpmAllAspiration');
@@ -52,6 +54,7 @@ Route::group(['middleware' => 'loggedIn'], function () {
         Route::put('/bpm/user_management/entitas/update/{id}','UserController@updateDataEntitas')->name('updateDataEntitas');
         Route::put('/bpm/user_management/entitas/update_password/{id}','UserController@resetPasswordEntitas')->name('resetPasswordEntitas');
         Route::put('/bpm/user_management/entitas/delete/{id}','UserController@hapusDataEntitas')->name('hapusDataEntitas');
+        Route::post('/aspiration/delete/{id}', 'AspirationController@destroy')->name('deleteAspiration');
     });
     //entitas
     Route::group(['middleware' => 'loggedInAsEntitas'], function () {
