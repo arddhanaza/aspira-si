@@ -270,10 +270,6 @@
         </script>
     @endif
 
-    <div>
-        @include('sweetalert::alert')
-    </div>
-
 
 @endsection
 

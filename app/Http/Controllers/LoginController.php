@@ -35,7 +35,7 @@ class LoginController extends Controller
 //                dd(session()->all());
 //                return redirect('/feed');
                 session()->put(['message'=>"Yeay, kamu berhasil login","messageType"=>'alert-success']);
-                return redirect(\URL::previous())->with('toast_success', 'Yeay, kamu berhasil login');
+                return redirect(\URL::previous());
             }else{
                 return redirect('/');
             }
@@ -45,7 +45,7 @@ class LoginController extends Controller
                 session()->put($user->all());
                 session()->put(['loginStatus' => true]);
                 session()->put(['message'=>"Yeay, kamu berhasil login","messageType"=>'alert-success']);
-                return redirect(\URL::previous())->with('toast_success', 'Yeay, kamu berhasil login');
+                return redirect(\URL::previous());
             }else{
                 return redirect('/');
             }
@@ -55,14 +55,14 @@ class LoginController extends Controller
                 session()->put($user->all());
                 session()->put(['loginStatus' => true]);
                 session()->put(['message'=>"Yeay, kamu berhasil login","messageType"=>'alert-success']);
-                return redirect(\URL::previous())->with('toast_success', 'Yeay, kamu berhasil login');
+                return redirect(\URL::previous());
             }else{
                 session()->put(['message'=>"Username atau Password Salah","messageType"=>'alert-danger']);
-                return redirect('/')->with('toast_warning', 'username/password salah');
+                return redirect('/');
             }
         }else{
             session()->put(['message'=>"Username atau Password Salah","messageType"=>'alert-danger']);
-            return redirect('/')->with('toast_warning', 'username/password salah');
+            return redirect('/');
         }
 
     }

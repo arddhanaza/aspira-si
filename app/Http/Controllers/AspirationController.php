@@ -109,7 +109,7 @@ class AspirationController extends Controller
         $notifikasiTipe = "aspirasi_baru";
         $notifikasi = new Notifikasi();
         $notifikasi->postNotifikasi($id, $notifikasiTeks, $notifikasiTipe);
-        return redirect('/')->with('toast_success', 'Yeay, kamu berhasil menambahkan Aspirasi');
+        return redirect('/');
     }
 
     /**
@@ -168,7 +168,7 @@ class AspirationController extends Controller
         $notifikasiTipe = "update_status_aspirasi";
         $notifikasi = new Notifikasi();
         $notifikasi->postNotifikasi($id, $notifikasiTeks, $notifikasiTipe);
-        return redirect(route('bpmAllAspiration'))->with('toast_success', 'berhasil update status', "position('top-end')");
+        return redirect(route('bpmAllAspiration'));
     }
 
     /**
