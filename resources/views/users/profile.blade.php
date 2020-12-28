@@ -106,13 +106,20 @@
             {{-- END OF ROW--}}
         </div>
         <div class="col-4">
-            <h5>Tentang Saya</h5>
-            <ul style="list-style: none">
-                <li>Mahasiswa</li>
-                <li>Nama:{{$mhs->nama_mahasiswa}}</li>
-                <li>NIM:{{$mhs->username}}</li>
-                <li>Angkatan:{{$mhs->angkatan}}</li>
-            </ul>
+            <div style="background-color: #4d9eda; border-radius:15px;margin: 20px 0px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <h5 style="padding:15px;color:white">Tentang Saya</h5>
+            </div>
+            <div class="card primary mb-3" style="max-width: 24rem; border-radius: 15px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <div class="card-body" style="background-image: url({{URL::to('/assets/img/bgg.png')}});border-radius: 15px">
+                    <h5 class="card-title" >{{$mhs->nama_mahasiswa}}</h5>
+                    <p class="card-text" ><i>" Hi... saya {{$mhs->nama_mahasiswa}}, mahasiswa S1 Sistem Informasi Telkom University angkatan {{$mhs->angkatan}} "</i></p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" style="background-color:inherit;">Nama : {{$mhs->nama_mahasiswa}}</li>
+                        <li class="list-group-item" style="background-color:inherit;">NIM  : {{$mhs->username}}</li>
+                        <li class="list-group-item" style="background-color:inherit;">Angkatan : {{$mhs->angkatan}}</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
