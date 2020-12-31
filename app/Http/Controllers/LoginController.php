@@ -34,7 +34,8 @@ class LoginController extends Controller
                 session()->put(['loginStatus' => true]);
 //                dd(session()->all());
 //                return redirect('/feed');
-                return redirect(\URL::previous());
+                session()->put(['message'=>"Yeay, kamu berhasil login","messageType"=>'alert-success']);
+                return redirect(\URL::previous())->with('toast_success', 'Yeay, kamu berhasil login');
             }else{
                 return redirect('/');
             }
@@ -43,7 +44,8 @@ class LoginController extends Controller
                 $user = EntitasSi::where('username',$username)->get();
                 session()->put($user->all());
                 session()->put(['loginStatus' => true]);
-                return redirect(\URL::previous());
+                session()->put(['message'=>"Yeay, kamu berhasil login","messageType"=>'alert-success']);
+                return redirect(\URL::previous())->with('toast_success', 'Yeay, kamu berhasil login');
             }else{
                 return redirect('/');
             }
@@ -52,12 +54,15 @@ class LoginController extends Controller
                 $user = Bpm::where('username',$username)->get();
                 session()->put($user->all());
                 session()->put(['loginStatus' => true]);
-                return redirect(\URL::previous());
+                session()->put(['message'=>"Yeay, kamu berhasil login","messageType"=>'alert-success']);
+                return redirect(\URL::previous())->with('toast_success', 'Yeay, kamu berhasil login');
             }else{
-                return redirect('/');
+                session()->put(['message'=>"Username atau Password Salah","messageType"=>'alert-danger']);
+                return redirect('/')->with('toast_warning', 'username/password salah');
             }
         }else{
-            return redirect('/');
+            session()->put(['message'=>"Username atau Password Salah","messageType"=>'alert-danger']);
+            return redirect('/')->with('toast_warning', 'username/password salah');
         }
 
     }
