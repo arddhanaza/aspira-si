@@ -31,6 +31,7 @@ Route::group(['middleware' => 'loggedIn'], function () {
     //aspiration
     Route::post('/PostAspiration', 'AspirationController@store');
     Route::get('/aspiration/{id}', 'AspirationController@show')->name('detailAspiration');
+    Route::put('/aspiration/update/{id}','AspirationController@update')->name('update');
     //reply
     Route::post('/reply', 'ReplyController@store')->name('comment');
     Route::get('/reply/delete/{id_comment}','ReplyController@delete')->name('deleteReply');
