@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-sm-6 col-md-6">
-                <img src="{{asset('assets/img/telkom.jpg')}}" alt="" class="img-thumbnail border-0 rounded-circle" style="max-width: 200px">
+                <img src="{{asset('assets/img/telkom.jpg')}}" alt="" class="img-thumbnail border -0 rounded-circle" style="max-width: 200px">
             </div>
             <div class="col-lg-3 col-sm-6 col-md-6">
                 <div style="bottom: 0;position: absolute;max-width: 100%">
@@ -45,6 +45,7 @@
         </div>
     </div>
 </div>
+@if(!$aspirasi_mhs->isEmpty())
 <div class="container">
     <div class="row">
         <div class="col-8">
@@ -59,10 +60,11 @@
                                     <h3>{{$aspirasi_mahasiswa->judul_aspirasi}}</h3>
                                     <span class="span-time">Posted on September, {{$aspirasi_mahasiswa->created_at}}</span>
                                 </div>
+                                
                                 <div class="col-5 text-right">
                                     <button disabled class="btn rounded-pill btn-primary">{{$aspirasi_mahasiswa->status}}
                                     </button>
-                                    <button disabled class="btn btn-sm btn-outline-danger"><span><img src="{{'assets/icon/hand-thumbs-down.svg'}}" class="img-icon" alt="">-{{$aspirasi_mahasiswa->downvote}}</span>
+                                    <button disabled class="btn btn-sm btn-outline-danger"><span><img src="{{'assets/icon/hand-thumbs-down.svg'}}" class="img-icon" alt="">{{$aspirasi_mahasiswa->downvote}}</span>
                                     </button>
                                     <button disabled class="btn btn-sm btn-primary"><span><img src="{{'assets/icon/hand-thumbs-up.svg'}}" class="img-icon" alt=""> +{{$aspirasi_mahasiswa->upvote}}</span>
                                     </button>
@@ -95,6 +97,9 @@
                                         @if(isset($aspirasi_mahasiswa->file_name))
                                         <a href="" class="btn btn-outline-info" data-target="#modalFile{{$aspirasi_mahasiswa->id_aspirasi}}" data-toggle="modal">File Pendukung</a>
                                         @endif
+                                        @if($aspirasi_mahasiswa->status == 'Belum Diproses')
+                                        <a href="" class="btn btn-outline-info" data-target="#modalupdate{{$aspirasi_mahasiswa->id_aspirasi}}" data-toggle="modal">Update</a>
+                                    @endif
                                     </div>
                                 </div>
                             </div>
@@ -105,6 +110,12 @@
             @endforeach
             {{-- END OF ROW--}}
         </div>
+        @else
+            <div class="container col-7 col-md-9">
+            <div class="text-center">
+            <p>Tidak ada aspirasi</p>
+            </div>
+        @endif
         <div class="col-4">
             <h5>Tentang Saya</h5>
             <ul style="list-style: none">
@@ -139,6 +150,51 @@
     </div>
 </div>
 @endif
+
 @endforeach
+{{--    Modal Update Aspirasi--}}
+    @foreach($aspirasi_mhs as $aspirasi_mahasiswa)
+        <div class="modal fade" id="modalupdate{{$aspirasi_mahasiswa->id_aspirasi}}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Update Aspirasi {{$mhs->nama_mahasiswa}}</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('update',$aspirasi_mahasiswa->id_aspirasi)}}" method="post">
+                            @method('put')
+                            @csrf
+                            <input type="hidden" name="id_aspirasi" value="{{$aspirasi_mahasiswa->id_entitas}}" id="id_mahasiswa">
+                            <input type="hidden" name="id_entitas" value="{{$aspirasi_mahasiswa->id_entitas}}">
+                            <div class="form-group">
+                                <label for="judulAspirasi">Judul Aspisrasi</label>
+                                <input type="text" class="form-control" id="judulAspirasi" value="{{$aspirasi_mahasiswa->judul_aspirasi}}" name="judul_aspirasi">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Tujuan Aspirasi</label>
+                                <input type="text" class="form-control" id="tujuanAspirasi" value="{{$aspirasi_mahasiswa->nama_entitas}}" name="">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Teks Aspirasi</label>
+                                <input type="text" class="form-control" id="tujuanAspirasi" value="{{$aspirasi_mahasiswa->aspirasi_text}}" name="">
+                            </div>
+                            <label for="file">File Pendukung</label>
+                            <input class="form-control-file" id="file" multiple type="file" name="file_name[]" value="">
+                            <br>
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-block" type="submit">Update</button>
+                                <button class="btn btn-outline-secondary btn-block" data-dismiss="modal" type="button">Cancel</button>
+                            </div>
+                        </form>
+                        </div>
+
+                        
+
+        @endforeach
 
 @endsection
