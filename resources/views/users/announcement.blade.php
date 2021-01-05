@@ -4,7 +4,6 @@
 
 @section('title','Announcement')
 
-
 @section('container')
 
     <section class="mt-5 container-fluid">
@@ -19,52 +18,39 @@
                                 <th>No</th>
                                 <th>Annoucement</th>
                                 <th>File Pendukung</th>
-{{--                                <th>Nama File</th>--}}
+                                {{--                                <th>Nama File</th>--}}
                                 <th>Issue Terkait</th>
                                 <th>Tanggal</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($announcements as $anc)
-                            <tr>
+                                <tr>
                                     <td>{{$loop->index+1}}</td>
                                     <td>{{$anc->announcement_text}}</td>
                                     <td>
                                         @if(isset($asp->file_name))
-                                            <a href="" class="btn btn-outline-info" data-target="#modalFile{{$asp->id_aspirasi}}" data-toggle="modal">File
+                                            <a href="" class="btn btn-outline-info"
+                                               data-target="#modalFile{{$asp->id_aspirasi}}" data-toggle="modal">File
                                                 Pendukung</a>
                                         @else
                                             <span>Tidak Ada File Pendukung</span>
                                         @endif
-                                    </td>    
-                                    <td>{{$anc->judul_aspirasi}}</td>
+                                    </td>
+                                    @if($anc->judul_aspirasi == 'Tanpa Tujuan')
+                                        <td>{{$anc->judul_aspirasi}}</td>
+                                    @else
+                                        <td><a href="{{route('detailAspiration',[$anc->id_aspirasi])}}">{{$anc->judul_aspirasi}}</a></td>
+                                    @endif
                                     <td>{{$anc->created_at}}</td>
-
+                                </tr>
                             @endforeach
-        <!--{{--loop--}}
-        @foreach($announcements as $anc)
-            <div class="row justify-content-center mb-4">
-                <div class="col-10">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>
-                                Oleh : {{$anc->nama_entitas}}
-                            </h5>
-                            <h5>
-                                Terkait : {{$anc->judul_aspirasi}}
-                            </h5>
-                            <span>Waktu: {{$anc->created_at}}</span>
-                        </div>
-                        <div class="card-body">
-                            <p>
-                                {{$anc->announcement_text}}
-                            </p>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-    @endforeach
-    End of Aspiration Card
+        </div>
     </section>
 @endsection
 

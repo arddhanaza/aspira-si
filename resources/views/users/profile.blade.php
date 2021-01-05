@@ -1,5 +1,3 @@
-{{--NOT FINISHED--}}
-
 @extends('templates/template')
 
 @include('templates.navbar')
