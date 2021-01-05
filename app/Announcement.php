@@ -12,8 +12,10 @@ class Announcement extends Model
 
     protected static function getAnnouncementByIdUser($user){
         $data = DB::table('announcement')
+            ->select('id_announcement','announcement.id_entitas','id_aspirasi','announcement_text','nama_file','announcement.created_at','nama_entitas','status')
             ->join('entitas_si', 'entitas_si.id_entitas', '=', 'announcement.id_entitas')
             ->where('announcement.id_entitas','=',$user)
+            ->orderByDesc('created_at')
             ->get();
         self::updateData($data);
         return $data;
@@ -37,6 +39,7 @@ class Announcement extends Model
 
     protected static function getAllData(){
         $data = DB::table('announcement')
+            ->select('id_announcement','announcement.id_entitas','id_aspirasi','announcement_text','nama_file','announcement.created_at','nama_entitas','status')
             ->join('entitas_si', 'entitas_si.id_entitas', '=', 'announcement.id_entitas')
             ->orderByDesc('announcement.created_at')
             ->get();

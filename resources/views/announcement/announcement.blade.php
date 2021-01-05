@@ -20,7 +20,7 @@
                                 <th>Oleh</th>
                                 <th>Judul Aspirasi</th>
                                 <th>Announcement</th>
-{{--                                <th>Nama File</th>--}}
+                                <th>Nama File</th>
                                 <th>Created At</th>
                                 <th>Aksi</th>
                             </tr>
@@ -32,15 +32,15 @@
                                     <td>{{$anc->nama_entitas}}</td>
                                     <td>{{$anc->judul_aspirasi}}</td>
                                     <td>{{$anc->announcement_text}}</td>
-{{--                                    <td>--}}
-{{--                                        @if(isset($asp->nama_file))--}}
-{{--                                            <a href="" class="btn btn-outline-info"--}}
-{{--                                               data-target="#modalFile" data-toggle="modal">File--}}
-{{--                                                Pendukung</a>--}}
-{{--                                        @else--}}
-{{--                                            <span>Tidak Ada File Pendukung</span>--}}
-{{--                                        @endif--}}
-{{--                                    </td>--}}
+                                    <td>
+                                        @if(isset($anc->nama_file))
+                                            <a href="" class="btn btn-outline-info"
+                                               data-target="#modalFile" data-toggle="modal">File
+                                                Pendukung</a>
+                                        @else
+                                            <span>Tidak Ada File Pendukung</span>
+                                        @endif
+                                    </td>
                                     <td>{{$anc->created_at}}</td>
                                     <td>
                                         <a href="{{route('edit_announcement',$anc->id_announcement)}}" class="btn btn-primary mb-2">Edit</a>
@@ -75,7 +75,7 @@
                     <form action="{{route('post_announcement')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
-                            <input type="hidden" name="id_entitas" value="{{session(0)->id_entitas}}">                            
+                            <input type="hidden" name="id_entitas" value="{{session(0)->id_entitas}}">
                             <label for="judul_aspirasi">Judul Aspirasi</label>
                             <select name="judul_aspirasi" id="judul_aspirasi" class="form-control">
                                 <option value="">Tanpa Tujuan</option>

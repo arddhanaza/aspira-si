@@ -19,6 +19,7 @@ class AnnouncementController extends Controller
     }
 
     public function getAllAnnouncement(){
+
         $announcements = Announcement::getAllData();
         $notifikasi = Notifikasi::getNotifikasiByUser();
         return view('users.announcement',['announcements' => $announcements,'notifikasiByUser'=>$notifikasi]);
@@ -26,12 +27,18 @@ class AnnouncementController extends Controller
 
     public function destroy($id){
         $announcement = Announcement::find($id);
+        $id_aspirasi = $announcement->id_aspirasi;
+        if (isset($id_aspirasi)){
+            $aspirasi = Aspiration::find($id_aspirasi);
+            $aspirasi->status = 'Diteruskan';
+            $aspirasi->save();
+        }
         $announcement->delete();
         return redirect(route('announcement'));
     }
 
     public function store(Request $request){
-        $announcement = new Announcement();        
+        $announcement = new Announcement();
         $announcement->id_entitas = $request->id_entitas;
         if (isset($request->judul_aspirasi)){
             $announcement->id_aspirasi = $request->judul_aspirasi;
@@ -46,8 +53,8 @@ class AnnouncementController extends Controller
             }
             $announcement->nama_file = json_encode($data);
         }
-        $announcement->announcement_text = $request->announcement_text;                
-        $announcement->save();    
+        $announcement->announcement_text = $request->announcement_text;
+        $announcement->save();
 
         $id_aspirasi = $request->judul_aspirasi;
         DB::table('aspirasi')
@@ -69,7 +76,7 @@ class AnnouncementController extends Controller
         if (isset($request->judul_aspirasi)){
             $announcement->id_aspirasi = $request->judul_aspirasi;
         }
-        
+
         if($request->hasfile('file_name')) {
             foreach($request->file('file_name') as $file)
             {
@@ -77,10 +84,10 @@ class AnnouncementController extends Controller
                 $file->move(public_path().'/files/', $name);
                 $data[] = $name;
             }
-            $announcement->nama_file = json_encode($data);        
+            $announcement->nama_file = json_encode($data);
         }
 
-        $announcement->announcement_text = $request->announcement_text;                            
+        $announcement->announcement_text = $request->announcement_text;
         $announcement->save();
         return redirect(route('announcement'));
 
