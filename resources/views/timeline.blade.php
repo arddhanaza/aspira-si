@@ -31,17 +31,17 @@
         </div>
         @foreach($aspirasi as $asp)
             <div class="row justify-content-center mb-4">
-                <div class="col-12">
+                <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card aspiration-card">
                         <div class="card-header aspiration-card-header">
                             <div class="row">
-                                <div class="col-9">
+                                <div class="col-lg-9 col-md-9 col-sm-12">
                                     <h3>
                                         <a href="{{route('detailAspiration',[$asp->id_aspirasi])}}">{{$asp->judul_aspirasi}}</a>
                                     </h3>
                                     <span class="span-time">Posted on September, {{$asp -> created_at}}</span>
                                 </div>
-                                <div class="col-3 text-right">
+                                <div class="col-lg-3 col-md-3 col-sm-12 text-sm-right mt-3">
                                     <h5><span class="badge badge-primary rounded-pill">{{$asp->status}}</span></h5>
                                     @if(session(0)->getTable() != 'bpm' && session(0)->getTable() != 'entitas_si')
                                         <button class="btn btn-sm btn-outline-danger"
@@ -54,7 +54,7 @@
                                                 data-max-count="1">{{$asp -> downvote}}</span>
                                         </button>
                                         <button class="btn btn-sm btn-primary"
-                                                onclick="addLikes(  {{session(0)->id_mahasiswa}},{{$asp->id_aspirasi}})">
+                                                onclick="addLikes({{session(0)->id_mahasiswa}},{{$asp->id_aspirasi}})">
                                             <img
                                                 src="{{asset('assets/icon/hand-thumbs-up.svg')}}" class="img-icon"
                                                 alt=""><span
@@ -78,26 +78,22 @@
                             <div class="aspiration-card-body-content">
                                 <div class="row mb-4">
                                     <div class="col-1 col">
-                                        <img alt="" class="img-thumbnail img-icon" src="../assets/img/telkom.jpg"
-                                             style="width: 50px">
+                                        <img alt="" class="img-thumbnail img-icon d-none d-lg-block d-md-block"
+                                             src="../assets/img/telkom.jpg" style="width: 50px">
                                     </div>
                                     <div class="col-11 col">
-                            <span class="span-asal usernamePengirim">
-                                {{$asp -> username}}
-                            </span>
+                                        <span class="span-asal usernamePengirim">{{$asp->username}}</span>
                                         <br>
-                                        <span class="span-tujuan">
-                                Kepada: {{$asp -> nama_entitas}}
-                            </span>
+                                        <span class="span-tujuan">Kepada: {{$asp->nama_entitas}}</span>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-10">
+                                    <div class="col-lg-10 col-md-10 col-sm-12">
                                         <p>
                                             {{$asp -> aspirasi_text}}
                                         </p>
                                     </div>
-                                    <div class="col-10">
+                                    <div class="col-lg-10 col-md-10 col-sm-12">
                                         @if(isset($asp->file_name))
                                             <a href="" class="btn btn-outline-info"
                                                data-target="#modalFile{{$asp->id_aspirasi}}" data-toggle="modal">File
@@ -110,8 +106,8 @@
                         <div class="card-footer aspiration-card-footer">
                             <div class="row">
                                 @if(session(0)->getTable() == 'mahasiswa')
-                                    <div class="col-1 col">
-                                        <img alt="" class="img-thumbnail img-icon" src="../assets/img/telkom.jpg"
+                                    <div class="col-1 d-none d-lg-block d-md-block">
+                                        <img alt="" class="img-thumbnail img-icon img-icon" src="{{asset("assets/img/telkom.jpg")}}"
                                              style="width: 50px;">
                                     </div>
                                     @if($asp->comment == null)
@@ -124,14 +120,14 @@
                                                     <input type="hidden" name="id_mahasiswa"
                                                            value="{{session(0)->id_mahasiswa}}">
                                                     <div class="col-11">
-                                                <textarea class="form-control aspiration-comments"
+                                                        <textarea class="form-control aspiration-comments"
                                                           placeholder="add comments"
                                                           style="resize: none" rows="1" name="text_comment"
                                                           id="text_comment"
                                                           type="text"></textarea>
                                                     </div>
-                                                    <div class="col-1">
-                                                        <button type="submit" class="btn py-0">
+                                                    <div class="col-1  px-0">
+                                                        <button type="submit" class="btn p-0">
                                                             <img alt="" class="img-thumbnail img-icon"
                                                                  src="{{asset('assets/icon/arrow-right-short.svg')}}"
                                                                  style="width: 50px;">
@@ -150,7 +146,8 @@
                                         <div class="col-1 p-0">
                                             <div>
                                                 <a href="{{route('deleteReply',[$asp->id_aspirasi])}}"
-                                                   class="btn btn-outline-danger align-self-center m-0 h-100">Delete</a>
+                                                   class="btn btn-outline-danger align-self-center m-0 h-100"><img
+                                                        src="{{asset('assets/icon/trash.svg')}}" alt=""></a>
                                             </div>
                                         </div>
                                     @endif

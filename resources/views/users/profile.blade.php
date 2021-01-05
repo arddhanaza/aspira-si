@@ -70,7 +70,7 @@
                                     <div class="card-header aspiration-card-header">
                                         <div class="row">
                                             <div class="col-lg-7 col-md-7 col-sm-12">
-                                                <h3>{{$aspirasi_mahasiswa->judul_aspirasi}}</h3>
+                                                <h3><a href="{{route('detailAspiration',$aspirasi_mahasiswa->id_aspirasi)}}">{{$aspirasi_mahasiswa->judul_aspirasi}}</a></h3>
                                                 <span
                                                     class="span-time">Posted on September, {{$aspirasi_mahasiswa->created_at}}</span>
                                             </div>

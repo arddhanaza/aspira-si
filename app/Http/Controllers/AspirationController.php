@@ -109,8 +109,8 @@ class AspirationController extends Controller
         $notifikasiTipe = "aspirasi_baru";
         $notifikasi = new Notifikasi();
         $notifikasi->postNotifikasi($id, $notifikasiTeks, $notifikasiTipe);
-        session()->put(['message'=>"Yeay, kamu berhasil menambahkan Aspirasi","messageType"=>'alert-success']);
-        return redirect('/');
+        session()->put(['message'=>"Yeay, kamu berhasil menambahkan Aspirasi dan Saat ini sedang direview oleh BPM","messageType"=>'alert-success']);
+        return redirect(route('detailAspiration',$id));
     }
 
     /**
@@ -123,6 +123,7 @@ class AspirationController extends Controller
     {
         $aspirasi = Aspiration::getAspirasiById($id);
         $reply = ReplyAspiration::getReplyById($id);
+        $entitas = EntitasSi::getDataEntitas();
         if (session(0)->getTable() == 'bpm') {
             $notifikasi = Notifikasi::getNotificationByBpm();
         } elseif (session(0)->getTable() == 'entitas_si') {
@@ -130,7 +131,7 @@ class AspirationController extends Controller
         } else {
             $notifikasi = Notifikasi::getNotifikasiByUser();
         }
-        return view('aspiration.detailaspiration', ['aspirasi' => $aspirasi, 'replys' => $reply, 'notifikasiByUser' => $notifikasi]);
+        return view('aspiration.detailaspiration', ['aspirasi' => $aspirasi, 'replys' => $reply, 'notifikasiByUser' => $notifikasi,'entitas'=>$entitas]);
     }
 
     /**
@@ -191,7 +192,7 @@ class AspirationController extends Controller
         $aspirasi->judul_aspirasi = $request->judul_aspirasi;
         $aspirasi->aspirasi_text = $request->aspirasi_text;
         $aspirasi->save();
-        return redirect(route('profile',[session(0)->id_mahasiswa]));
+        return redirect(route('detailAspiration',$id));
     }
 
     /**
