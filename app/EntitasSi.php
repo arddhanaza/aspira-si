@@ -9,6 +9,7 @@ class EntitasSi extends Model
 {
     protected $table = 'entitas_si';
     protected $primaryKey = 'id_entitas';
+    public $timestamps = false;
 
     protected static function getDataEntitas(){
         return DB::table('entitas_si')
