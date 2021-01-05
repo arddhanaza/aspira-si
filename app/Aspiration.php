@@ -125,7 +125,12 @@ class Aspiration extends Model
     protected static function getAspirationForYou(){
         $user = session(0)->id_entitas;
         $getAspiration = self::getAllAspiration()
-        -> where('id_entitas','=',$user, 'and', '(status', '=', 'Diteruskan', 'or', 'status', '=', 'Done Resolved)');        
+                        -> where('id_entitas','=',$user)
+                        -> whereBetween('status',['Diteruskan','Done Resolved'])
+                        -> where('status','!=','Ditinjau')
+                        -> sortBy('status');
+//        dd($getAspiration);
+
         return $getAspiration;
 
         //sort by status
