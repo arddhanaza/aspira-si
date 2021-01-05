@@ -109,6 +109,7 @@ class AspirationController extends Controller
         $notifikasiTipe = "aspirasi_baru";
         $notifikasi = new Notifikasi();
         $notifikasi->postNotifikasi($id, $notifikasiTeks, $notifikasiTipe);
+        session()->put(['message'=>"Yeay, kamu berhasil menambahkan Aspirasi","messageType"=>'alert-success']);
         return redirect('/');
     }
 
@@ -153,6 +154,12 @@ class AspirationController extends Controller
     public function update(Request $request, $id)
     {
         $aspirasi = Aspiration::find($id);
+        $aspirasi->id_mahasiswa = $request->id_mahasiswa;
+        $aspirasi->id_entitas = $request->id_entitas;
+        $aspirasi->judul_aspirasi = $request->judul_aspirasi;
+        $aspirasi->aspirasi_text = $request->aspirasi_text;
+        $aspirasi->save();
+        return redirect(route('profile'));
         if (isset($request->statusUpdate)) {
             $aspirasi->status = $request->statusUpdate;
             $aspirasi->save();
@@ -168,6 +175,7 @@ class AspirationController extends Controller
         $notifikasiTipe = "update_status_aspirasi";
         $notifikasi = new Notifikasi();
         $notifikasi->postNotifikasi($id, $notifikasiTeks, $notifikasiTipe);
+        session()->put(['message'=>"Berhasil update status!","messageType"=>'alert-success']);
         return redirect(route('bpmAllAspiration'));
     }
 
@@ -181,7 +189,19 @@ class AspirationController extends Controller
     {
         $aspirasi = Aspiration::find($id);
         $aspirasi->delete();
+        session()->put(['message'=>"Berhasil menghapus aspirasi","messageType"=>'alert-danger']);
         return redirect(route('bpmAllAspiration'));
 
     }
+   //public function updateAspirasi($id, Request $request){
+        //$aspirasi = Aspiration::find($id);
+        //$aspirasi->id_mahasiswa = $request->id_mahasiswa;
+        //$aspirasi->id_entitas = $request->id_entitas;
+        //$aspirasi->judul_aspirasi = $request->judul_aspirasi;
+        //$aspirasi->aspirasi_text = $request->aspirasi_text;
+        //$aspirasi->save();
+        //return redirect(route('profile'));
+        
+        
+    //}
 }
