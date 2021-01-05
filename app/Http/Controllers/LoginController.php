@@ -79,8 +79,10 @@ class LoginController extends Controller
         $nama_mahasiswa = $request->nama_mahasiswa;
         $mahasiswa = Mahasiswa::where('username',$username)->first();
         if (Mahasiswa::validateUsername($username,$nama_mahasiswa)){
+            session()->put(['message'=>"Masukkan Password Baru","messageType"=>'alert-warning']);
             return redirect(route('edit_lupa_password',$mahasiswa->id_mahasiswa));
         }else{
+            session()->put(['message'=>"Username atau nama mahasiswa salah","messageType"=>'alert-warning']);
             return redirect()->back();
         }
     }
@@ -94,6 +96,7 @@ class LoginController extends Controller
         $mahasiswa = Mahasiswa::find($request->id_mahasiswa);
         $mahasiswa->password = $request->new_password;
         $mahasiswa->save();
+        session()->put(['message'=>"Berhasil edit password","messageType"=>'alert-warning']);
         return redirect('/');
     }
 

@@ -192,6 +192,7 @@ class AspirationController extends Controller
         $aspirasi->judul_aspirasi = $request->judul_aspirasi;
         $aspirasi->aspirasi_text = $request->aspirasi_text;
         $aspirasi->save();
+        session()->put(['message'=>"Berhasil mengupdate aspirasi","messageType"=>'alert-warning']);
         return redirect(route('detailAspiration',$id));
     }
 

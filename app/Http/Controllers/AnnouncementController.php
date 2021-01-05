@@ -34,6 +34,7 @@ class AnnouncementController extends Controller
             $aspirasi->save();
         }
         $announcement->delete();
+        session()->put(['message'=>"Announcemnt berhasil dihapus","messageType"=>'alert-danger']);
         return redirect(route('announcement'));
     }
 
@@ -61,6 +62,7 @@ class AnnouncementController extends Controller
             -> where('id_aspirasi', '=', $id_aspirasi)
             -> update(['status' => 'Done Resolved']);
 
+        session()->put(['message'=>"Announcemnt berhasil ditambahkan","messageType"=>'alert-success']);
         return redirect(route('announcement'));
     }
 
@@ -89,6 +91,7 @@ class AnnouncementController extends Controller
 
         $announcement->announcement_text = $request->announcement_text;
         $announcement->save();
+        session()->put(['message'=>"Announcemnt berhasil diupdate","messageType"=>'alert-warning']);
         return redirect(route('announcement'));
 
     }

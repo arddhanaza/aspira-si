@@ -14,7 +14,14 @@
         <div class="col-md-6 align-self-center">
             <div class="card rounded text-center shadow" style="width: 18rem;">
                 <div class="card-body" style="padding-bottom: 30%;">
-                    <h5 class="card-title" style="color: #45A1E5;">ASPIRA-SI</h5>                    
+                    @if(Session::has('message'))
+                        <div class="alert {{session('messageType')}} alert-dismissible fade show" role="alert" id="alert-success">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{session("message")}}
+                        </div>
+                        {{session()->forget('message')}}
+                    @endif
+                    <h5 class="card-title" style="color: #45A1E5;">ASPIRA-SI</h5>
                     <h6 class="card-subtitle mb-2">Change Password</h6>
                     <form method="POST" action="{{route('save_edit_lupa_password',$mahasiswa->id_mahasiswa)}}">
                         @method('put')

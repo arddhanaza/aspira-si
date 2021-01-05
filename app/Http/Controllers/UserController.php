@@ -38,9 +38,11 @@ class UserController extends Controller
         if (Mahasiswa::validatePassword(session(0)->id_mahasiswa,$request->old_password)){
             $mahasiswa->password = $request->new_password;
         }else{
+            session()->put(['message'=>"Password salah","messageType"=>'alert-danger']);
             return redirect()->back();
         }
         $mahasiswa->save();
+        session()->put(['message'=>"Berhasil update data","messageType"=>'alert-success']);
         return redirect(route('profile',session(0)->id_mahasiswa));
     }
 
@@ -60,6 +62,7 @@ class UserController extends Controller
         $entitas->username = $request->username_entitas;
         $entitas->password = $request->password_entitas;
         $entitas->save();
+        session()->put(['message'=>"Data berhasil ditambahkan","messageType"=>'alert-success']);
         return redirect(route('user_management'));
     }
 
@@ -71,6 +74,7 @@ class UserController extends Controller
         $entitas->nama_entitas = $request->nama_entitas;
         $entitas->username = $request->username_entitas;
         $entitas->save();
+        session()->put(['message'=>"Data berhasil diupdate","messageType"=>'alert-success']);
         return redirect(route('user_management'));
     }
 
@@ -78,12 +82,14 @@ class UserController extends Controller
         $entitas = EntitasSi::find($id);
         $entitas->password = 'root';
         $entitas->save();
+        session()->put(['message'=>"Password berhasil direset","messageType"=>'alert-warning']);
         return redirect(route('user_management'));
     }
 
     public function hapusDataEntitas($id){
         $entitas = EntitasSi::find($id);
         $entitas->delete();
+        session()->put(['message'=>"Data Berhasil Dihapus","messageType"=>'alert-danger']);
         return redirect(route('user_management'));
     }
 
@@ -95,6 +101,7 @@ class UserController extends Controller
         $mahasiswa->nama_mahasiswa = $request->nama_mhs;
         $mahasiswa->angkatan = $request->angkatan_mhs;
         $mahasiswa->save();
+        session()->put(['message'=>"Data berhasil ditambahkan","messageType"=>'alert-success']);
         return redirect(route('user_management'));
     }
 
@@ -105,6 +112,7 @@ class UserController extends Controller
         $mahasiswa->nama_mahasiswa = $request->nama_mhs;
         $mahasiswa->angkatan = $request->angkatan_mhs;
         $mahasiswa->save();
+        session()->put(['message'=>"Data berhasil diupdate","messageType"=>'alert-success']);
         return redirect(route('user_management'));
 
     }
@@ -113,12 +121,14 @@ class UserController extends Controller
         $mahasiswa = Mahasiswa::find($id);
         $mahasiswa->password = 'root';
         $mahasiswa->save();
+        session()->put(['message'=>"Password berhasil direset","messageType"=>'alert-warning']);
         return redirect(route('user_management'));
     }
 
     public function hapusDataMahasiswa($id){
         $mahasiswa = Mahasiswa::find($id);
         $mahasiswa->delete();
+        session()->put(['message'=>"Data Berhasil Dihapus","messageType"=>'alert-danger']);
         return redirect(route('user_management'));
     }
 }

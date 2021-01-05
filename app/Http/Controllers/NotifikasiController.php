@@ -27,6 +27,7 @@ class NotifikasiController extends Controller
 
     public function destroy(){
         $deleted = Notifikasi::deleteByUser();
+        session()->put(['message'=>"Notifikasi dihpaus","messageType"=>'alert-warning']);
         return back();
     }
 }

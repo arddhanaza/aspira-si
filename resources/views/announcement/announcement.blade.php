@@ -7,6 +7,14 @@
 
 @section('container')
 
+    @if(Session::has('message'))
+        <div class="alert {{session('messageType')}} alert-dismissible fade show" role="alert" id="alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{session("message")}}
+        </div>
+        {{session()->forget('message')}}
+    @endif
+
     <section class="mt-5 container-fluid">
         <!--Start of Aspiration Card-->
         <div class="row justify-content-center mb-4">
@@ -34,9 +42,12 @@
                                     <td>{{$anc->announcement_text}}</td>
                                     <td>
                                         @if(isset($anc->nama_file))
-                                            <a href="" class="btn btn-outline-info"
-                                               data-target="#modalFile" data-toggle="modal">File
-                                                Pendukung</a>
+                                            <h6>File Pendukung</h6>
+                                            <?php
+                                            foreach (json_decode($anc->nama_file) as $file){ ?>
+                                            <a href="{{asset('files/'.$file)}}" target="_blank"
+                                               class="btn btn-outline-info mb-2">Name: <?php echo $file?></a>
+                                            <?php } ?>
                                         @else
                                             <span>Tidak Ada File Pendukung</span>
                                         @endif
@@ -101,4 +112,5 @@
         </div>
 
     @endif
+
 @endsection

@@ -15,11 +15,14 @@ class ReplyController extends Controller
         if (isset($request->text_comment)){
             $data = $request->all();
             if( ReplyAspiration::postComment($data)){
+                session()->put(['message'=>"Berhasil Menambahkan Komentar","messageType"=>'alert-success']);
                 return redirect(route('detailAspiration',[$request->id_aspirasi]));
             }else{
+                session()->put(['message'=>"Sudah pernah memberikan Komentar","messageType"=>'alert-danger']);
                 return redirect()->back();
             }
         }else{
+            session()->put(['message'=>"Gagal Menambahkan Komentar","messageType"=>'alert-danger']);
             return redirect()->back();
         }
     }
