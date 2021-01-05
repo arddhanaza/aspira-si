@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Routing\RouteDependencyResolverTrait;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,9 +52,14 @@ Route::group(['middleware' => 'loggedIn'], function () {
         Route::get('/bpm/allaspiration', 'AspirationController@getAllAspiration')->name('bpmAllAspiration');
         Route::put('/aspiration/{id}', 'AspirationController@update')->name('updateApirationStatus');
         Route::get('/bpm/user_management','UserController@getAllData')->name('user_management');
+        Route::post('/bpm/add_entitas', 'UserController@tambahDataEntitas')->name('tambahDataEntitas');
+        Route::post('/bpm/add_mahasiswa', 'UserController@tambahDataMahasiswa')->name('tambahDataMahasiswa');
         Route::put('/bpm/user_management/entitas/update/{id}','UserController@updateDataEntitas')->name('updateDataEntitas');
         Route::put('/bpm/user_management/entitas/update_password/{id}','UserController@resetPasswordEntitas')->name('resetPasswordEntitas');
         Route::put('/bpm/user_management/entitas/delete/{id}','UserController@hapusDataEntitas')->name('hapusDataEntitas');
+        Route::put('/bpm/user_management/mahasiswa/update/{id}', 'UserController@updateDataMahasiswa')->name('updateDataMahasiswa');
+        Route::put('/bpm/user_management/mahasiswa/update_password/{id}','UserController@resetPasswordMahasiswa')->name('resetPasswordMahasiswa');
+        Route::put('/bpm/user_management/mahasiswa/delete/{id}','UserController@hapusDataMahasiswa')->name('hapusDataMahasiswa');
         Route::post('/aspiration/delete/{id}', 'AspirationController@destroy')->name('deleteAspiration');
     });
     //entitas
