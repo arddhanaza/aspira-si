@@ -205,7 +205,7 @@
                         <textarea class="form-control" name="aspirasi_text" id="textAspirasi" cols="30" rows="10"
                                   required></textarea>
                         <label for="file">File Pendukung
-                            <label class="text-danger">*Optional</label>
+                            <label class="text-danger">*optional</label>
                         </label>
                         <input class="form-control-file" id="file" multiple type="file" name="file_name[]">
                     </div>
