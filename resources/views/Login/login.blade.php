@@ -30,7 +30,7 @@
                         <form action="{{route('login')}}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="username">NIM</label>
+                                <label for="username">USERNAME</label>
                                 <input type="text" class="form-control rounded-pill shadow p-3 mb-1 bg-white rounded" id="username" name="username" style="border: none">
                             </div>
                             <div class="form-group">
