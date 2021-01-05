@@ -27,9 +27,6 @@
                     <li class="nav-item {{ Route::currentRouteNamed('bpmAllAspiration') ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('bpmAllAspiration')}}">All Aspiration <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item {{ Route::currentRouteNamed('announcement') ? 'active' : '' }}">
-                        <a class="nav-link" href="#">Announcement <span class="sr-only">(current)</span></a>
-                    </li>
                     <li class="nav-item {{ Route::currentRouteNamed('user_management') ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('user_management')}}">User Management <span class="sr-only">(current)</span></a>
                     </li>
