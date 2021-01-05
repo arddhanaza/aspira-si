@@ -36,10 +36,13 @@
                                     <td>{{$loop->index+1}}</td>
                                     <td>{{$anc->announcement_text}}</td>
                                     <td>
-                                        @if(isset($asp->file_name))
-                                            <a href="" class="btn btn-outline-info"
-                                               data-target="#modalFile{{$asp->id_aspirasi}}" data-toggle="modal">File
-                                                Pendukung</a>
+                                        @if(isset($anc->nama_file))
+                                            <h6>File Pendukung</h6>
+                                            <?php
+                                            foreach (json_decode($anc->nama_file) as $file){ ?>
+                                            <a href="{{asset('files/'.$file)}}" target="_blank"
+                                               class="btn btn-outline-info mb-2">Name: <?php echo $file?></a>
+                                            <?php } ?>
                                         @else
                                             <span>Tidak Ada File Pendukung</span>
                                         @endif
