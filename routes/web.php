@@ -32,7 +32,7 @@ Route::group(['middleware' => 'loggedIn'], function () {
     //aspiration
     Route::post('/PostAspiration', 'AspirationController@store');
     Route::get('/aspiration/{id}', 'AspirationController@show')->name('detailAspiration');
-    Route::put('/aspiration/update/{id}','AspirationController@update')->name('update');
+    Route::put('/aspiration/update/{id}','AspirationController@updateApirasiBeforeStatusChange')->name('updateAspiration');
     //reply
     Route::post('/reply', 'ReplyController@store')->name('comment');
     Route::get('/reply/delete/{id_comment}','ReplyController@delete')->name('deleteReply');
@@ -77,27 +77,6 @@ Route::group(['middleware' => 'loggedIn'], function () {
 Route::get('forgot-password', function () {
     return view(('/Login.forgot-password'));
 });
-// Route::get('/', function () {
-//     return view('timeline');
-// });
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-//Route::get('/', 'AuthController@showFormLogin')->name('login');
-//Route::get('login', 'AuthController@showFormLogin')->name('login');
-//Route::post('login', 'AuthController@login');
-//Route::get('register', 'AuthController@showFormRegister')->name('register');
-//Route::post('register', 'AuthController@register');
-//
-//Route::group(['middleware' => 'auth'], function () {
-//
-// Route::get('home', 'HomeController@index')->name('home');
-// Route::get('logout', 'AuthController@logout')->name('logout');
-//
-//});
 
 Route::get('/testCase', function () {
     echo 'Failed';

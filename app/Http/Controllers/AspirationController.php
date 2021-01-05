@@ -154,12 +154,7 @@ class AspirationController extends Controller
     public function update(Request $request, $id)
     {
         $aspirasi = Aspiration::find($id);
-        $aspirasi->id_mahasiswa = $request->id_mahasiswa;
-        $aspirasi->id_entitas = $request->id_entitas;
-        $aspirasi->judul_aspirasi = $request->judul_aspirasi;
-        $aspirasi->aspirasi_text = $request->aspirasi_text;
-        $aspirasi->save();
-        return redirect(route('profile'));
+
         if (isset($request->statusUpdate)) {
             $aspirasi->status = $request->statusUpdate;
             $aspirasi->save();
@@ -179,6 +174,26 @@ class AspirationController extends Controller
         return redirect(route('bpmAllAspiration'));
     }
 
+    public function updateApirasiBeforeStatusChange(Request $request, $id){
+        $aspirasi = Aspiration::find($id);
+
+        if ($request->hasfile('file_name')) {
+            foreach ($request->file('file_name') as $file) {
+                $name = time() . '.' . $file->extension();
+                $file->move(public_path() . '/files/', $name);
+                $data[] = $name;
+            }
+            $aspirasi->file_name = json_encode($data);
+        }
+
+        $aspirasi->id_mahasiswa = session(0)->id_mahasiswa;
+        $aspirasi->id_entitas = $request->id_entitas;
+        $aspirasi->judul_aspirasi = $request->judul_aspirasi;
+        $aspirasi->aspirasi_text = $request->aspirasi_text;
+        $aspirasi->save();
+        return redirect(route('profile',[session(0)->id_mahasiswa]));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -193,15 +208,4 @@ class AspirationController extends Controller
         return redirect(route('bpmAllAspiration'));
 
     }
-   //public function updateAspirasi($id, Request $request){
-        //$aspirasi = Aspiration::find($id);
-        //$aspirasi->id_mahasiswa = $request->id_mahasiswa;
-        //$aspirasi->id_entitas = $request->id_entitas;
-        //$aspirasi->judul_aspirasi = $request->judul_aspirasi;
-        //$aspirasi->aspirasi_text = $request->aspirasi_text;
-        //$aspirasi->save();
-        //return redirect(route('profile'));
-        
-        
-    //}
 }

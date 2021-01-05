@@ -13,18 +13,19 @@ class UserController extends Controller
 {
     public function Index($user)
     {
+        $entitas = EntitasSi::getDataEntitas();
         if ($user != session(0)->id_mahasiswa){
             $aspirasi_mhs = Aspiration::getAspirasiByUser(session(0)->id_mahasiswa);
             $mhs = Mahasiswa::find(session(0)->id_mahasiswa);
             $notifikasi = Notifikasi::getNotifikasiByUser();
-            return view('users.profile',['aspirasi_mhs'=>$aspirasi_mhs, 'mhs' => $mhs,'notifikasiByUser'=>$notifikasi]);
+            return view('users.profile',['aspirasi_mhs'=>$aspirasi_mhs, 'mhs' => $mhs,'notifikasiByUser'=>$notifikasi, 'entitas' => $entitas]);
         }else{
             $aspirasi_mhs = Aspiration::getAspirasiByUser($user);
             $mhs = Mahasiswa::find($user);
             $notifikasi = Notifikasi::getNotifikasiByUser();
-            return view('users.profile',['aspirasi_mhs'=>$aspirasi_mhs, 'mhs' => $mhs,'notifikasiByUser'=>$notifikasi]);
+            return view('users.profile',['aspirasi_mhs'=>$aspirasi_mhs, 'mhs' => $mhs,'notifikasiByUser'=>$notifikasi, 'entitas' => $entitas]);
         }
-    }    
+    }
 
     public function edit($id){
         $mahasiswa = Mahasiswa::find($id);
@@ -60,7 +61,7 @@ class UserController extends Controller
         $entitas->password = $request->password_entitas;
         $entitas->save();
         return redirect(route('user_management'));
-    }    
+    }
 
     public function updateDataEntitas($id, Request $request){
         $entitas = EntitasSi::find($id);
@@ -89,7 +90,7 @@ class UserController extends Controller
     public function tambahDataMahasiswa(Request $request){
         $mahasiswa = new Mahasiswa();
 
-        $mahasiswa->username = $request->username_mhs;    
+        $mahasiswa->username = $request->username_mhs;
         $mahasiswa->password = $request->password_mhs;
         $mahasiswa->nama_mahasiswa = $request->nama_mhs;
         $mahasiswa->angkatan = $request->angkatan_mhs;
@@ -100,7 +101,7 @@ class UserController extends Controller
     public function updateDataMahasiswa($id, Request $request){
         $mahasiswa = Mahasiswa::find($id);
 
-        $mahasiswa->username = $request->username_mhs;            
+        $mahasiswa->username = $request->username_mhs;
         $mahasiswa->nama_mahasiswa = $request->nama_mhs;
         $mahasiswa->angkatan = $request->angkatan_mhs;
         $mahasiswa->save();
