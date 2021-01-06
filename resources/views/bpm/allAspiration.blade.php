@@ -13,17 +13,17 @@
         {{session()->forget('message')}}
     @endif
 
-<section class="mt-5 container-fluid">
-    <!--Start of Aspiration Card-->
-    <div class="row justify-content-center mb-4">
-        <div class="col-12">
-            <div class="card aspiration-card-table">
-                <div class="card-header">
-                    <h1>Data Aspirasi</h1>
-                </div>
-                <div class="card-body table-responsive">
-                    <table class="table table-striped datTable">
-                        <thead>
+    <section class="mt-5 container-fluid">
+        <!--Start of Aspiration Card-->
+        <div class="row justify-content-center mb-4">
+            <div class="col-12">
+                <div class="card aspiration-card-table">
+                    <div class="card-header">
+                        <h1>Data Aspirasi</h1>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table table-striped datTable">
+                            <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Pengirim</th>
@@ -36,8 +36,8 @@
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                            <tbody>
                             @foreach($aspirasi as $asp)
                                 <tr>
                                     <td>{{$loop->index+1}}</td>
@@ -48,7 +48,8 @@
                                     <td>{{$asp->nama_entitas}}</td>
                                     <td>
                                         @if(isset($asp->file_name))
-                                            <a href="" class="btn btn-outline-info" data-target="#modalFile{{$asp->id_aspirasi}}" data-toggle="modal">File
+                                            <a href="" class="btn btn-outline-info"
+                                               data-target="#modalFile{{$asp->id_aspirasi}}" data-toggle="modal">File
                                                 Pendukung</a>
                                         @else
                                             <span>Tidak Ada File Pendukung</span>
@@ -57,99 +58,112 @@
                                     <td>{{$asp->created_at}}</td>
                                     <td>{{$asp->status}}</td>
                                     <td>
-                                    <a href="{{route('detailAspiration',[$asp->id_aspirasi])}}" class="btn btn-primary mb-2">Detail</a>
+                                        <a href="{{route('detailAspiration',[$asp->id_aspirasi])}}"
+                                           class="btn btn-primary mb-2">Detail</a>
                                         <button class="btn btn-outline-info mb-2" data-toggle="modal"
                                                 data-target="#modalUpdate{{$asp->id_aspirasi}}">Update
                                         </button>
                                         <button class="btn btn-outline-danger mb-2" data-toggle="modal"
                                                 data-target="#modalDelete{{$asp->id_aspirasi}}">Delete
-                                            </button>
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--End of Aspiration Card-->
-</section>
+        <!--End of Aspiration Card-->
+    </section>
 
-@foreach($aspirasi as $asp)
-<div class="modal fade" id="modalUpdate{{$asp->id_aspirasi}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Update Status</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h6>Status: <span class="badge badge-pill badge-secondary">{{$asp->status}}</span></h6>
-                <hr>
-                <form action="{{route('updateApirationStatus',$asp->id_aspirasi)}}" method="post">
-                    @method('put')
-                    @csrf
-                    <input type="hidden" name="rowData" value="">
-                    <input type="hidden" name="idAspirasi" value="">
-                    <div class="form-group">
-                        <label for="statusUpdate">Status Update</label>
-                        <select name="statusUpdate" id="statusUpdate" class="update-selection btn btn-sm btn-outline-dark btn-block btn-lg">
-                            <option value="{{$asp->status}}" selected disabled>
-                                {{$asp->status}}
-                            </option>
-                            @if($asp->status == 'Belum Diproses')
-                            <option value="Ditinjau">Ditinjau</option>
-                            <option value="Sedang diprocess">Sedang diprocess</option>
-                            <option value="Diteruskan">Diteruskan</option>
-                            <option value="Done Resolved">Done Resolved</option>
-                            @elseif($asp->status == 'Ditinjau')
-                            <option value="Sedang diprocess">Sedang diprocess</option>
-                            <option value="Diteruskan">Diteruskan</option>
-                            <option value="Done Resolved">Done Resolved</option>
-                            @elseif($asp->status == 'Sedang diprocess')
-                            <option value="Diteruskan">Diteruskan</option>
-                            <option value="Done Resolved">Done Resolved</option>
-                            @else
-                            <option value="Done Resolved">Done Resolved</option>
+    @foreach($aspirasi as $asp)
+        <div class="modal fade" id="modalUpdate{{$asp->id_aspirasi}}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Update Status</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Status: <span class="badge badge-pill badge-secondary">{{$asp->status}}</span></h6>
+                        <hr>
+                        <form action="{{route('updateApirationStatus',$asp->id_aspirasi)}}" method="post">
+                            @method('put')
+                            @csrf
+                            <input type="hidden" name="rowData" value="">
+                            <input type="hidden" name="idAspirasi" value="">
+                            <div class="form-group">
+                                <label for="statusUpdate">Status Update</label>
+                                <select name="statusUpdate" id="statusUpdate{{$asp->id_aspirasi}}"
+                                        class="update-selection btn btn-sm btn-outline-dark btn-block btn-lg" onclick="change({{$asp->id_aspirasi}})">
+                                    <option value="{{$asp->status}}" selected disabled>
+                                        {{$asp->status}}
+                                    </option>
+                                    @if($asp->status == 'Belum Diproses' || $asp->status == 'On Hold')
+                                        <option value="Ditinjau">Ditinjau</option>
+                                        <option value="Sedang diprocess">Sedang diprocess</option>
+                                        <option value="Diteruskan">Diteruskan</option>
+                                        <option value="Done Resolved">Done Resolved</option>
+                                        @if($asp->status != 'On Hold')
+                                            <option value="On Hold">On Hold</option>
+                                        @endif
+                                    @elseif($asp->status == 'Ditinjau')
+                                        <option value="Sedang diprocess">Sedang diprocess</option>
+                                        <option value="Diteruskan">Diteruskan</option>
+                                        <option value="Done Resolved">Done Resolved</option>
+                                    @elseif($asp->status == 'Sedang diprocess')
+                                        <option value="Diteruskan">Diteruskan</option>
+                                        <option value="Done Resolved">Done Resolved</option>
+                                    @else
+                                        <option value="Done Resolved">Done Resolved</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="form-group" id="form-notifikasi{{$asp->id_aspirasi}}" style="display: none">
+                                <label for="notifikasi{{$asp->id_aspirasi}}">Keterangan</label>
+                                <textarea name="notifikasi" id="notifikasi{{$asp->id_aspirasi}}" rows="3" class="form-control"></textarea>
+                            </div>
+                            <hr>
+                            @if($asp->status != 'Done Resolved')
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block btn-update" type="submit">Update</button>
+                                </div>
                             @endif
-                        </select>
+                        </form>
                     </div>
-                    <hr>
-                    @if($asp->status != 'Done Resolved')
-                    <div class="form-group">
-                        <button class="btn btn-primary btn-block" type="submit">Update</button>
-                    </div>
-                    @endif
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-@if(isset($asp->file_name))
-<div aria-hidden="true" aria-labelledby="modalFile{{$asp->id_aspirasi}}" class="modal fade" id="modalFile{{$asp->id_aspirasi}}" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">File Pendukung</h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        @if(isset($asp->file_name))
+            <div aria-hidden="true" aria-labelledby="modalFile{{$asp->id_aspirasi}}" class="modal fade"
+                 id="modalFile{{$asp->id_aspirasi}}" role="dialog" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">File Pendukung</h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <span>Download</span> <br>
+                            <?php
+                            foreach (json_decode($asp->file_name) as $file) { ?>
+                            <a href="{{asset('files/'.$file)}}" target="_blank"
+                               class="btn btn-outline-info">Name: <?php echo $file ?></a>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <span>Download</span> <br>
-                <?php
-                foreach (json_decode($asp->file_name) as $file) { ?>
-                    <a href="{{asset('files/'.$file)}}" target="_blank" class="btn btn-outline-info">Name: <?php echo $file ?></a>
-                <?php } ?>
-            </div>
-        </div>
-    </div>
-</div>
-@endif
-        <div class="modal fade" id="modalDelete{{$asp->id_aspirasi}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        @endif
+        <div class="modal fade" id="modalDelete{{$asp->id_aspirasi}}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -172,5 +186,20 @@
             </div>
         </div>
     @endforeach
+
+    <script !src="">
+        var idd;
+        function change(id){
+            this.idd = id;
+            document.getElementById('statusUpdate' + id).addEventListener('change', function (e) {
+                if (this.value == "On Hold") {
+                    document.getElementById('form-notifikasi' + id).style.display = "block";
+                    document.getElementById('notifikasi' + id).required = "true";
+                } else {
+                    document.getElementById('form-notifikasi' + id).style.display = "none";
+                    document.getElementById('notifikasi' + id).removeAttribute("required");
+                }
+            });
+    </script>
 
 

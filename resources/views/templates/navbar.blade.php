@@ -40,17 +40,17 @@
                             <img src="{{asset('assets/icon/bell.svg')}}" alt="">
                         @endif
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-menu dropdown-menu-right" style="width: 400px;max-height: 500px; overflow: scroll">
                         {{--                        if there is notification maka tampilkan di bawah ini, else...--}}
                         @if($notifikasiByUser->count() > 0)
                             <div class="dropdown-item">
                                 <a href="{{route('delete_notifikasi')}}" class="dropdown-item-text text-right text-danger">delete all..</a>
                             </div>
                             @foreach($notifikasiByUser as $notif)
-                                <div class="dropdown-item">
+                                <div class="dropdown-item" style="white-space: normal;">
                                     <a href="{{route('detailAspiration',$notif->id_aspirasi)}}">
-                                        <span class="dropdown-item-text" href="">Aspirasi: {{$notif->judul_aspirasi}}</span>
-                                        <span class="dropdown-item-text" href="">{{$notif->teks_notifikasi}}</span>
+                                        <span class="dropdown-item-text " >Aspirasi: {{$notif->judul_aspirasi}}</span>
+                                        <span class="dropdown-item-text" >{{$notif->teks_notifikasi}}</span>
                                     </a>
                                 </div>
                                 <div class="dropdown-divider"></div>

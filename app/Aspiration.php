@@ -20,6 +20,7 @@ class Aspiration extends Model
             ->select('aspirasi.*', 'mahasiswa.username', 'entitas_si.nama_entitas')
             ->where('aspirasi.status','!=','Done Resolved')
             ->where('aspirasi.status','!=','Belum Diproses')
+            ->where('aspirasi.status','!=','On Hold')
             ->orderBy('created_at', 'desc')
             ->get();
         for ($row = 0; $row < count($data); $row++) {
@@ -128,6 +129,7 @@ class Aspiration extends Model
                         -> where('id_entitas','=',$user)
                         -> whereBetween('status',['Diteruskan','Done Resolved'])
                         -> where('status','!=','Ditinjau')
+                        -> where('status','!=','On Hold')
                         -> sortBy('status');
 //        dd($getAspiration);
 
