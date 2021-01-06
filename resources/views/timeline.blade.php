@@ -14,6 +14,7 @@
         {{session()->forget('message')}}
     @endif
 
+    @if(count($aspirasi) >= 1)
     <section class="container  mt-5">
         <div class="row mb-4">
             <div class="col-12">
@@ -162,6 +163,13 @@
                 </div>
             </div>
     @endforeach
+    @else
+        <div class="row d-flex justify-content-center">
+            <div class="col-10 mt-5 text-center">
+                <h5 class="text-secondary">Belum ada aspirasi yang dipublikasikan</h5>
+            </div>
+        </div>
+    @endif
     <!--End of Aspiration Card-->
     </section>
 

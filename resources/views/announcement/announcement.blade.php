@@ -55,7 +55,9 @@
                                     <td>{{$anc->created_at}}</td>
                                     <td>
                                         <a href="{{route('edit_announcement',$anc->id_announcement)}}" class="btn btn-primary mb-2">Edit</a>
-                                        <a href="{{route('delete_announcement',['id'=>$anc->id_announcement])}}" class="btn btn-outline-danger mb-2">Delete</a>
+                                        <button class="btn btn-outline-danger mb-2" data-toggle="modal"
+                                                data-target="#modalDelete{{$anc->id_announcement}}">Delete
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -110,7 +112,31 @@
                 </div>
             </div>
         </div>
-
     @endif
+
+    @foreach($announcements as $anc)
+    <div class="modal fade" id="modalDelete{{$anc->id_announcement}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Announcement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Announecment akan dihapus. Anda yakin?
+                </div>
+                <form action="{{route('delete_announcement',['id'=>$anc->id_announcement])}}" method="get">
+                    @csrf
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endforeach
 
 @endsection
