@@ -18,20 +18,24 @@
             @if($aspirasi->status == 'Belum Diproses')
                 <div class="col-9 mb-4">
                     <h5>
-                        <button onClick="window.history.back();" style="border: none;background-color: transparent;"><img
+                        <button onClick="window.history.back();" style="border: none;background-color: transparent;">
+                            <img
                                 style="width: 30px;" src="{{asset('assets/icon/arrow-left-short.svg')}}" alt="">Back
                         </button>
                     </h5>
                 </div>
-                <div class="col-2 mb-4">
-                    <a href="" class="btn btn-outline-info"
-                       data-target="#modalupdate{{$aspirasi->id_aspirasi}}"
-                       data-toggle="modal">Update</a>
-                </div>
+                @if(session(0)->getTable() == "mahasiswa")
+                    <div class="col-2 mb-4">
+                        <a href="" class="btn btn-outline-info"
+                           data-target="#modalupdate{{$aspirasi->id_aspirasi}}"
+                           data-toggle="modal">Update</a>
+                    </div>
+                @endif
             @else
                 <div class="col-12 mb-4">
                     <h5>
-                        <button onClick="window.history.back();" style="border: none;background-color: transparent;"><img
+                        <button onClick="window.history.back();" style="border: none;background-color: transparent;">
+                            <img
                                 style="width: 30px;" src="{{asset('assets/icon/arrow-left-short.svg')}}" alt="">Back
                         </button>
                     </h5>
@@ -66,7 +70,8 @@
                                         <img
                                             src="{{asset('assets/icon/hand-thumbs-up.svg')}}" class="img-icon"
                                             alt=""><span
-                                            id="totalLikes{{$aspirasi->id_aspirasi}}" data-count="{{$aspirasi->upVoteCount}}"
+                                            id="totalLikes{{$aspirasi->id_aspirasi}}"
+                                            data-count="{{$aspirasi->upVoteCount}}"
                                             data-max-count="1">{{$aspirasi -> upvote}}</span>
                                     </button>
                                 @else
@@ -115,7 +120,8 @@
                         @if(session(0)->getTable() == 'mahasiswa')
                             <div class="row">
                                 <div class="col-1 d-none d-lg-block d-md-block">
-                                    <img alt="" class="img-thumbnail img-icon img-icon" src="{{asset("assets/img/telkom.jpg")}}"
+                                    <img alt="" class="img-thumbnail img-icon img-icon"
+                                         src="{{asset("assets/img/telkom.jpg")}}"
                                          style="width: 50px;">
                                 </div>
                                 <div class="col-11 col">
@@ -171,7 +177,8 @@
                             <div class="card-footer aspiration-card-footer">
                                 <div class="row">
                                     <div class="col-1 d-none d-lg-block d-md-block">
-                                        <img alt="" class="img-thumbnail img-icon img-icon" src="{{asset("assets/img/telkom.jpg")}}"
+                                        <img alt="" class="img-thumbnail img-icon img-icon"
+                                             src="{{asset("assets/img/telkom.jpg")}}"
                                              style="width: 50px;">
                                     </div>
                                     @if(session(0)->id_mahasiswa == $reply->id_mahasiswa)

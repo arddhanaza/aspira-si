@@ -39,7 +39,7 @@ class Notifikasi extends Model
             ->join('aspirasi','aspirasi.id_aspirasi','=','notifikasi.id_aspirasi')
             ->where('aspirasi.id_entitas','=',$id_user)
             ->where('notifikasi.tipe_notifikasi','=','aspirasi_diteruskan')
-            ->orderBy('notifikasi.created_at')
+            ->orderBy('notifikasi.created_at','desc')
             ->get();
 //        dd($notifikasi);
         return $notifikasi;
@@ -50,8 +50,9 @@ class Notifikasi extends Model
             ->select('aspirasi.judul_aspirasi','teks_notifikasi','aspirasi.id_aspirasi')
             ->join('aspirasi','aspirasi.id_aspirasi','=','notifikasi.id_aspirasi')
             ->where('notifikasi.tipe_notifikasi','=','aspirasi_baru')
-            ->orderBy('notifikasi.created_at')
+            ->orderBy('notifikasi.created_at','desc')
             ->get();
+//        dd($notifikasi);
         return $notifikasi;
     }
 

@@ -43,6 +43,10 @@ class AnnouncementController extends Controller
         $announcement->id_entitas = $request->id_entitas;
         if (isset($request->judul_aspirasi)){
             $announcement->id_aspirasi = $request->judul_aspirasi;
+            $notifikasiTeks = "Aspirasi telah di response, silakan cek pada announcement";
+            $notifikasiTipe = "finalisasi_status_aspirasi";
+            $notifikasi = new Notifikasi();
+            $notifikasi->postNotifikasi($announcement->id_aspirasi, $notifikasiTeks, $notifikasiTipe);
         }
         if($request->hasfile('file_name'))
         {

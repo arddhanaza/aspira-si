@@ -166,10 +166,13 @@ class AspirationController extends Controller
 
             $notifikasi = new Notifikasi();
             $notifikasi->postNotifikasi($id, $notifikasiTeks, $notifikasiTipe);
-        }
-        if ($request->statusUpdate == "On Hold"){
+        }elseif ($request->statusUpdate == "Done Resolved"){
+            $notifikasiTeks = "Aspirasi  $request->judul_aspirasi telah dipdate menjadi $request->statusUpdate";
+            $notifikasiTipe = "finalisasi_status_aspirasi";
+            $notifikasi = new Notifikasi();
+            $notifikasi->postNotifikasi($id, $notifikasiTeks, $notifikasiTipe);
+        }elseif ($request->statusUpdate == "On Hold"){
             $notifikasiTeks = "Status Aspirasi untuk sementara dalam status $request->statusUpdate.  $request->notifikasi";
-
         }else{
             $notifikasiTeks = "Status Aspirasi Telah di Update Menjadi $request->statusUpdate";
         }

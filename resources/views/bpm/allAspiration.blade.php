@@ -112,10 +112,13 @@
                                         @if($asp->status != 'On Hold')
                                             <option value="On Hold">On Hold</option>
                                         @endif
-                                    @elseif($asp->status == 'Ditinjau')
+                                    @elseif($asp->status == 'Ditinjau'  || $asp->status == 'On Hold')
                                         <option value="Sedang diprocess">Sedang diprocess</option>
                                         <option value="Diteruskan">Diteruskan</option>
                                         <option value="Done Resolved">Done Resolved</option>
+                                        @if($asp->status != 'On Hold')
+                                            <option value="On Hold">On Hold</option>
+                                        @endif
                                     @elseif($asp->status == 'Sedang diprocess')
                                         <option value="Diteruskan">Diteruskan</option>
                                         <option value="Done Resolved">Done Resolved</option>
@@ -189,7 +192,7 @@
 
     <script !src="">
         var idd;
-        function change(id){
+        function change(id) {
             this.idd = id;
             document.getElementById('statusUpdate' + id).addEventListener('change', function (e) {
                 if (this.value == "On Hold") {
@@ -200,6 +203,8 @@
                     document.getElementById('notifikasi' + id).removeAttribute("required");
                 }
             });
+        }
+
     </script>
 
 

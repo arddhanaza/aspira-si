@@ -58,6 +58,7 @@ class Aspiration extends Model
             ->join('mahasiswa', 'aspirasi.id_mahasiswa', '=', 'mahasiswa.id_mahasiswa')
             ->join('entitas_si', 'aspirasi.id_entitas', '=', 'entitas_si.id_entitas')
             ->select('aspirasi.*', 'mahasiswa.username', 'entitas_si.nama_entitas', 'mahasiswa.nama_mahasiswa', 'mahasiswa.angkatan')
+            ->orderBy('status','asc')
             ->orderBy('created_at', 'desc')
             ->get();
         return $data;

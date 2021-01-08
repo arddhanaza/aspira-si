@@ -37,6 +37,7 @@ class LoginController extends Controller
                 session()->put(['message'=>"Yeay, kamu berhasil login","messageType"=>'alert-success']);
                 return redirect(\URL::previous());
             }else{
+                session()->put(['message'=>"Username atau Password Salah","messageType"=>'alert-danger']);
                 return redirect('/');
             }
         }elseif ( EntitasSi::isExisted($username) ){
@@ -47,6 +48,7 @@ class LoginController extends Controller
                 session()->put(['message'=>"Yeay, kamu berhasil login","messageType"=>'alert-success']);
                 return redirect(\URL::previous());
             }else{
+                session()->put(['message'=>"Username atau Password Salah","messageType"=>'alert-danger']);
                 return redirect('/');
             }
         }elseif ( Bpm::isExisted($username)){
